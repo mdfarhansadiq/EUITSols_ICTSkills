@@ -142,7 +142,7 @@
     'view nationality',
     'view routine',
 ]) || Auth::user()->role->id == 1)
-    <li class="nav-item {{ Request::is('setup/*') ? 'menu-open' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('setup/*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link ">
             <i class="nav-icon fas fa-cogs"></i>
             <p>
@@ -338,7 +338,7 @@
                     <p>Subject Assign</p>
                 </a>
             </li>
-            {{-- Teacher Assign --}}
+
             <li class="nav-item">
                 <a href="{{ route('teacher-assign.index') }}"
                     class="nav-link {{ Request::is('setup/teacher-assign/*') ? 'active' : '' }}">
@@ -347,7 +347,7 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 @endif
 
 
@@ -653,7 +653,7 @@
 </li> --}}
 
 
-<li class="nav-item {{ Request::is('about/*') ? 'menu-open' : '' }} ">
+{{-- <li class="nav-item {{ Request::is('about/*') ? 'menu-open' : '' }} ">
     <a href="#" class="nav-link ">
         <i class="fa fa-file"></i>
         <p>
@@ -701,17 +701,7 @@
         </li>
 
     </ul>
-    {{-- <ul class="nav nav-treeview">
-
-        <li class="nav-item">
-            <a href="{{ url('/about/vision-and-mission') }}" class="nav-link {{ Request::is('/about/*') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-minus"></i>
-                <p>Vision and Mission</p>
-            </a>
-        </li>
-
-    </ul> --}}
-</li>
+</li> --}}
 
 {{-- <li class="nav-item">
     <a href="{{url('/notice-board')}}" class="nav-link {{ Request::is('/notice-board') ? 'active' : '' }}">
@@ -720,7 +710,15 @@
     </a>
 </li> --}}
 
+
 <li class="nav-item">
+    <a href="{{url('/admin/category/view')}}" class="nav-link {{ Request::is('/admin/category/view') ? 'active' : '' }}">
+        <i class="fas fa-list-alt"></i>
+        <p>Course Category</p>
+    </a>
+</li>
+
+{{-- <li class="nav-item">
     <a href="{{url('/icsb-president')}}" class="nav-link {{ Request::is('/icsb-president') ? 'active' : '' }}">
         <i class="fa fa-user" aria-hidden="true"></i>
         <p>ICSB President</p>
@@ -740,13 +738,6 @@
         <p>ICSB Services</p>
     </a>
 </li>
-
-{{-- <li class="nav-item">
-    <a href="{{url('/mission-vision')}}" class="nav-link {{ Request::is('/mission-vision') ? 'active' : '' }}">
-        <i class="fa fa-bullseye" aria-hidden="true"></i>
-        <p>ICSB Mission & Vision</p>
-    </a>
-</li> --}}
 
 <li class="nav-item">
     <a href="{{url('/contact-address')}}" class="nav-link {{ Request::is('/contact-address') ? 'active' : '' }}">
@@ -781,7 +772,7 @@
         <i class="fa fa-gavel" aria-hidden="true"></i>
         <p>ICSB Code Of Conduct</p>
     </a>
-</li>
+</li> --}}
 
 
 

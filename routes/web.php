@@ -45,7 +45,7 @@ use App\Http\Controllers\library\AssignBookController;
 use App\Http\Controllers\library\RerurnBookController;
 use App\Http\Controllers\library\BookshelfController;
 use App\Http\Controllers\library\BookController;
-use App\Http\Controllers\library\CategoryController;
+// use App\Http\Controllers\library\CategoryController;
 use App\Http\Controllers\library\LibraryReportController;
 use App\Http\Controllers\library\LibraryMemberController;
 use App\Http\Controllers\setup\RoutineController;
@@ -63,6 +63,7 @@ use App\Http\Controllers\eligibility\EligibilityController;
 use App\Http\Controllers\admissionrule\AdmissionRuleController;
 use App\Http\Controllers\nationalaward\NationalAwardController;
 use App\Http\Controllers\codeconduct\CodeConductController;
+use App\Http\Controllers\category\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -755,6 +756,10 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     /// ICSBCodeOfConduct Route
     Route::get('/code-of-conduct', [CodeConductController::class, 'codeConduct']);
     Route::post('/code-of-conduct-create', [CodeConductController::class, 'codeConductPost']);
+
+    Route::get('/admin/category/view', [CategoryController::class, 'categoryPageView']);
+    Route::post('/admin/category/create', [CategoryController::class, 'categoryCreate']);
+
 });
 
 

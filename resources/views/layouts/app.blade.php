@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title> @yield('title', 'Polytechnic Information Managenment System') - ICSB </title>
+    <title> @yield('title', 'ICT Skills') - ICT Skills </title>
 
     <!-- Favicon-->
     <link rel="icon" href="" type="image/png">
