@@ -762,6 +762,7 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::post('/admin/category/create', [CategoryController::class, 'categoryCreate']);
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
+    Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
 
 });
 

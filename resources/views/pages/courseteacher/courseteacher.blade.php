@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/category/create') }}" method="POST" class="form-horizontal"
+                                <form action="{{ url('/admin/teacher-info/create') }}" method="POST" class="form-horizontal"
                                     enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     <div class="form-group row">
