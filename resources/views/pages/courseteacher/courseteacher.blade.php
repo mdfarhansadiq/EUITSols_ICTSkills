@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>Add Teacher Info</h4>
+                            <h4>Add Course Teacher Info</h4>
                         </span>
                         {{-- <span class="float-right">
                         @if (Auth::user()->can('user view') || Auth::user()->role->id == 1)<a href="{{ route('users.index') }}" class="btn btn-info">Back</a>@endif
@@ -48,7 +48,7 @@
                                     enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherName">Course Teacher Name<span
+                                        <label class="col-sm-3" for="courseTeacherName">Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTeacherName" name="courseTeacherName"
@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherEmail">Course Teacher Email<span
+                                        <label class="col-sm-3" for="courseTeacherEmail">Email<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="email" class="form-control" id="courseTeacherEmail" name="courseTeacherEmail"
@@ -64,10 +64,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherPhone">Course Teacher Phone<span
+                                        <label class="col-sm-3" for="courseTeacherPhone">Phone<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="tel" class="form-control" id="courseTeacherPhone" name="courseTeacherPhone"
+                                                placeholder="Enter Course Teacher Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3" for="courseTeacherDOB">Date Of Birth<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" id="courseTeacherDOB" name="courseTeacherDOB"
                                                 placeholder="Enter Course Teacher Phone">
                                         </div>
                                     </div>
@@ -96,6 +104,38 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-sm-3" for="courseTeacherFacebook">Facebook URL<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherFacebook" name="courseTeacherFacebook"
+                                                placeholder="Enter Facebook" rows="17" cols="70"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3" for="courseTeacherLinkedIn">LinkedIn URL<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherLinkedIn" name="courseTeacherLinkedIn"
+                                                placeholder="Enter LinkedIn" rows="17" cols="70"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3" for="courseTeacherGitHub">GitHub URL<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherGitHub" name="courseTeacherGitHub"
+                                                placeholder="Enter GitHub" rows="17" cols="70"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3" for="courseTeacherWebSite">WebSite URL<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherWebSite" name="courseTeacherWebSite"
+                                                placeholder="Enter WebSite" rows="17" cols="70"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-sm-3" for="courseTeacherAddress">Address<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
@@ -115,7 +155,14 @@
                                         <label for="about-photo">Photo: <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9 offset-md-3">
-                                            <input type="file" name="courseTeacherImage" id="courseTeacherImage" class="form-control">
+                                            <input type="file" name="courseTeacherPhoto" id="courseTeacherPhoto" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="about-cv">CV: <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-md-9 offset-md-3">
+                                            <input type="file" name="courseTeacherCV" id="courseTeacherCV" class="form-control">
                                         </div>
                                     </div>
 
@@ -150,7 +197,7 @@
                     <div class="card-body">
                         @include('partial.flush-message')
 
-                        {{-- <div class="table table-responsive">
+                        <div class="table table-responsive">
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
@@ -172,18 +219,18 @@
 
                                 <tr>
                                     <td id="keyVal">{{ $key + 1 }}</td>
-                                    <td id="titleVal">{{ $d->category_name }}</td>
+                                    <td id="titleVal">{{ $d->course_teacher_name }}</td>
 
-                                    <td>{!! $d->category_description !!}</td>
+                                    <td>{!! $d->course_teacher_description !!}</td>
                                     <td>
-                                        <img src="{{ asset($d->category_image) }}" alt="" title="">
+                                        <img src="{{ asset($d->course_teacher_photo) }}" alt="" title="">
                                     </td>
                                 </tr>
                             @endforeach
                                 </tbody>
                                 @endif
                             </table>
-                        </div> --}}
+                        </div>
 
                     </div>
                 </div>
@@ -198,7 +245,7 @@
 
 @push('page_scripts')
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -291,7 +338,7 @@
 
 
         });
-</script>
+</script> --}}
 {{-- <script>
     function reqrChk()
     {

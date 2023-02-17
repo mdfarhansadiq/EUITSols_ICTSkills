@@ -15,6 +15,21 @@ return new class extends Migration
     {
         Schema::create('courseteachers', function (Blueprint $table) {
             $table->id();
+            $table->string('course_teacher_name');
+            $table->string('course_teacher_email');
+            $table->string('course_teacher_phone');
+            $table->date('course_teacher_dob');
+            $table->string('course_teacher_profession');
+            $table->string('course_teacher_company');
+            $table->string('course_teacher_interest_area');
+            $table->text('course_teacher_facebook');
+            $table->text('course_teacher_linkedin');
+            $table->text('course_teacher_github');
+            $table->text('course_teacher_website');
+            $table->string('course_teacher_address');
+            $table->text('course_teacher_description');
+            $table->text('course_teacher_photo');
+            $table->text('course_teacher_cv');
             $table->timestamps();
         });
     }
