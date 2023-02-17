@@ -64,6 +64,7 @@ use App\Http\Controllers\admissionrule\AdmissionRuleController;
 use App\Http\Controllers\nationalaward\NationalAwardController;
 use App\Http\Controllers\codeconduct\CodeConductController;
 use App\Http\Controllers\category\CategoryController;
+use App\Http\Controllers\courseteacher\CourseTeacherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -759,6 +760,8 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/category/view', [CategoryController::class, 'categoryPageView']);
     Route::post('/admin/category/create', [CategoryController::class, 'categoryCreate']);
+
+    Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
 
 });
 

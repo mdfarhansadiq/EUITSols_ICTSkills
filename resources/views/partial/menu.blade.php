@@ -718,6 +718,14 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{url('/admin/teacher-info/view')}}" class="nav-link {{ Request::is('/admin/teacher-info/view') ? 'active' : '' }}">
+        <i class="fas fa-list-alt"></i>
+        <p>Course Teacher Info</p>
+    </a>
+</li>
+
+
 {{-- <li class="nav-item">
     <a href="{{url('/icsb-president')}}" class="nav-link {{ Request::is('/icsb-president') ? 'active' : '' }}">
         <i class="fa fa-user" aria-hidden="true"></i>
