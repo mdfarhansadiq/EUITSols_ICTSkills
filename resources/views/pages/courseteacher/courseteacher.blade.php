@@ -203,7 +203,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Date_Of_Birth</th>
+                                        {{-- <th>Date_Of_Birth</th>
                                         <th>Profession</th>
                                         <th>Company/Institute</th>
                                         <th>Interested_Area</th>
@@ -212,9 +212,9 @@
                                         <th>Github</th>
                                         <th>Website</th>
                                         <th>Address</th>
-                                        <th>Description</th>
+                                        <th>Description</th> --}}
                                         <th>Photo</th>
-                                        <th>CV</th>
+                                        {{-- <th>CV</th> --}}
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
 
@@ -232,7 +232,7 @@
 
                                     <td>{{ $d->course_teacher_email }}</td>
                                     <td>{{ $d->course_teacher_phone }}</td>
-                                    <td>{{ $d->course_teacher_dob }}</td>
+                                    {{-- <td>{{ $d->course_teacher_dob }}</td>
                                     <td>{{ $d->course_teacher_profession }}</td>
                                     <td>{{ $d->course_teacher_company }}</td>
                                     <td>{{ $d->course_teacher_interest_area }}</td>
@@ -241,7 +241,7 @@
                                     <td>{!! $d->course_teacher_github !!}</td>
                                     <td>{!! $d->course_teacher_website !!}</td>
                                     <td>{{ $d->course_teacher_address }}</td>
-                                    <td>{!! $d->course_teacher_description !!}</td>
+                                    <td>{!! $d->course_teacher_description !!}</td> --}}
                                     <td>
                                         {{-- <img src="{{ asset($d->course_teacher_photo) }}" alt="" title="" height="300" width="300"> --}}
                                         <a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>
@@ -268,18 +268,22 @@
 
 @push('page_scripts')
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-{{-- <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
-                var data1 = CKEDITOR.instances.categoryDescription.getData();
+                var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
+                var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
+                var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
+                var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
+                var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
                 for ( instance in CKEDITOR.instances ) {
                     CKEDITOR.instances[instance].updateElement();
                 }
 
                 var formData = new FormData(this);
-                length_array = [formData.get('categoryName').length, data1.length, $('#categoryImage').get(0).files.length]
+                length_array = [formData.get('courseTeacherName').length, formData.get('courseTeacherEmail').length, formData.get('courseTeacherPhone').length, formData.get('courseTeacherDOB').length, formData.get('courseTeacherProfession').length, formData.get('courseTeacherCompany').length, formData.get('courseTeacherInterestArea').length, formData.get('courseTeacherAddress').length, data1.length, data2.length, data3.length, data4.length, data5.length, formData.get('courseTeacherPhoto').lengt, formData.get('courseTeacherCV').length]
                     count = 0
                     for (i = 0; i < length_array.length; i = i + 1) {
                         if (length_array[i] == 0) {
@@ -299,7 +303,7 @@
                     else
                     {
                         $.ajax({
-                    url: '/admin/category/create',
+                    url: '/admin/teacher-info/create',
                     type: "post",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -322,12 +326,18 @@
                             response.length + '</td>';
 
                             student += '<td>' +
-                                value.categoryName + '</td>';
+                                value.courseTeacherName + '</td>';
 
                             student += '<td>' +
-                                value.categoryDescription + '</td>';
+                                value.courseTeacherEmail + '</td>';
 
-                            student += '<td><img src="'+value.categoryImage+'" alt="" title="" height = "200" width="200">'
+                            student += '<td>' +
+                                value.courseTeacherPhoto + '</td>';
+
+                            student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
+                                '</td>';
+
+                            student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
                                 '</td>';
 
                             // student += '<td>' +
@@ -338,7 +348,7 @@
                             student += '</tr>';
                             student +='</tbody>'
                         });
-                        table_head = '<th>SL</th><th>Name</th><th>Description</th><th>Image</th><th>Action</th>'
+                        table_head = '<th>SL</th><th>Name</th><th>Email</th><th>Phone</th><th>Photo</th>'
 
                         $(".about_table thead tr th:lt(5)").remove();
                         $('.about_table thead tr').append(table_head)
@@ -361,7 +371,7 @@
 
 
         });
-</script> --}}
+</script>
 {{-- <script>
     function reqrChk()
     {

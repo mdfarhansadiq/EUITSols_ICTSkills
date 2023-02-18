@@ -60,7 +60,10 @@ class CourseTeacherController extends Controller
 
         $data->save();
 
-        return redirect('/admin/teacher-info/view');
+        // return redirect('/admin/teacher-info/view');
 
+        $data1 = CourseTeacherModel::all();
+
+        return response()->json($data1);
     }
 }
