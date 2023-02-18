@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/teacher-info/create') }}" method="POST" class="form-horizontal"
+                                <form action="{{ url('/admin/courses-info/create') }}" method="POST" class="form-horizontal"
                                     enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     <div class="form-group row">
@@ -56,14 +56,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseCategory">Category Name<span
+                                        <label class="col-sm-3" for="courseCategory">Course Category Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                                 <select class="form-select" aria-label="Default select example"
-                                                name="courseTeacher" id="courseTeacher">
-                                                <option selected value="">Select Teacher</option>
-                                                @foreach ($data as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_teacher_name }}
+                                                name="courseCategory" id="courseCategory">
+                                                <option selected value="">Select Course Category</option>
+                                                @foreach ($data2 as $d)
+                                                    <option value="{{ $d->id }}">{{ $d->category_name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -71,13 +71,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacher">Teacher Name<span
+                                        <label class="col-sm-3" for="courseTeacher">Course Teacher Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                                 <select class="form-select" aria-label="Default select example"
                                                 name="courseTeacher" id="courseTeacher">
-                                                <option selected value="">Select Teacher</option>
-                                                @foreach ($data as $d)
+                                                <option selected value="">Select Course Teacher</option>
+                                                @foreach ($data1 as $d)
                                                     <option value="{{ $d->id }}">{{ $d->course_teacher_name }}
                                                     </option>
                                                 @endforeach
@@ -109,6 +109,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-sm-3" for="courseFee">Fee<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="courseFee" name="courseFee"
+                                                placeholder="Enter Course Fee">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-sm-3" for="guard_name"></label>
                                         <div class="col-sm-9">
                                             <button id="about_btn" type="submit"
@@ -136,18 +144,17 @@
                     <div class="card-body">
                         @include('partial.flush-message')
 
-                        {{-- <div class="table table-responsive">
+                        <div class="table table-responsive">
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
-                                        @if(count($data)!=0)
+                                        @if(count($data3)!=0)
                                         <th>SL</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Teacher</th>
                                         <th>Photo</th>
-                                        <th>CV</th>
+                                        {{-- <th>CV</th> --}}
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
 
@@ -155,19 +162,15 @@
 
                                     </tr>
                                 </thead>
-                                @if(count($data))
+                                @if(count($data3))
                                 <tbody id="showPost">
-                                    @foreach($data as $key => $d)
+                                    @foreach($data3 as $key => $d)
 
                                 <tr>
                                     <td id="keyVal">{{ $key + 1 }}</td>
-                                    <td id="titleVal">{{ $d->course_teacher_name }}</td>
+                                    <td id="titleVal">{{ $d->course_category_id }}</td>
 
-                                    <td>{{ $d->course_teacher_email }}</td>
-                                    <td>{{ $d->course_teacher_phone }}</td>
-                                    <td>
-                                        <a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>
-                                    </td>
+                                    <td>{{ $d->course_teacher_id }}</td>
 
                                     <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a></td>
                                     <td><div class="btn-group">
@@ -178,7 +181,7 @@
                                 </tbody>
                                 @endif
                             </table>
-                        </div> --}}
+                        </div>
 
                     </div>
                 </div>

@@ -766,6 +766,8 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
 
     Route::get('/admin/courses-info/view', [CoursesInfoController::class, 'coursesInfoPageView']);
+    Route::post('/admin/courses-info/create', [CoursesInfoController::class, 'coursesInfoCreate']);
+
 
 });
 

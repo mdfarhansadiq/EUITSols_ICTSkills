@@ -10,4 +10,6 @@ class CoursesInfoModel extends Model
     use HasFactory;
 
     protected $table = 'coursesinfos';
+
+    
 }
