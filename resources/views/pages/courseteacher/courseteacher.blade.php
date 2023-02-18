@@ -202,19 +202,19 @@
                                         <th>SL</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Phone</th>
+                                        <th>Date Of Birth</th>
+                                        <th>Profession</th>
+                                        <th>Company/Institute</th>
+                                        <th>Interested Area</th>
+                                        <th>Facebook</th>
+                                        <th>LinkedIn</th>
+                                        <th>Github</th>
+                                        <th>Website</th>
+                                        <th>Address</th>
+                                        <th>Description</th>
+                                        <th>Photo</th>
+                                        <th>CV</th>
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
 
@@ -230,10 +230,23 @@
                                     <td id="keyVal">{{ $key + 1 }}</td>
                                     <td id="titleVal">{{ $d->course_teacher_name }}</td>
 
+                                    <td>{{ $d->course_teacher_email }}</td>
+                                    <td>{{ $d->course_teacher_phone }}</td>
+                                    <td>{{ $d->course_teacher_dob }}</td>
+                                    <td>{{ $d->course_teacher_profession }}</td>
+                                    <td>{{ $d->course_teacher_company }}</td>
+                                    <td>{{ $d->course_teacher_interest_area }}</td>
+                                    <td>{!! $d->course_teacher_facebook !!}</td>
+                                    <td>{!! $d->course_teacher_linkedin !!}</td>
+                                    <td>{!! $d->course_teacher_github !!}</td>
+                                    <td>{!! $d->course_teacher_website !!}</td>
+                                    <td>{{ $d->course_teacher_address }}</td>
                                     <td>{!! $d->course_teacher_description !!}</td>
                                     <td>
-                                        <img src="{{ asset($d->course_teacher_photo) }}" alt="" title="">
+                                        <img src="{{ asset($d->course_teacher_photo) }}" alt="" title="" height="300" width="300">
                                     </td>
+
+                                    <td><a href="{{ asset($d->course_teacher_cv) }}">Open the pdf!</a></td>
                                 </tr>
                             @endforeach
                                 </tbody>
