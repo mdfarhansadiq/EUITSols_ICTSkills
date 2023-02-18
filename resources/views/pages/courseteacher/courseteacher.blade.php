@@ -214,7 +214,7 @@
                                         <th>Address</th>
                                         <th>Description</th> --}}
                                         <th>Photo</th>
-                                        {{-- <th>CV</th> --}}
+                                        <th>CV</th>
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
 
