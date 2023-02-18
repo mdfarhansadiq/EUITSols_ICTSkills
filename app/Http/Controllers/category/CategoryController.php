@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
         $data = CourseCategoryModel::all();
 
-        return view('pages.category.category', compact('data'));
+        return view('pages.coursecategory.category', compact('data'));
     }
 
     public function categoryCreate(Request $req)

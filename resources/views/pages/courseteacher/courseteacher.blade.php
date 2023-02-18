@@ -248,6 +248,9 @@
                                     </td>
 
                                     <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a></td>
+                                    <td><div class="btn-group">
+                                        <a href="javascript:void(0)" class="btn btn-info btnView"
+                                            data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                             @endforeach
                                 </tbody>
@@ -368,7 +371,28 @@
             });
 
 
-
+            // $('.btnView').click( function(){
+            //     if($(this).data('id') != null || $(this).data('id') != ''){
+            //         let url = ("{{ url('/admin/teacher-info/view/', ['id']) }}");
+            //         let _url = url.replace('id', $(this).data('id'));
+            //         $.ajax({
+            //             url: _url,
+            //             method: "GET",
+            //             success: function (response) {
+            //                 $('#view-name').html(response.courseTeacherName);
+            //                 $('#view-email').html(response.courseTeacherEmail);
+            //                 $('#view-photo').html(response.courseTeacherPhoto);
+            //                 // $('#view-createdAt').html(response.created_at ? new Date(response.created_at) : '');
+            //                 // $('#view-createdBy').html(response.created_user ? response.created_user.name : 'system');
+            //                 // $('#view-updatedAt').html(response.updated_at ? new Date(response.updated_at) : '');
+            //                 // $('#view-updatedBy').html(response.updated_user ? response.updated_user.name: '');
+            //                 $('#view-modal').modal('show');
+            //             }
+            //         });
+            //     }else{
+            //         alart('Something went wrong');
+            //     }
+            // });
 
         });
 </script>
