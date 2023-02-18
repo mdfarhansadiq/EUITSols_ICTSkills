@@ -48,124 +48,66 @@
                                     enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherName">Name<span
+                                        <label class="col-sm-3" for="courseTitle">Title<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseTeacherName" name="courseTeacherName"
-                                                placeholder="Enter Course Teacher Name">
+                                            <input type="text" class="form-control" id="courseTitle" name="courseTitle"
+                                                placeholder="Enter Course Title">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherEmail">Email<span
+                                        <label class="col-sm-3" for="courseCategory">Category Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="email" class="form-control" id="courseTeacherEmail" name="courseTeacherEmail"
-                                                placeholder="Enter Course Teacher Email">
+                                                <select class="form-select" aria-label="Default select example"
+                                                name="courseTeacher" id="courseTeacher">
+                                                <option selected value="">Select Teacher</option>
+                                                @foreach ($data as $d)
+                                                    <option value="{{ $d->id }}">{{ $d->course_teacher_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherPhone">Phone<span
+                                        <label class="col-sm-3" for="courseTeacher">Teacher Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="tel" class="form-control" id="courseTeacherPhone" name="courseTeacherPhone"
-                                                placeholder="Enter Course Teacher Phone">
+                                                <select class="form-select" aria-label="Default select example"
+                                                name="courseTeacher" id="courseTeacher">
+                                                <option selected value="">Select Teacher</option>
+                                                @foreach ($data as $d)
+                                                    <option value="{{ $d->id }}">{{ $d->course_teacher_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherDOB">Date Of Birth<span
+                                        <label class="col-sm-3" for="courseDuration">Duration<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="date" class="form-control" id="courseTeacherDOB" name="courseTeacherDOB"
-                                                placeholder="Enter Course Teacher Phone">
+                                            <input type="text" class="form-control" id="courseDuration" name="courseDuration"
+                                                placeholder="Enter Course Duration">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherProfession">Profession<span
+                                        <label class="col-sm-3" for="courseDescription">Description<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseTeacherProfession" name="courseTeacherProfession"
-                                                placeholder="Enter Profession">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherCompany">Company<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseTeacherCompany" name="courseTeacherCompany"
-                                                placeholder="Enter Company Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherInterestArea">Interest Area<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseTeacherInterestArea" name="courseTeacherInterestArea"
-                                                placeholder="Enter Interest Area">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherFacebook">Facebook URL<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherFacebook" name="courseTeacherFacebook"
-                                                placeholder="Enter Facebook" rows="17" cols="70"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherLinkedIn">LinkedIn URL<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherLinkedIn" name="courseTeacherLinkedIn"
-                                                placeholder="Enter LinkedIn" rows="17" cols="70"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherGitHub">GitHub URL<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherGitHub" name="courseTeacherGitHub"
-                                                placeholder="Enter GitHub" rows="17" cols="70"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherWebSite">WebSite URL<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherWebSite" name="courseTeacherWebSite"
-                                                placeholder="Enter WebSite" rows="17" cols="70"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherAddress">Address<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseTeacherAddress" name="courseTeacherAddress"
-                                                placeholder="Enter Address">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTeacherDescription">Description<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherDescription" placeholder="Write Your Post" name="courseTeacherDescription"
+                                            <textarea type="text" class="ckeditor form-control" id="courseDescription" placeholder="Write Your Post" name="courseDescription"
                                                 rows="17" cols="70"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="about-photo">Photo: <span class="text-danger">*</span>
+                                        <label for="about-photo">Course Image: <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9 offset-md-3">
-                                            <input type="file" name="courseTeacherPhoto" id="courseTeacherPhoto" class="form-control">
+                                            <input type="file" name="courseImage" id="courseImage" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="about-cv">CV: <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-md-9 offset-md-3">
-                                            <input type="file" name="courseTeacherCV" id="courseTeacherCV" class="form-control">
-                                        </div>
-                                    </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="guard_name"></label>
                                         <div class="col-sm-9">
@@ -188,7 +130,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>View Course Teacher</h4>
+                            <h4>View Course Info</h4>
                         </span>
                     </div>
                     <div class="card-body">
