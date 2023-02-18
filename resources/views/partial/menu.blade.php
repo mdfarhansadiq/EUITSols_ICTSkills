@@ -725,6 +725,13 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{url('/admin/courses-info/view')}}" class="nav-link {{ Request::is('/admin/courses/view') ? 'active' : '' }}">
+        <i class="fas fa-list-alt"></i>
+        <p>Courses Info</p>
+    </a>
+</li>
+
 
 {{-- <li class="nav-item">
     <a href="{{url('/icsb-president')}}" class="nav-link {{ Request::is('/icsb-president') ? 'active' : '' }}">

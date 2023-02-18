@@ -65,6 +65,7 @@ use App\Http\Controllers\nationalaward\NationalAwardController;
 use App\Http\Controllers\codeconduct\CodeConductController;
 use App\Http\Controllers\category\CategoryController;
 use App\Http\Controllers\courseteacher\CourseTeacherController;
+use App\Http\Controllers\coursesinfo\CoursesInfoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -763,6 +764,8 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
+
+    Route::get('/admin/courses-info/view', [CoursesInfoController::class, 'coursesInfoPageView']);
 
 });
 
