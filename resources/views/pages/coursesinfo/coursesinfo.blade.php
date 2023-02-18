@@ -153,7 +153,7 @@
                                         <th>Title</th>
                                         <th>Category</th>
                                         <th>Teacher</th>
-                                        <th>Photo</th>
+                                        {{-- <th>Photo</th> --}}
                                         {{-- <th>CV</th> --}}
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
@@ -168,14 +168,14 @@
 
                                 <tr>
                                     <td id="keyVal">{{ $key + 1 }}</td>
-                                    <td id="titleVal">{{ $d->course_category_id }}</td>
+                                    <td id="titleVal">{{ $d->course_title }}</td>
 
-                                    <td>{{ $d->course_teacher_id }}</td>
+                                    <td>{{ $d->CourseCategoryModel->category_name }}</td>
 
-                                    <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a></td>
-                                    <td><div class="btn-group">
+                                    <td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
+                                    {{-- <td><div class="btn-group">
                                         <a href="javascript:void(0)" class="btn btn-info btnView"
-                                            data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a></td>
+                                            data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a></td> --}}
                                 </tr>
                             @endforeach
                                 </tbody>
@@ -196,22 +196,22 @@
 
 @push('page_scripts')
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-{{-- <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
-                var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
-                var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-                var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-                var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-                var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
+                // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
+                // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
+                // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
+                // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
+                // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
                 for ( instance in CKEDITOR.instances ) {
                     CKEDITOR.instances[instance].updateElement();
                 }
 
                 var formData = new FormData(this);
-                length_array = [formData.get('courseTeacherName').length, formData.get('courseTeacherEmail').length, formData.get('courseTeacherPhone').length, formData.get('courseTeacherDOB').length, formData.get('courseTeacherProfession').length, formData.get('courseTeacherCompany').length, formData.get('courseTeacherInterestArea').length, formData.get('courseTeacherAddress').length, data1.length, data2.length, data3.length, data4.length, data5.length, formData.get('courseTeacherPhoto').lengt, formData.get('courseTeacherCV').length]
+                length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length, formData.get('courseTeacher').length]
                     count = 0
                     for (i = 0; i < length_array.length; i = i + 1) {
                         if (length_array[i] == 0) {
@@ -231,7 +231,7 @@
                     else
                     {
                         $.ajax({
-                    url: '/admin/teacher-info/create',
+                    url: '/admin/courses-info/create',
                     type: "post",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -254,19 +254,19 @@
                             response.length + '</td>';
 
                             student += '<td>' +
-                                value.courseTeacherName + '</td>';
+                                value.courseTitle + '</td>';
 
                             student += '<td>' +
-                                value.courseTeacherEmail + '</td>';
+                                value.courseCategory + '</td>';
 
                             student += '<td>' +
-                                value.courseTeacherPhoto + '</td>';
+                                value.courseTeacher + '</td>';
 
-                            student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
-                                '</td>';
+                            // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
+                            //     '</td>';
 
-                            student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
-                                '</td>';
+                            // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
+                            //     '</td>';
 
                             // student += '<td>' +
                             //     value.Articles + '</td>';
@@ -276,7 +276,7 @@
                             student += '</tr>';
                             student +='</tbody>'
                         });
-                        table_head = '<th>SL</th><th>Name</th><th>Email</th><th>Phone</th><th>Photo</th>'
+                        table_head = '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
 
                         $(".about_table thead tr th:lt(5)").remove();
                         $('.about_table thead tr').append(table_head)
@@ -320,7 +320,7 @@
             // });
 
         });
-</script> --}}
+</script>
 {{-- <script>
     function reqrChk()
     {

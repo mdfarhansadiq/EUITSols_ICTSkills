@@ -44,6 +44,10 @@ class CoursesInfoController extends Controller
 
         $data->save();
 
-        return redirect('/admin/courses-info/view');
+        $data1 = CoursesInfoModel::all();
+
+        return response()->json($data1);
+
+        // return redirect('/admin/courses-info/view');
     }
 }
