@@ -203,10 +203,10 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Date Of Birth</th>
+                                        <th>Date_Of_Birth</th>
                                         <th>Profession</th>
                                         <th>Company/Institute</th>
-                                        <th>Interested Area</th>
+                                        <th>Interested_Area</th>
                                         <th>Facebook</th>
                                         <th>LinkedIn</th>
                                         <th>Github</th>
@@ -243,10 +243,11 @@
                                     <td>{{ $d->course_teacher_address }}</td>
                                     <td>{!! $d->course_teacher_description !!}</td>
                                     <td>
-                                        <img src="{{ asset($d->course_teacher_photo) }}" alt="" title="" height="300" width="300">
+                                        {{-- <img src="{{ asset($d->course_teacher_photo) }}" alt="" title="" height="300" width="300"> --}}
+                                        <a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>
                                     </td>
 
-                                    <td><a href="{{ asset($d->course_teacher_cv) }}">Open the pdf!</a></td>
+                                    <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a></td>
                                 </tr>
                             @endforeach
                                 </tbody>
