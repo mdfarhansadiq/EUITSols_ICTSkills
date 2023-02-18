@@ -53,7 +53,7 @@ class CourseTeacherController extends Controller
 
             $file = $req->file('courseTeacherCV');
             $filename = $file->getClientOriginalName();
-            $folder = $data->category_name;
+            $folder = $data->course_teacher_name;
             $path = $req->file('courseTeacherCV')->storeAs($folder, $filename, 'public');
         }
         $data->course_teacher_cv = '/storage/'.$path;

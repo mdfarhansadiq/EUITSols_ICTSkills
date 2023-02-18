@@ -200,9 +200,21 @@
                                     <tr>
                                         @if(count($data)!=0)
                                         <th>SL</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
 
