@@ -50,4 +50,12 @@ class CoursesInfoController extends Controller
 
         // return redirect('/admin/courses-info/view');
     }
+
+    public function coursesInfoDelete($id){
+        CoursesInfoModel::where('id', $id)->delete();
+
+        $data1 = CoursesInfoModel::all();
+
+        return response()->json($data1);
+    }
 }

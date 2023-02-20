@@ -112,7 +112,7 @@
                                         <label class="col-sm-3" for="courseFee">Fee<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseFee" name="courseFee"
+                                            <input type="number" class="form-control" id="courseFee" name="courseFee"
                                                 placeholder="Enter Course Fee">
                                         </div>
                                     </div>
@@ -153,6 +153,7 @@
                                             <th>Title</th>
                                             <th>Category</th>
                                             <th>Teacher</th>
+                                            <th>Action</th>
                                             {{-- <th>Photo</th> --}}
                                             {{-- <th>CV</th> --}}
                                         @else
@@ -172,6 +173,8 @@
                                                 <td>{{ $d->CourseCategoryModel->category_name }}</td>
 
                                                 <td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
+                                                <td><a href="javascript:void(0);" class="delete"
+                                                        data-id="{{ $d->id }}">Delete</a></td>
                                                 {{-- <td><div class="btn-group">
                                         <a href="javascript:void(0)" class="btn btn-info btnView"
                                             data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a></td> --}}
@@ -294,6 +297,49 @@
                 return false;
 
             });
+
+            // $(".delete").on("click", function() {
+            //     var id = $(this).attr("data-id");
+            //     $.ajax({
+            //         url: "/admin/courses-info/delete/" + id,
+            //         data: {
+            //             "id": id,
+            //             "_token": "{{ csrf_token() }}"
+            //         },
+            //         type: 'post',
+            //         success: function(result) {
+            //             console.log("Yes");
+            //         }
+            //     });
+            // });
+
+            $(".delete").on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                var confirmation = confirm("Are you sure you want to delete this user?");
+                if (confirmation) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/admin/courses-info/delete/" + id,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        // data:{user_id: userId},
+                        success: function(data) {
+                            //Refresh the grid
+                            $(".data-id" + id).remove();
+                            alert(data.success);
+                        },
+                        error: function(e) {
+                            alert(e.error);
+                        }
+                    });
+                } else {
+                    //alert ('no');
+                    return false;
+                }
+            });
+
 
 
             // $('.btnView').click( function(){
