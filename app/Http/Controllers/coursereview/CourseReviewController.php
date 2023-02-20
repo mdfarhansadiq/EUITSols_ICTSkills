@@ -29,7 +29,9 @@ class CourseReviewController extends Controller
 
         $data->save();
 
-        return redirect('/admin/course-review/view');
+        $data1 = CourseReviewModel::all();
+
+        return response()->json($data1);
     }
 
 }

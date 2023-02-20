@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Courses Review')
+@section('title', 'Course Discount')
 
 @push('third_party_stylesheets')
 @endpush
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>Add Course Info</h4>
+                            <h4>Add Course Discount</h4>
                         </span>
                         {{-- <span class="float-right">
                         @if (Auth::user()->can('user view') || Auth::user()->role->id == 1)<a href="{{ route('users.index') }}" class="btn btn-info">Back</a>@endif
@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/course-review/create') }}" method="POST"
+                                <form action="{{ url('/admin/course-discount/create') }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     {{-- <div class="form-group row">
@@ -62,7 +62,7 @@
                                             <select class="form-control" aria-label="Default select example"
                                                 name="courseTitle" id="courseTitle">
                                                 <option selected value="">Select Course Title</option>
-                                                @foreach ($data1 as $d)
+                                                @foreach ($data as $d)
                                                     <option value="{{ $d->id }}">{{ $d->course_title }}
                                                     </option>
                                                 @endforeach
@@ -70,7 +70,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <label class="col-sm-3" for="courseStudent">Student Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
@@ -84,13 +84,29 @@
                                             </select>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseReview">Course Review<span
+                                        <label class="col-sm-3" for="courseDiscountStart">Discount Start<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseReview" placeholder="Write Your Post"
-                                                name="courseReview" rows="17" cols="70"></textarea>
+                                            <input type="date" class="form-control" id="courseDiscountStart" name="courseDiscountStart"
+                                                placeholder="Enter Start Date">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3" for="courseDiscountEnd">Discount End<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" id="courseDiscountEnd" name="courseDiscountEnd"
+                                                placeholder="Enter End Date">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3" for="courseDiscountAmount">Discount Amount<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="courseDiscountAmount" name="courseDiscountAmount"
+                                                placeholder="Enter Discount Amount">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -118,7 +134,7 @@
                             <h4>View Course Review</h4>
                         </span>
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         @include('partial.flush-message')
 
                         <div class="table table-responsive">
@@ -156,7 +172,7 @@
                             </table>
                         </div>
 
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -169,7 +185,7 @@
 
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -233,7 +249,7 @@
                                     value.courseStudent + '</td>';
 
 
-                                    
+
                                 student += '<td>' +
                                     value.courseReview + '</td>';
 
@@ -285,7 +301,7 @@
             // });
 
         });
-    </script>
+    </script> --}}
     {{-- <script>
     function reqrChk()
     {
