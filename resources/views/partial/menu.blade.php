@@ -726,13 +726,20 @@
 </li>
 
 <li class="nav-item">
+    <a href="{{url('/admin/student-info/view')}}" class="nav-link {{ Request::is('/admin/student-info/view') ? 'active' : '' }}">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+        <p>Student Info</p>
+    </a>
+</li>
+
+
+
+<li class="nav-item">
     <a href="{{url('/admin/courses-info/view')}}" class="nav-link {{ Request::is('/admin/courses/view') ? 'active' : '' }}">
         <i class="fa fa-file" aria-hidden="true"></i>
         <p>Courses Info</p>
     </a>
 </li>
-
-
 
 <li class="nav-item">
 
@@ -742,12 +749,7 @@
     </a>
 </li>
 
-<li class="nav-item">
-    <a href="{{url('/admin/student-info/view')}}" class="nav-link {{ Request::is('/admin/student-info/view') ? 'active' : '' }}">
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-        <p>Student Info</p>
-    </a>
-</li>
+
 
 
 {{-- <li class="nav-item">
