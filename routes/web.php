@@ -66,6 +66,9 @@ use App\Http\Controllers\codeconduct\CodeConductController;
 use App\Http\Controllers\category\CategoryController;
 use App\Http\Controllers\courseteacher\CourseTeacherController;
 use App\Http\Controllers\coursesinfo\CoursesInfoController;
+use App\Http\Controllers\coursereview\CourseReviewController;
+use App\Http\Controllers\coursestudent\CourseStudentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -768,6 +771,10 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::get('/admin/courses-info/view', [CoursesInfoController::class, 'coursesInfoPageView']);
     Route::post('/admin/courses-info/create', [CoursesInfoController::class, 'coursesInfoCreate']);
 
+    Route::get('/admin/course-review/view', [CourseReviewController::class, 'courseReviewPageView']);
+
+    
+    Route::get('/admin/student-info/view', [CourseStudentController::class, 'courseStudentInfoPageView']);
 
 });
 

@@ -721,7 +721,7 @@
 <li class="nav-item">
     <a href="{{url('/admin/teacher-info/view')}}" class="nav-link {{ Request::is('/admin/teacher-info/view') ? 'active' : '' }}">
         <i class="fas fa-chalkboard-teacher"></i>
-        <p>Course Teacher Info</p>
+        <p>Teacher Info</p>
     </a>
 </li>
 
@@ -735,9 +735,17 @@
 
 
 <li class="nav-item">
-    <a href="{{url('/admin/courses-info/view')}}" class="nav-link {{ Request::is('/admin/courses/view') ? 'active' : '' }}">
+
+    <a href="{{url('/admin/course-review/view')}}" class="nav-link {{ Request::is('/admin/course-review/view') ? 'active' : '' }}">
         <i class="fa fa-comments" aria-hidden="true"></i>
         <p>Course Review</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{url('/admin/student-info/view')}}" class="nav-link {{ Request::is('/admin/student-info/view') ? 'active' : '' }}">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+        <p>Student Info</p>
     </a>
 </li>
 
