@@ -720,15 +720,24 @@
 
 <li class="nav-item">
     <a href="{{url('/admin/teacher-info/view')}}" class="nav-link {{ Request::is('/admin/teacher-info/view') ? 'active' : '' }}">
-        <i class="fas fa-list-alt"></i>
+        <i class="fas fa-chalkboard-teacher"></i>
         <p>Course Teacher Info</p>
     </a>
 </li>
 
 <li class="nav-item">
     <a href="{{url('/admin/courses-info/view')}}" class="nav-link {{ Request::is('/admin/courses/view') ? 'active' : '' }}">
-        <i class="fas fa-list-alt"></i>
+        <i class="fa fa-file" aria-hidden="true"></i>
         <p>Courses Info</p>
+    </a>
+</li>
+
+
+
+<li class="nav-item">
+    <a href="{{url('/admin/courses-info/view')}}" class="nav-link {{ Request::is('/admin/courses/view') ? 'active' : '' }}">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        <p>Course Review</p>
     </a>
 </li>
 

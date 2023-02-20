@@ -44,8 +44,8 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/courses-info/create') }}" method="POST" class="form-horizontal"
-                                    enctype="multipart/form-data" id="about_form">
+                                <form action="{{ url('/admin/courses-info/create') }}" method="POST"
+                                    class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseTitle">Title<span
@@ -59,7 +59,7 @@
                                         <label class="col-sm-3" for="courseCategory">Course Category Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                                <select class="form-select" aria-label="Default select example"
+                                            <select class="form-control" aria-label="Default select example"
                                                 name="courseCategory" id="courseCategory">
                                                 <option selected value="">Select Course Category</option>
                                                 @foreach ($data2 as $d)
@@ -74,7 +74,7 @@
                                         <label class="col-sm-3" for="courseTeacher">Course Teacher Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                                <select class="form-select" aria-label="Default select example"
+                                            <select class="form-control" aria-label="Default select example"
                                                 name="courseTeacher" id="courseTeacher">
                                                 <option selected value="">Select Course Teacher</option>
                                                 @foreach ($data1 as $d)
@@ -89,16 +89,16 @@
                                         <label class="col-sm-3" for="courseDuration">Duration<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseDuration" name="courseDuration"
-                                                placeholder="Enter Course Duration">
+                                            <input type="text" class="form-control" id="courseDuration"
+                                                name="courseDuration" placeholder="Enter Course Duration">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseDescription">Description<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseDescription" placeholder="Write Your Post" name="courseDescription"
-                                                rows="17" cols="70"></textarea>
+                                            <textarea type="text" class="ckeditor form-control" id="courseDescription" placeholder="Write Your Post"
+                                                name="courseDescription" rows="17" cols="70"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -148,37 +148,36 @@
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
-                                        @if(count($data3)!=0)
-                                        <th>SL</th>
-                                        <th>Title</th>
-                                        <th>Category</th>
-                                        <th>Teacher</th>
-                                        {{-- <th>Photo</th> --}}
-                                        {{-- <th>CV</th> --}}
+                                        @if (count($data3) != 0)
+                                            <th>SL</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Teacher</th>
+                                            {{-- <th>Photo</th> --}}
+                                            {{-- <th>CV</th> --}}
                                         @else
-                                        <th style="text-align:center;">{{"No Data Found"}}<th>
-
+                                            <th style="text-align:center;">{{ 'No Data Found' }}
+                                            <th>
                                         @endif
 
                                     </tr>
                                 </thead>
-                                @if(count($data3))
-                                <tbody id="showPost">
-                                    @foreach($data3 as $key => $d)
+                                @if (count($data3))
+                                    <tbody id="showPost">
+                                        @foreach ($data3 as $key => $d)
+                                            <tr>
+                                                <td id="keyVal">{{ $key + 1 }}</td>
+                                                <td id="titleVal">{{ $d->course_title }}</td>
 
-                                <tr>
-                                    <td id="keyVal">{{ $key + 1 }}</td>
-                                    <td id="titleVal">{{ $d->course_title }}</td>
+                                                <td>{{ $d->CourseCategoryModel->category_name }}</td>
 
-                                    <td>{{ $d->CourseCategoryModel->category_name }}</td>
-
-                                    <td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
-                                    {{-- <td><div class="btn-group">
+                                                <td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
+                                                {{-- <td><div class="btn-group">
                                         <a href="javascript:void(0)" class="btn btn-info btnView"
                                             data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a></td> --}}
-                                </tr>
-                            @endforeach
-                                </tbody>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 @endif
                             </table>
                         </div>
@@ -195,8 +194,8 @@
 @endpush
 
 @push('page_scripts')
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script type="text/javascript">
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -206,90 +205,91 @@
                 // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
                 // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
-                for ( instance in CKEDITOR.instances ) {
+                for (instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();
                 }
 
                 var formData = new FormData(this);
-                length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length, formData.get('courseTeacher').length]
-                    count = 0
-                    for (i = 0; i < length_array.length; i = i + 1) {
-                        if (length_array[i] == 0) {
+                length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length,
+                    formData.get('courseTeacher').length
+                ]
+                count = 0
+                for (i = 0; i < length_array.length; i = i + 1) {
+                    if (length_array[i] == 0) {
 
-                            count = 0
-                            break;
-                        } else {
-                            count = 1
-
-                        }
+                        count = 0
+                        break;
+                    } else {
+                        count = 1
 
                     }
-                    if (count == 0) {
-                        $('#alertError1').fadeIn()
-                        $("#alertError1").fadeOut(10000);
-                    }
-                    else
-                    {
-                        $.ajax({
-                    url: '/admin/courses-info/create',
-                    type: "post",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        $('#alertSuccess').fadeIn()
-                        $("#alertSuccess").fadeOut(5000);
-                        var student = '';
-                        // ITERATING THROUGH OBJECTS
-                        $.each(response, function(key, value) {
-                            //CONSTRUCTION OF ROWS HAVING
-                            // DATA FROM JSON OBJECT
-                            student = '<tbody id="showPost">';
-                            student += '<tr>';
-                            student += '<td>' +
-                            response.length + '</td>';
 
-                            student += '<td>' +
-                                value.courseTitle + '</td>';
+                }
+                if (count == 0) {
+                    $('#alertError1').fadeIn()
+                    $("#alertError1").fadeOut(10000);
+                } else {
+                    $.ajax({
+                        url: '/admin/courses-info/create',
+                        type: "post",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            $('#alertSuccess').fadeIn()
+                            $("#alertSuccess").fadeOut(5000);
+                            var student = '';
+                            // ITERATING THROUGH OBJECTS
+                            $.each(response, function(key, value) {
+                                //CONSTRUCTION OF ROWS HAVING
+                                // DATA FROM JSON OBJECT
+                                student = '<tbody id="showPost">';
+                                student += '<tr>';
+                                student += '<td>' +
+                                    response.length + '</td>';
 
-                            student += '<td>' +
-                                value.courseCategory + '</td>';
+                                student += '<td>' +
+                                    value.courseTitle + '</td>';
 
-                            student += '<td>' +
-                                value.courseTeacher + '</td>';
+                                student += '<td>' +
+                                    value.courseCategory + '</td>';
 
-                            // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
-                            //     '</td>';
+                                student += '<td>' +
+                                    value.courseTeacher + '</td>';
 
-                            // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
-                            //     '</td>';
+                                // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
+                                //     '</td>';
 
-                            // student += '<td>' +
-                            //     value.Articles + '</td>';
+                                // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
+                                //     '</td>';
 
-                            // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
+                                // student += '<td>' +
+                                //     value.Articles + '</td>';
 
-                            student += '</tr>';
-                            student +='</tbody>'
-                        });
-                        table_head = '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
+                                // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
 
-                        $(".about_table thead tr th:lt(5)").remove();
-                        $('.about_table thead tr').append(table_head)
-                        $('.about_table').append(student);
-                        // showJobs(response);
+                                student += '</tr>';
+                                student += '</tbody>'
+                            });
+                            table_head =
+                                '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
 
-                    },
-                    error: function(error) {
-                                $('#alertError').fadeIn()
-                                $("#alertError").fadeOut(5000);
-                            },
-                });
-                    }
+                            $(".about_table thead tr th:lt(5)").remove();
+                            $('.about_table thead tr').append(table_head)
+                            $('.about_table').append(student);
+                            // showJobs(response);
+
+                        },
+                        error: function(error) {
+                            $('#alertError').fadeIn()
+                            $("#alertError").fadeOut(5000);
+                        },
+                    });
+                }
 
                 return false;
 
@@ -320,8 +320,8 @@
             // });
 
         });
-</script>
-{{-- <script>
+    </script>
+    {{-- <script>
     function reqrChk()
     {
 
@@ -329,7 +329,7 @@
     reqrChk();
 </script> --}}
 
-{{-- <script>
+    {{-- <script>
 
 function postDisable()
 {
@@ -349,5 +349,4 @@ postDisable();
 
 
 </script> --}}
-
 @endpush
