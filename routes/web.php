@@ -69,7 +69,7 @@ use App\Http\Controllers\coursesinfo\CoursesInfoController;
 use App\Http\Controllers\coursereview\CourseReviewController;
 use App\Http\Controllers\coursestudent\CourseStudentController;
 use App\Http\Controllers\coursediscount\CourseDiscountController;
-
+use App\Http\Controllers\coursecontent\CourseContentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -782,6 +782,9 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/course-discount/view', [CourseDiscountController::class, 'courseDiscountPageView']);
     Route::post('/admin/course-discount/create', [CourseDiscountController::class, 'courseDiscountCreate']);
+
+    Route::get('/admin/course-content/view', [CourseContentController::class, 'courseContentPageView']);
+    Route::post('/admin/course-content/create', [CourseContentController::class, 'courseContentCreate']);
 
 });
 

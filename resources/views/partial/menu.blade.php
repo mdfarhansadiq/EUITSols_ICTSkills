@@ -758,7 +758,13 @@
     </a>
 </li>
 
+<li class="nav-item">
 
+    <a href="{{url('/admin/course-content/view')}}" class="nav-link {{ Request::is('/admin/course-content/view') ? 'active' : '' }}">
+        <i style='font-size:' class='fas'>&#xf07c;</i>
+        <p>Course Content</p>
+    </a>
+</li>
 
 
 {{-- <li class="nav-item">
