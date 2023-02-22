@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('coursecontents', function (Blueprint $table) {
+        Schema::create('coursestudentcertificates', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('course_enroll_student_id');
+            $table->foreign('course_enroll_student_id')->references('id')->on('courseenrollstudents')->onDelete('cascade');
             $table->unsignedBigInteger('course_title_id');
-            $table->string('course_content_title');
-            $table->text('course_content_link');
-            $table->text('course_content_material_file')->nullable();
-            $table->text('course_content_material_link')->nullable();
-            $table->string('course_content_duration');
             $table->foreign('course_title_id')->references('id')->on('coursesinfos')->onDelete('cascade');
+            $table->unsignedBigInteger('course_student_id');
+            $table->foreign('course_student_id')->references('id')->on('coursestudents')->onDelete('cascade');
+            $table->integer('number_of_certificate');
+
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coursecontents');
+        Schema::dropIfExists('coursestudentcertificates');
     }
 };

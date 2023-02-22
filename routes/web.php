@@ -70,6 +70,8 @@ use App\Http\Controllers\coursereview\CourseReviewController;
 use App\Http\Controllers\coursestudent\CourseStudentController;
 use App\Http\Controllers\coursediscount\CourseDiscountController;
 use App\Http\Controllers\coursecontent\CourseContentController;
+use App\Http\Controllers\courseenrollstudent\CourseEnrollStudentController;
+use App\Http\Controllers\coursestudentcertificate\CourseStudentCertificateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -785,6 +787,12 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/course-content/view', [CourseContentController::class, 'courseContentPageView']);
     Route::post('/admin/course-content/create', [CourseContentController::class, 'courseContentCreate']);
+
+    Route::get('/admin/course-enroll-student/view', [CourseEnrollStudentController::class, 'courseEnrollStudentPageView']);
+    Route::post('/admin/course-enroll-student/create', [CourseEnrollStudentController::class, 'courseEnrollStudentCreate']);
+
+    Route::get('/admin/student-certificate/view', [CourseStudentCertificateController::class, 'courseStudentCertificatePageView']);
+    Route::post('/admin/student-certificate/create', [CourseStudentCertificateController::class, 'courseStudentCertificateCreate']);
 
 });
 

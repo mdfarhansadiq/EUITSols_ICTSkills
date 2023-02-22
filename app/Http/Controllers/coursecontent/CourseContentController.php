@@ -13,7 +13,8 @@ class CourseContentController extends Controller
     public function courseContentPageView()
     {
         $data1 = CoursesInfoModel::all();
-        return view('pages.coursecontent.coursecontent', compact('data1'));
+        $data2 = CourseContentModel::all();
+        return view('pages.coursecontent.coursecontent', compact('data1', 'data2'));
     }
 
     public function courseContentCreate(Request $req)
@@ -22,7 +23,7 @@ class CourseContentController extends Controller
 
         $data->course_title_id = $req->courseTitle;
         $data->course_content_title = $req->courseContentTitle;
-
+        $data->course_content_link = $req->courseContentLink;
         $path = '';
 
         if ($req->hasFile('courseContentMaterialFile')) {

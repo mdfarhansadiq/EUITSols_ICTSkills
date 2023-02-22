@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Courses Content')
+@section('title', 'Course Student Certificate')
 
 @push('third_party_stylesheets')
 @endpush
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>Add Course Content</h4>
+                            <h4>Add Course Student Certificate</h4>
                         </span>
                         {{-- <span class="float-right">
                         @if (Auth::user()->can('user view') || Auth::user()->role->id == 1)<a href="{{ route('users.index') }}" class="btn btn-info">Back</a>@endif
@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/course-content/create') }}" method="POST"
+                                <form action="{{ url('/admin/course-enroll-student/create') }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     {{-- <div class="form-group row">
@@ -63,19 +63,25 @@
                                                 name="courseTitle" id="courseTitle">
                                                 <option selected value="">Select Course Title</option>
                                                 @foreach ($data1 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_title }}
+                                                    <option value="{{ $d->CoursesInfoModel->id }}">{{ $d->CoursesInfoModel->course_title }}
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseContentTitle">Content Title<span
+                                        <label class="col-sm-3" for="courseEnrollStudent">Student Name<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseContentTitle" name="courseContentTitle"
-                                                placeholder="Enter Course Content Title">
+                                            <select class="form-control" aria-label="Default select example"
+                                                name="courseEnrollStudent" id="courseEnrollStudent">
+                                                <option selected value="">Select Student Name</option>
+                                                @foreach ($data1 as $d)
+                                                    <option value="{{ $d->CourseStudentModel->id }}">
+                                                        {{ $d->CourseStudentModel->course_student_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     {{-- <div class="form-group row">
@@ -93,35 +99,22 @@
 
                                         </div>
                                     </div> --}}
+
                                     <div class="form-group row">
-                                        <label class="col-sm-3" for="courseContentLink">Course Content<span
+                                        <label class="col-sm-3" for="numberCourseCertificate">Number Of Certificate<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseContentLink" placeholder="Write Your Post"
-                                                name="courseContentLink" rows="17" cols="70"></textarea>
+                                            <input type="number" class="form-control" id="courseCertificate"
+                                                name="courseCertificate" placeholder="Enter Number Of Certificate">
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
-                                        <label for="about-photo">Content Material File: <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-md-9 offset-md-3">
-                                            <input type="file" name="courseContentMaterialFile" id="courseContentMaterialFile" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseContentMaterialLink">Content Material Link<span
+                                        <label class="col-sm-3" for="courseCompletionDate">Course Completion Date<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="url" class="form-control" id="courseContentMaterialLink" name="courseContentMaterialLink"
-                                                placeholder="Enter Content Material Link">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseContentDuration">Content Duration<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseContentDuration" name="courseContentDuration"
-                                                placeholder="Enter Content Duration">
+                                            <input type="date" class="form-control" id="courseCompletionDate"
+                                                name="courseCompletionDate" placeholder="Enter Course Start Date">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -152,7 +145,7 @@
                     <div class="card-body">
                         @include('partial.flush-message')
 
-                        <div class="table table-responsive">
+                        {{-- <div class="table table-responsive">
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
@@ -174,9 +167,6 @@
                                         @foreach ($data2 as $key => $d)
                                             <tr>
                                                 <td id="keyVal">{{ $key + 1 }}</td>
-                                                {{-- <td id="titleVal">{{ $d->CoursesInfoModel->course_title }}</td>
-
-                                                <td>{{ $d->CourseStudentModel->course_student_name }}</td> --}}
 
                                                 <td>{!! $d->course_content_link !!}</td>
 
@@ -185,7 +175,7 @@
                                     </tbody>
                                 @endif
                             </table>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

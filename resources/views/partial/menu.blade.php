@@ -767,6 +767,21 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{url('/admin/course-enroll-student/view')}}" class="nav-link {{ Request::is('/admin/course-enroll-student/view') ? 'active' : '' }}">
+        <i style='font-size:' class='fas'>&#xf2c2;</i>
+        <p>Course Enroll Student</p>
+    </a>
+</li>
+
+<li class="nav-item">
+
+    <a href="{{url('/admin/student-certificate/view')}}" class="nav-link {{ Request::is('/admin/student-certificate/view') ? 'active' : '' }}">
+        <i class="fa fa-certificate" aria-hidden="true"></i>
+        <p>Course Student Certificate</p>
+    </a>
+</li>
+
 {{-- <li class="nav-item">
     <a href="{{url('/icsb-president')}}" class="nav-link {{ Request::is('/icsb-president') ? 'active' : '' }}">
         <i class="fa fa-user" aria-hidden="true"></i>
