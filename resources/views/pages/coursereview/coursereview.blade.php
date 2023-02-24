@@ -232,8 +232,6 @@
                                 student += '<td>' +
                                     value.courseStudent + '</td>';
 
-
-                                    
                                 student += '<td>' +
                                     value.courseReview + '</td>';
 
