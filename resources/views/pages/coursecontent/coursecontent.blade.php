@@ -193,13 +193,8 @@
                                             <td>
                                                 <h5>{{ $d->course_content_title }}</h5>
                                             </td>
-                                            
+
                                             <td>
-                                                {{-- <div style="display: none" id="display{{ $key }}">
-                                                    <iframe width="750" height="450" id="player{{ $key }}"
-                                                        src="">
-                                                    </iframe>
-                                                </div> --}}
                                                 <div id="player{{ $key }}"></div>
                                             </td>
 
