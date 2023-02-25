@@ -74,8 +74,8 @@
                                         <label class="col-sm-3" for="courseContentTitle">Content Title<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseContentTitle" name="courseContentTitle"
-                                                placeholder="Enter Course Content Title">
+                                            <input type="text" class="form-control" id="courseContentTitle"
+                                                name="courseContentTitle" placeholder="Enter Course Content Title">
                                         </div>
                                     </div>
                                     {{-- <div class="form-group row">
@@ -97,31 +97,40 @@
                                         <label class="col-sm-3" for="courseContentLink">Course Content<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
+                                            <input type="url" class="form-control" id="courseContentLink"
+                                                name="courseContentLink" placeholder="Enter Content URL">
+                                        </div>
+                                    </div>
+                                    {{-- <div class="form-group row">
+                                        <label class="col-sm-3" for="courseContentLink">Course Content<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
                                             <textarea type="text" class="ckeditor form-control" id="courseContentLink" placeholder="Write Your Post"
                                                 name="courseContentLink" rows="17" cols="70"></textarea>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group row">
                                         <label for="about-photo">Content Material File: <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9 offset-md-3">
-                                            <input type="file" name="courseContentMaterialFile" id="courseContentMaterialFile" class="form-control">
+                                            <input type="file" name="courseContentMaterialFile"
+                                                id="courseContentMaterialFile" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseContentMaterialLink">Content Material Link<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="url" class="form-control" id="courseContentMaterialLink" name="courseContentMaterialLink"
-                                                placeholder="Enter Content Material Link">
+                                            <input type="url" class="form-control" id="courseContentMaterialLink"
+                                                name="courseContentMaterialLink" placeholder="Enter Content Material Link">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseContentDuration">Content Duration<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseContentDuration" name="courseContentDuration"
-                                                placeholder="Enter Content Duration">
+                                            <input type="text" class="form-control" id="courseContentDuration"
+                                                name="courseContentDuration" placeholder="Enter Content Duration">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -132,13 +141,14 @@
                                         </div>
                                     </div>
                                 </form>
+                                {{-- <div>
+                                    <a href="https://youtu.be/7L2RLBmEJmE" id="youtubeLink"></a>
+                                </div> --}}
+
+
                             </div>
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -156,34 +166,51 @@
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
-                                        @if (count($data2) != 0)
-                                            <th>SL</th>
-                                            <th>Course Title</th>
-                                            <th>Student Name</th>
-                                            <th>Course Review</th>
+                                        {{-- @if (count($data2) != 0) --}}
+                                        <th>SL</th>
+                                        <th>Course Title</th>
+                                        <th>Lecture Button</th>
+                                        <th>Lecture Video</th>
 
-                                        @else
+                                        {{-- @else
                                             <th style="text-align:center;">{{ 'No Data Found' }}
                                             <th>
-                                        @endif
+                                        @endif --}}
 
                                     </tr>
                                 </thead>
-                                @if (count($data2))
-                                    <tbody id="showPost">
-                                        @foreach ($data2 as $key => $d)
-                                            <tr>
-                                                <td id="keyVal">{{ $key + 1 }}</td>
-                                                {{-- <td id="titleVal">{{ $d->CoursesInfoModel->course_title }}</td>
+                                {{-- @if (count($data2)) --}}
+                                @foreach ($data2 as $key => $d)
+                                    <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
+                                @endforeach
+                                <tbody id="showPost">
+                                    @foreach ($data2 as $key => $d)
+                                        <tr>
+                                            <td>
+                                                <h4 id="keyVal">{{ $key + 1 }}</h4>
+                                            </td>
 
-                                                <td>{{ $d->CourseStudentModel->course_student_name }}</td> --}}
+                                            <td>
+                                                <h3>{{ $d->course_content_title }}</h3>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary"
+                                                    id="clickBtn{{ $key }}"
+                                                    onclick="setIframeElement(this.id)">Click to see the lecture</button>
+                                            <td>
+                                                <div style="display: none" id="display{{ $key }}">
+                                                <iframe width="750" height="450" id="player{{ $key }}"
+                                                    src="">
+                                                </iframe>
+                                                </div>
+                                            </td>
 
-                                                <td>{!! $d->course_content_link !!}</td>
 
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                @endif
+
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                {{-- @endif --}}
                             </table>
                         </div>
 
@@ -345,4 +372,70 @@ postDisable();
 
 
 </script> --}}
+
+    {{-- <script src="http://www.youtube.com/player_api"></script> --}}
+
+    <script>
+        // create youtube player
+    </script>
+
+    <script src="http://www.youtube.com/player_api"></script>
+
+    <script>
+        // create youtube player
+        var btnCount = 0;
+
+        function setIframeElement(clicked_id) {
+
+            var IdMake = '';
+
+            for (var i = 0; i < clicked_id.length; i++) {
+                if (clicked_id[i] >= '0' && clicked_id[i] <= '9') {
+                    IdMake += clicked_id[i];
+                }
+            }
+
+            var videoLink = document.getElementById(IdMake).href;
+            //console.log(ID);
+            var youtubeVideoId = '';
+            var cnt = 0;
+
+            for (var i = videoLink.length - 1; i >= 0; i--) {
+                if (cnt !== 11) {
+                    youtubeVideoId += videoLink[i];
+                    cnt++;
+                }
+            }
+
+            var videoID = '';
+
+            for (var i = youtubeVideoId.length - 1; i >= 0; i--) {
+                videoID += youtubeVideoId[i];
+            }
+
+            //var Val = document.getElementById("{{ $key }}").innerHTML;
+            //console.log(Val);
+
+            var player = 'player' + IdMake;
+            //console.log(player);
+            btnCount++;
+
+            var display = 'display' + IdMake;
+
+            if(document.getElementById(display).style.display == 'none')
+            {
+                document.getElementById(display).style.display = 'block';
+            }
+            else
+            {
+                document.getElementById(display).style.display = 'none';
+            }
+            //document.getElementById(display).style.display = 'block';
+
+            document.getElementById(player).src = ('https://www.youtube-nocookie.com/embed/' + videoID);
+
+            console.log(btnCount);
+
+        }
+    </script>
 @endpush

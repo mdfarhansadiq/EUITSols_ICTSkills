@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_title_id');
             $table->string('course_content_title');
-            $table->text('course_content_link');
+            $table->string('course_content_link');
             $table->text('course_content_material_file')->nullable();
             $table->text('course_content_material_link')->nullable();
             $table->string('course_content_duration');
