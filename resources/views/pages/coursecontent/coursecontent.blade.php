@@ -169,7 +169,7 @@
                                         {{-- @if (count($data2) != 0) --}}
                                         <th>SL</th>
                                         <th>Course Title</th>
-                                        <th>Lecture Button</th>
+                                        {{-- <th>Lecture Button</th> --}}
                                         <th>Lecture Video</th>
 
                                         {{-- @else
@@ -187,16 +187,13 @@
                                     @foreach ($data2 as $key => $d)
                                         <tr>
                                             <td>
-                                                <h4 id="keyVal">{{ $key + 1 }}</h4>
+                                                <h5 id="keyVal">{{ $key + 1 }}</h5>
                                             </td>
 
                                             <td>
-                                                <h3>{{ $d->course_content_title }}</h3>
+                                                <h5>{{ $d->course_content_title }}</h5>
                                             </td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary"
-                                                    id="clickBtn{{ $key }}"
-                                                    onclick="setIframeElement(this.id)">Click to see the lecture</button>
+                                            
                                             <td>
                                                 {{-- <div style="display: none" id="display{{ $key }}">
                                                     <iframe width="750" height="450" id="player{{ $key }}"
@@ -386,6 +383,7 @@ postDisable();
         // create youtube player
         var player;
 
+        var completeVid = 0;
         function onYouTubePlayerAPIReady() {
 
             var allId = document.getElementById("{{ $key }}").id;
@@ -439,14 +437,18 @@ postDisable();
 
         // autoplay video
         function onPlayerReady(event) {
-            event.target.playVideo();
+            event.target.pauseVideo();
         }
 
         // when video ends
         function onPlayerStateChange(event) {
             if (event.data === 0) {
-                alert('done');
+                // alert('done');
+                completeVid++;
+                console.log(completeVid);
             }
         }
+
+
     </script>
 @endpush
