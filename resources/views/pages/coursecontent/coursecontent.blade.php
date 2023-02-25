@@ -198,11 +198,12 @@
                                                     id="clickBtn{{ $key }}"
                                                     onclick="setIframeElement(this.id)">Click to see the lecture</button>
                                             <td>
-                                                <div style="display: none" id="display{{ $key }}">
-                                                <iframe width="750" height="450" id="player{{ $key }}"
-                                                    src="">
-                                                </iframe>
-                                                </div>
+                                                {{-- <div style="display: none" id="display{{ $key }}">
+                                                    <iframe width="750" height="450" id="player{{ $key }}"
+                                                        src="">
+                                                    </iframe>
+                                                </div> --}}
+                                                <div id="player{{ $key }}"></div>
                                             </td>
 
 
@@ -383,59 +384,69 @@ postDisable();
 
     <script>
         // create youtube player
-        var btnCount = 0;
+        var player;
 
-        function setIframeElement(clicked_id) {
+        function onYouTubePlayerAPIReady() {
 
-            var IdMake = '';
+            var allId = document.getElementById("{{ $key }}").id;
 
-            for (var i = 0; i < clicked_id.length; i++) {
-                if (clicked_id[i] >= '0' && clicked_id[i] <= '9') {
-                    IdMake += clicked_id[i];
+
+
+            for (var i = 0; i <= (parseInt(allId)); i++) {
+
+                var ID = i.toString();
+                var videoURL = document.getElementById(ID).href;
+                var ytV = '';
+                var ytVid = '';
+                var cnt = 0;
+
+
+
+                for(var j = videoURL.length - 1; j >= 0; j--)
+                {
+                    if(cnt !== 11)
+                    {
+                        ytV += videoURL[j];
+                        cnt++;
+                    }
                 }
-            }
 
-            var videoLink = document.getElementById(IdMake).href;
-            //console.log(ID);
-            var youtubeVideoId = '';
-            var cnt = 0;
 
-            for (var i = videoLink.length - 1; i >= 0; i--) {
-                if (cnt !== 11) {
-                    youtubeVideoId += videoLink[i];
-                    cnt++;
+
+                for(var j = ytV.length - 1; j >= 0; j--)
+                {
+                    ytVid += ytV[j];
                 }
+
+                console.log(ytVid);
+
+                var plr = 'player' + i;
+
+
+
+                player = new YT.Player(plr, {
+                    height: '390',
+                    width: '640',
+                    videoId: ytVid,
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+
             }
+        }
 
-            var videoID = '';
+        // autoplay video
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
 
-            for (var i = youtubeVideoId.length - 1; i >= 0; i--) {
-                videoID += youtubeVideoId[i];
+        // when video ends
+        function onPlayerStateChange(event) {
+            if (event.data === 0) {
+                alert('done');
             }
-
-            //var Val = document.getElementById("{{ $key }}").innerHTML;
-            //console.log(Val);
-
-            var player = 'player' + IdMake;
-            //console.log(player);
-            btnCount++;
-
-            var display = 'display' + IdMake;
-
-            if(document.getElementById(display).style.display == 'none')
-            {
-                document.getElementById(display).style.display = 'block';
-            }
-            else
-            {
-                document.getElementById(display).style.display = 'none';
-            }
-            //document.getElementById(display).style.display = 'block';
-
-            document.getElementById(player).src = ('https://www.youtube-nocookie.com/embed/' + videoID);
-
-            console.log(btnCount);
-
         }
     </script>
 @endpush
