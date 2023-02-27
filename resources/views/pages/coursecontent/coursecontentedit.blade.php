@@ -62,9 +62,8 @@
                                             <select class="form-control" aria-label="Default select example"
                                                 name="courseTitle" id="courseTitle">
                                                 <option selected value="">Select Course Title</option>
-                                                @foreach ($data1 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_title }}
-                                                    </option>
+                                                @foreach ($course as $d)
+                                                    <option value="{{ $d->id }}" @if ($d->id == $data->course_title_id) selected @endif>{{ $d->course_title }}</option>
                                                 @endforeach
                                             </select>
 
@@ -83,7 +82,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentLink"
-                                                name="courseContentLink" placeholder="Enter Content URL" value="{{  }}">
+                                                name="courseContentLink" placeholder="Enter Content URL" value="">
                                         </div>
                                     </div>
                                     <div class="form-group row">

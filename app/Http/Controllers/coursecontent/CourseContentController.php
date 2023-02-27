@@ -47,8 +47,8 @@ class CourseContentController extends Controller
     public function courseContentEditView($id)
     {
         $data = CourseContentModel::findOrFail($id);
-
-        return view('pages.coursecontent.coursecontentedit', compact('data'));
+        $course = CoursesInfoModel::all();
+        return view('pages.coursecontent.coursecontentedit', compact('data', 'course'));
     }
 
     public function courseContentDelete($id){

@@ -195,7 +195,7 @@
                                                 <td><a href="javascript:void(0);" class="delete" type="button"
                                                         data-id="{{ $d->id }}">Delete</a></td>
 
-                                                <td><a href="javascript:void(0);" class="edit" type="button"
+                                                <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}" class="edit" type="button"
                                                         data-id="{{ $d->id }}">Edit</a></td>
 
                                             </div>
@@ -416,6 +416,7 @@ postDisable();
                     height: '370',
                     width: '750',
                     videoId: ytVid,
+                    playerVars: {rel: 0, showinfo: 0, ecver: 0},
                     events: {
                         'onReady': onPlayerReady,
                         'onStateChange': onPlayerStateChange
@@ -436,6 +437,7 @@ postDisable();
                 completeVid++;
                 tdHideShow = "tableData" + completeVid;
                 document.getElementById(tdHideShow).removeAttribute("hidden");
+                player.stopVideo();
             }
         }
 
