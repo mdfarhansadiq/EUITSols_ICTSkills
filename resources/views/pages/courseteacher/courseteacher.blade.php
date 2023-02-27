@@ -251,6 +251,12 @@
                                     <td><div class="btn-group">
                                         <a href="javascript:void(0)" class="btn btn-info btnView"
                                             data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a></td>
+
+                                    <td><a href="javascript:void(0);" class="delete" type="button"
+                                                data-id="{{ $d->id }}">Delete</a></td>
+
+                                    <td><a href="{{ url('/admin/teacher-info/edit/view', $d['id']) }}" class="edit" type="button"
+                                                data-id="{{ $d->id }}">Edit</a></td>
                                 </tr>
                             @endforeach
                                 </tbody>
@@ -368,6 +374,33 @@
 
                 return false;
 
+            });
+
+            $(".delete").on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                var confirmation = confirm("Are you sure you want to delete this?");
+                if (confirmation) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/admin/teacher-info/delete/" + id,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        // data:{user_id: userId},
+                        success: function(data) {
+                            //Refresh the grid
+                            alert(data.success);
+                            $(".data-id" + id).remove();
+                        },
+                        error: function(e) {
+                            alert(e.error);
+                        }
+                    });
+                } else {
+                    //alert ('no');
+                    return false;
+                }
             });
 
 

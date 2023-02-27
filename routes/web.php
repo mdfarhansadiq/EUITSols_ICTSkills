@@ -761,7 +761,6 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     /// ICSBNationalAward Route
     Route::get('/national-award', [NationalAwardController::class, 'nationalAward']);
     Route::post('/national-award-create', [NationalAwardController::class, 'nationalAwardPost']);
-
     /// ICSBCodeOfConduct Route
     Route::get('/code-of-conduct', [CodeConductController::class, 'codeConduct']);
     Route::post('/code-of-conduct-create', [CodeConductController::class, 'codeConductPost']);
@@ -771,6 +770,9 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
+    Route::get('/admin/teacher-info/delete/{id}', [CourseTeacherController::class, 'courseTeacherInfoDelete']);
+    Route::get('/admin/teacher-info/edit/view/{id}', [CourseTeacherController::class, 'courseTeacherInfoEditView']);
+    Route::post('/admin/teacher-info/update/{id}', [CourseTeacherController::class, 'courseTeacherInfoEditUpdate']);
 
     Route::get('/admin/courses-info/view', [CoursesInfoController::class, 'coursesInfoPageView']);
     Route::post('/admin/courses-info/create', [CoursesInfoController::class, 'coursesInfoCreate']);
@@ -782,6 +784,9 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/student-info/view', [CourseStudentController::class, 'courseStudentInfoPageView']);
     Route::post('/admin/student-info/create', [CourseStudentController::class, 'courseStudentInfoCreate']);
+    Route::get('/admin/student-info/delete/{id}', [CourseStudentController::class, 'courseStudentInfoDelete']);
+    Route::get('/admin/student-info/edit/view/{id}', [CourseStudentController::class, 'courseStudentInfoEditView']);
+    Route::post('/admin/student-info/update/{id}', [CourseStudentController::class, 'courseStudentInfoEditUpdate']);
 
     Route::get('/admin/course-discount/view', [CourseDiscountController::class, 'courseDiscountPageView']);
     Route::post('/admin/course-discount/create', [CourseDiscountController::class, 'courseDiscountCreate']);
@@ -790,6 +795,7 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::post('/admin/course-content/create', [CourseContentController::class, 'courseContentCreate']);
     Route::get('/admin/courses-content/delete/{id}', [CourseContentController::class, 'courseContentDelete']);
     Route::get('/admin/courses-content/edit/view/{id}', [CourseContentController::class, 'courseContentEditView']);
+    Route::post('/admin/courses-content/update/{id}', [CourseContentController::class, 'courseContentEditUpdate']);
 
     Route::get('/admin/course-enroll-student/view', [CourseEnrollStudentController::class, 'courseEnrollStudentPageView']);
     Route::post('/admin/course-enroll-student/create', [CourseEnrollStudentController::class, 'courseEnrollStudentCreate']);

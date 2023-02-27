@@ -51,6 +51,33 @@ class CourseContentController extends Controller
         return view('pages.coursecontent.coursecontentedit', compact('data', 'course'));
     }
 
+    public function courseContentEditUpdate(Request $req, $id)
+    {
+        $data = CourseContentModel::findOrFail($id);
+
+        $data->course_title_id = $req->courseTitle;
+        $data->course_content_title = $req->courseContentTitle;
+        $data->course_content_link = $req->courseContentLink;
+        $path = '';
+
+        if ($req->hasFile('courseContentMaterialFile')) {
+
+
+            $file = $req->file('courseContentMaterialFile');
+            $filename = $file->getClientOriginalName();
+            $folder = $data->course_content_title;
+            $path = $req->file('courseContentMaterialFile')->storeAs($folder, $filename, 'public');
+            $data->course_content_material_file = '/storage/'.$path;
+        }
+        $data->course_content_material_link = $req->courseContentMaterialLink;
+        $data->course_content_duration = $req->courseContentDuration;
+
+
+        $data->save();
+
+        return redirect('/admin/course-content/view');
+    }
+
     public function courseContentDelete($id){
         CourseContentModel::where('id', $id)->delete();
 

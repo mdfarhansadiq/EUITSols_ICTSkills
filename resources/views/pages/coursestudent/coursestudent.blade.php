@@ -203,6 +203,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Photo</th>
+                                        <th>Action</th>
                                         @else
                                         <th style="text-align:center;">{{"No Data Found"}}<th>
 
@@ -224,6 +225,12 @@
                                     <td>
                                         <a href="{{ asset($d->course_student_photo) }}" target="_blank">Student Photo</a>
                                     </td>
+
+                                    <td><a href="javascript:void(0);" class="delete" type="button"
+                                        data-id="{{ $d->id }}">Delete</a></td>
+
+                            <td><a href="{{ url('/admin/student-info/edit/view', $d['id']) }}" class="edit" type="button"
+                                        data-id="{{ $d->id }}">Edit</a></td>
 
                                     {{-- <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a></td>
                                     <td><div class="btn-group">
@@ -368,6 +375,33 @@
             //         alart('Something went wrong');
             //     }
             // });
+
+            $(".delete").on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                var confirmation = confirm("Are you sure you want to delete this?");
+                if (confirmation) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/admin/student-info/delete/" + id,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        // data:{user_id: userId},
+                        success: function(data) {
+                            //Refresh the grid
+                            alert(data.success);
+                            $(".data-id" + id).remove();
+                        },
+                        error: function(e) {
+                            alert(e.error);
+                        }
+                    });
+                } else {
+                    //alert ('no');
+                    return false;
+                }
+            });
 
         });
 </script>

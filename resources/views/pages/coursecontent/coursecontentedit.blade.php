@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/course-content/create') }}" method="POST"
+                                <form action="/admin/courses-content/update/{{ $data['id'] }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     {{-- <div class="form-group row">
@@ -74,7 +74,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseContentTitle"
-                                                name="courseContentTitle" placeholder="Enter Course Content Title">
+                                                name="courseContentTitle" placeholder="Enter Course Content Title" value="{{ $data->course_content_title }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -82,7 +82,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentLink"
-                                                name="courseContentLink" placeholder="Enter Content URL" value="">
+                                                name="courseContentLink" placeholder="Enter Content URL" value="{{ $data->course_content_link }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -98,7 +98,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentMaterialLink"
-                                                name="courseContentMaterialLink" placeholder="Enter Content Material Link">
+                                                name="courseContentMaterialLink" placeholder="Enter Content Material Link" value="{{ $data->course_content_material_link }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -106,7 +106,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseContentDuration"
-                                                name="courseContentDuration" placeholder="Enter Content Duration">
+                                                name="courseContentDuration" placeholder="Enter Content Duration" value="{{ $data->course_content_duration }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -519,33 +519,6 @@ postDisable();
         //         }
         //     });
         // });
-
-        $(".delete").on('click', function(e) {
-            e.preventDefault();
-            var id = $(this).attr("data-id");
-            var confirmation = confirm("Are you sure you want to delete this user?");
-            if (confirmation) {
-                $.ajax({
-                    type: 'GET',
-                    url: "/admin/courses-content/delete/" + id,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    // data:{user_id: userId},
-                    success: function(data) {
-                        //Refresh the grid
-                        alert(data.success);
-                        $(".data-id" + id).remove();
-                    },
-                    error: function(e) {
-                        alert(e.error);
-                    }
-                });
-            } else {
-                //alert ('no');
-                return false;
-            }
-        });
 
     });
 </script>
