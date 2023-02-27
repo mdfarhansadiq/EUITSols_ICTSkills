@@ -43,4 +43,19 @@ class CourseContentController extends Controller
         return redirect('/admin/course-content/view');
 
     }
+
+    public function courseContentEditView($id)
+    {
+        $data = CourseContentModel::findOrFail($id);
+
+        return view('pages.coursecontent.coursecontentedit', compact('data'));
+    }
+
+    public function courseContentDelete($id){
+        CourseContentModel::where('id', $id)->delete();
+
+        $data1 = CourseContentModel::all();
+
+        return response()->json($data1);
+    }
 }

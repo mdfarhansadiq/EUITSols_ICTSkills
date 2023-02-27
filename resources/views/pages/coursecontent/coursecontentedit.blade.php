@@ -78,37 +78,14 @@
                                                 name="courseContentTitle" placeholder="Enter Course Content Title">
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-3" for="courseStudent">Student Name<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" aria-label="Default select example"
-                                                name="courseStudent" id="courseStudent">
-                                                <option selected value="">Student Name</option>
-                                                @foreach ($data2 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_student_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseContentLink">Course Content<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentLink"
-                                                name="courseContentLink" placeholder="Enter Content URL">
+                                                name="courseContentLink" placeholder="Enter Content URL" value="{{  }}">
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-3" for="courseContentLink">Course Content<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseContentLink" placeholder="Write Your Post"
-                                                name="courseContentLink" rows="17" cols="70"></textarea>
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group row">
                                         <label for="about-photo">Content Material File: <span class="text-danger">*</span>
                                         </label>
@@ -141,18 +118,13 @@
                                         </div>
                                     </div>
                                 </form>
-                                {{-- <div>
-                                    <a href="https://youtu.be/7L2RLBmEJmE" id="youtubeLink"></a>
-                                </div> --}}
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-10 col-lg-12">
+            {{-- <div class="col-md-10 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
@@ -172,43 +144,37 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                {{-- @if (count($data2)) --}}
                                 @foreach ($data2 as $key => $d)
                                     <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
                                 @endforeach
                                 <tbody id="showPost">
                                     @foreach ($data2 as $key => $d)
-                                        <tr id="tableData{{ $key }}" hidden="hidden">
-                                            <div>
-                                                <td>
-                                                    <h5 id="keyVal">{{ $key + 1 }}</h5>
-                                                </td>
+                                        <tr>
+                                            <td>
+                                                <h5 id="keyVal">{{ $key + 1 }}</h5>
+                                            </td>
 
-                                                <td>
-                                                    <h5>{{ $d->course_content_title }}</h5>
-                                                </td>
+                                            <td>
+                                                <h5>{{ $d->course_content_title }}</h5>
+                                            </td>
 
-                                                <td>
-                                                    <div id="player{{ $key }}"></div>
-                                                </td>
+                                            <td>
+                                                <div id="player{{ $key }}"></div>
+                                            </td>
 
-                                                <td><a href="javascript:void(0);" class="delete" type="button"
-                                                        data-id="{{ $d->id }}">Delete</a></td>
+                                            <td><a href="javascript:void(0);" class="delete"
+                                                data-id="{{ $d->id }}">Delete</a></td>
 
-                                                <td><a href="javascript:void(0);" class="edit" type="button"
-                                                        data-id="{{ $d->id }}">Edit</a></td>
-
-                                            </div>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                {{-- @endif --}}
+
                             </table>
                         </div>
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
@@ -371,15 +337,13 @@ postDisable();
         // create youtube player
     </script>
 
-    <script src="http://www.youtube.com/player_api"></script>
+    {{-- <script src="http://www.youtube.com/player_api"></script>
 
     <script>
         // create youtube player
         var player;
 
         var completeVid = 0;
-        var tdHideShow = -1;
-
         function onYouTubePlayerAPIReady() {
 
             var allId = document.getElementById("{{ $key }}").id;
@@ -396,8 +360,10 @@ postDisable();
 
 
                 /// Video ID get
-                for (var j = videoURL.length - 1; j >= 0; j--) {
-                    if (cnt !== 11) {
+                for(var j = videoURL.length - 1; j >= 0; j--)
+                {
+                    if(cnt !== 11)
+                    {
                         ytV += videoURL[j];
                         cnt++;
                     }
@@ -405,7 +371,8 @@ postDisable();
 
 
                 /// Video ID reverse
-                for (var j = ytV.length - 1; j >= 0; j--) {
+                for(var j = ytV.length - 1; j >= 0; j--)
+                {
                     ytVid += ytV[j];
                 }
 
@@ -434,157 +401,153 @@ postDisable();
         function onPlayerStateChange(event) {
             if (event.data === 0) {
                 completeVid++;
-                tdHideShow = "tableData" + completeVid;
-                document.getElementById(tdHideShow).removeAttribute("hidden");
             }
         }
 
-        tdHideShow = "tableData" + 0;
-        document.getElementById(tdHideShow).removeAttribute("hidden");
-    </script>
+    </script> --}}
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // $("#about_form").submit(function(e) {
-            //     e.preventDefault()
-            //     // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
-            //     // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-            //     // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-            //     // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-            //     // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
+<script type="text/javascript">
+    $(document).ready(function() {
+        // $("#about_form").submit(function(e) {
+        //     e.preventDefault()
+        //     // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
+        //     // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
+        //     // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
+        //     // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
+        //     // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
-            //     for (instance in CKEDITOR.instances) {
-            //         CKEDITOR.instances[instance].updateElement();
-            //     }
+        //     for (instance in CKEDITOR.instances) {
+        //         CKEDITOR.instances[instance].updateElement();
+        //     }
 
-            //     var formData = new FormData(this);
-            //     length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length,
-            //         formData.get('courseTeacher').length
-            //     ]
-            //     count = 0
-            //     for (i = 0; i < length_array.length; i = i + 1) {
-            //         if (length_array[i] == 0) {
+        //     var formData = new FormData(this);
+        //     length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length,
+        //         formData.get('courseTeacher').length
+        //     ]
+        //     count = 0
+        //     for (i = 0; i < length_array.length; i = i + 1) {
+        //         if (length_array[i] == 0) {
 
-            //             count = 0
-            //             break;
-            //         } else {
-            //             count = 1
+        //             count = 0
+        //             break;
+        //         } else {
+        //             count = 1
 
-            //         }
+        //         }
 
-            //     }
-            //     if (count == 0) {
-            //         $('#alertError1').fadeIn()
-            //         $("#alertError1").fadeOut(10000);
-            //     } else {
-            //         $.ajax({
-            //             url: '/admin/courses-info/create',
-            //             type: "post",
-            //             headers: {
-            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //             },
-            //             data: formData,
-            //             cache: false,
-            //             contentType: false,
-            //             processData: false,
-            //             success: function(response) {
-            //                 $('#alertSuccess').fadeIn()
-            //                 $("#alertSuccess").fadeOut(5000);
-            //                 var student = '';
-            //                 // ITERATING THROUGH OBJECTS
-            //                 $.each(response, function(key, value) {
-            //                     //CONSTRUCTION OF ROWS HAVING
-            //                     // DATA FROM JSON OBJECT
-            //                     student = '<tbody id="showPost">';
-            //                     student += '<tr>';
-            //                     student += '<td>' +
-            //                         response.length + '</td>';
+        //     }
+        //     if (count == 0) {
+        //         $('#alertError1').fadeIn()
+        //         $("#alertError1").fadeOut(10000);
+        //     } else {
+        //         $.ajax({
+        //             url: '/admin/courses-info/create',
+        //             type: "post",
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             },
+        //             data: formData,
+        //             cache: false,
+        //             contentType: false,
+        //             processData: false,
+        //             success: function(response) {
+        //                 $('#alertSuccess').fadeIn()
+        //                 $("#alertSuccess").fadeOut(5000);
+        //                 var student = '';
+        //                 // ITERATING THROUGH OBJECTS
+        //                 $.each(response, function(key, value) {
+        //                     //CONSTRUCTION OF ROWS HAVING
+        //                     // DATA FROM JSON OBJECT
+        //                     student = '<tbody id="showPost">';
+        //                     student += '<tr>';
+        //                     student += '<td>' +
+        //                         response.length + '</td>';
 
-            //                     student += '<td>' +
-            //                         value.courseTitle + '</td>';
+        //                     student += '<td>' +
+        //                         value.courseTitle + '</td>';
 
-            //                     student += '<td>' +
-            //                         value.courseCategory + '</td>';
+        //                     student += '<td>' +
+        //                         value.courseCategory + '</td>';
 
-            //                     student += '<td>' +
-            //                         value.courseTeacher + '</td>';
+        //                     student += '<td>' +
+        //                         value.courseTeacher + '</td>';
 
-            //                     // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
-            //                     //     '</td>';
+        //                     // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
+        //                     //     '</td>';
 
-            //                     // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
-            //                     //     '</td>';
+        //                     // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
+        //                     //     '</td>';
 
-            //                     // student += '<td>' +
-            //                     //     value.Articles + '</td>';
+        //                     // student += '<td>' +
+        //                     //     value.Articles + '</td>';
 
-            //                     // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
+        //                     // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
 
-            //                     student += '</tr>';
-            //                     student += '</tbody>'
-            //                 });
-            //                 table_head =
-            //                     '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
+        //                     student += '</tr>';
+        //                     student += '</tbody>'
+        //                 });
+        //                 table_head =
+        //                     '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
 
-            //                 $(".about_table thead tr th:lt(5)").remove();
-            //                 $('.about_table thead tr').append(table_head)
-            //                 $('.about_table').append(student);
-            //                 // showJobs(response);
+        //                 $(".about_table thead tr th:lt(5)").remove();
+        //                 $('.about_table thead tr').append(table_head)
+        //                 $('.about_table').append(student);
+        //                 // showJobs(response);
 
-            //             },
-            //             error: function(error) {
-            //                 $('#alertError').fadeIn()
-            //                 $("#alertError").fadeOut(5000);
-            //             },
-            //         });
-            //     }
+        //             },
+        //             error: function(error) {
+        //                 $('#alertError').fadeIn()
+        //                 $("#alertError").fadeOut(5000);
+        //             },
+        //         });
+        //     }
 
-            //     return false;
+        //     return false;
 
-            // });
+        // });
 
-            // $(".delete").on("click", function() {
-            //     var id = $(this).attr("data-id");
-            //     $.ajax({
-            //         url: "/admin/courses-info/delete/" + id,
-            //         data: {
-            //             "id": id,
-            //             "_token": "{{ csrf_token() }}"
-            //         },
-            //         type: 'post',
-            //         success: function(result) {
-            //             console.log("Yes");
-            //         }
-            //     });
-            // });
+        // $(".delete").on("click", function() {
+        //     var id = $(this).attr("data-id");
+        //     $.ajax({
+        //         url: "/admin/courses-info/delete/" + id,
+        //         data: {
+        //             "id": id,
+        //             "_token": "{{ csrf_token() }}"
+        //         },
+        //         type: 'post',
+        //         success: function(result) {
+        //             console.log("Yes");
+        //         }
+        //     });
+        // });
 
-            $(".delete").on('click', function(e) {
-                e.preventDefault();
-                var id = $(this).attr("data-id");
-                var confirmation = confirm("Are you sure you want to delete this user?");
-                if (confirmation) {
-                    $.ajax({
-                        type: 'GET',
-                        url: "/admin/courses-content/delete/" + id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        // data:{user_id: userId},
-                        success: function(data) {
-                            //Refresh the grid
-                            alert(data.success);
-                            $(".data-id" + id).remove();
-                        },
-                        error: function(e) {
-                            alert(e.error);
-                        }
-                    });
-                } else {
-                    //alert ('no');
-                    return false;
-                }
-            });
-
+        $(".delete").on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                $.ajax({
+                    type: 'GET',
+                    url: "/admin/courses-content/delete/" + id,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // data:{user_id: userId},
+                    success: function(data) {
+                        //Refresh the grid
+                        alert(data.success);
+                        $(".data-id" + id).remove();
+                    },
+                    error: function(e) {
+                        alert(e.error);
+                    }
+                });
+            } else {
+                //alert ('no');
+                return false;
+            }
         });
-    </script>
+
+    });
+</script>
 @endpush

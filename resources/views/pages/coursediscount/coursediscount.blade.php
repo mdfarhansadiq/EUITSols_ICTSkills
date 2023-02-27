@@ -131,7 +131,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>View Course Review</h4>
+                            <h4>View Course Discount</h4>
                         </span>
                     </div>
                     {{-- <div class="card-body">
