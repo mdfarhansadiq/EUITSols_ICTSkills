@@ -178,7 +178,7 @@
                                 @endforeach
                                 <tbody id="showPost">
                                     @foreach ($data2 as $key => $d)
-                                        <tr id="tableData{{ $key }}" hidden="hidden">
+                                        <tr id="tableData{{ $key }}">
                                             <div>
                                                 <td>
                                                     <h5 id="keyVal">{{ $key + 1 }}</h5>
@@ -188,9 +188,9 @@
                                                     <h5>{{ $d->course_content_title }}</h5>
                                                 </td>
 
-                                                <td>
+                                                {{-- <td>
                                                     <div id="player{{ $key }}"></div>
-                                                </td>
+                                                </td> --}}
 
                                                 <td><a href="javascript:void(0);" class="delete" type="button"
                                                         data-id="{{ $d->id }}">Delete</a></td>
@@ -205,7 +205,12 @@
                                 {{-- @endif --}}
                             </table>
                         </div>
-
+                        <video id="vidSrc" autoplay poster="/images/video.gif" controls height="300" width="700" controlsList="nodownload">
+                            <source src="https://dl.dropbox.com/s/6yoiltd9flkgd88/Class_01.mp4" />
+                            <img src="video.jpg">
+                          </video>
+                          <button onclick="vidEnd()">Check</button>
+                        <div id="hiID" style="display: none"><h3>Hi</h3></div>
                     </div>
                 </div>
             </div>
@@ -365,15 +370,14 @@ postDisable();
 
 </script> --}}
 
-    {{-- <script src="http://www.youtube.com/player_api"></script> --}}
 
     <script>
         // create youtube player
     </script>
 
-    <script src="http://www.youtube.com/player_api"></script>
+    {{-- <script src="http://www.youtube.com/player_api"></script> --}}
 
-    <script>
+    {{-- <script>
         // create youtube player
         var player;
 
@@ -443,6 +447,29 @@ postDisable();
 
         tdHideShow = "tableData" + 0;
         document.getElementById(tdHideShow).removeAttribute("hidden");
+    </script> --}}
+
+    <script>
+
+        function vidEnd()
+        {
+            var a = document.getElementById("vidSrc");
+
+            if(a.ended === true)
+            {
+                document.getElementById("hiID").style.display = 'block';
+            }
+        }
+
+        var a = $("#vidSrc").find('source').attr("src");
+        var b = document.getElementById("vidSrc");
+        var c = document.getElementById("vidSrc");
+
+        if(b.ended === true)
+        {
+            console.log("Yes");
+
+        }
     </script>
 
     <script type="text/javascript">
