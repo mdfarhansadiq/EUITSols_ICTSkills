@@ -796,6 +796,7 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::get('/admin/courses-content/delete/{id}', [CourseContentController::class, 'courseContentDelete']);
     Route::get('/admin/courses-content/edit/view/{id}', [CourseContentController::class, 'courseContentEditView']);
     Route::post('/admin/courses-content/update/{id}', [CourseContentController::class, 'courseContentEditUpdate']);
+    Route::get('/admin/course-content-complete/{id}', [CourseContentController::class, 'courseContentComplete']);
 
     Route::get('/admin/course-enroll-student/view', [CourseEnrollStudentController::class, 'courseEnrollStudentPageView']);
     Route::post('/admin/course-enroll-student/create', [CourseEnrollStudentController::class, 'courseEnrollStudentCreate']);
@@ -805,6 +806,8 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/course-completion/view', [CourseStudentCompletionController::class, 'courseStudentCompletionPageView']);
     Route::post('/admin/course-completion/create', [CourseStudentCompletionController::class, 'courseStudentCompletionCreate']);
+
+
 });
 
 

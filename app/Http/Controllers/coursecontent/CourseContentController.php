@@ -85,4 +85,15 @@ class CourseContentController extends Controller
 
         return response()->json($data1);
     }
+
+    public function courseContentComplete($id)
+    {
+        $data = CourseContentModel::findOrFail($id);
+
+        $data->course_content_mark = 1;
+
+        $data->save();
+
+        return redirect('/admin/course-content/view');
+    }
 }

@@ -28,9 +28,6 @@
                         <span class="float-left">
                             <h4>Add Course Content</h4>
                         </span>
-                        {{-- <span class="float-right">
-                        @if (Auth::user()->can('user view') || Auth::user()->role->id == 1)<a href="{{ route('users.index') }}" class="btn btn-info">Back</a>@endif
-                    </span> --}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -47,14 +44,7 @@
                                 <form action="{{ url('/admin/course-content/create') }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-3" for="courseTitle">Title<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="courseTitle" name="courseTitle"
-                                                placeholder="Enter Course Title">
-                                        </div>
-                                    </div> --}}
+
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseTitle">Course Title<span
                                                 class="text-danger">*</span></label>
@@ -78,21 +68,7 @@
                                                 name="courseContentTitle" placeholder="Enter Course Content Title">
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-3" for="courseStudent">Student Name<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" aria-label="Default select example"
-                                                name="courseStudent" id="courseStudent">
-                                                <option selected value="">Student Name</option>
-                                                @foreach ($data2 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_student_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
 
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseContentLink">Course Content<span
                                                 class="text-danger">*</span></label>
@@ -101,14 +77,7 @@
                                                 name="courseContentLink" placeholder="Enter Content URL">
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-3" for="courseContentLink">Course Content<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseContentLink" placeholder="Write Your Post"
-                                                name="courseContentLink" rows="17" cols="70"></textarea>
-                                        </div>
-                                    </div> --}}
+
                                     <div class="form-group row">
                                         <label for="about-photo">Content Material File: <span class="text-danger">*</span>
                                         </label>
@@ -141,11 +110,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                {{-- <div>
-                                    <a href="https://youtu.be/7L2RLBmEJmE" id="youtubeLink"></a>
-                                </div> --}}
-
-
                             </div>
                         </div>
                     </div>
@@ -172,13 +136,85 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                {{-- @if (count($data2)) --}}
+                                @if (count($data2))
                                 @foreach ($data2 as $key => $d)
                                     <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
                                 @endforeach
                                 <tbody id="showPost">
                                     @foreach ($data2 as $key => $d)
-                                        <tr id="tableData{{ $key }}">
+                                        @if ($key === 0)
+                                            <tr id="tableData{{ $key }}">
+                                                <div>
+                                                    <td>
+                                                        <h5 id="keyVal">{{ $key + 1 }}</h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>{{ $d->course_content_title }}</h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <div><video id="vid{{ $key }}" controls height="300"
+                                                                width="700" controlsList="nodownload" src="">
+                                                                {{-- <source  /> --}}
+                                                            </video></div>
+                                                    </td>
+                                                    {{-- <td>
+                                                    <div id="player{{ $key }}"></div>
+                                                </td> --}}
+                                                    <td>
+                                                        <button class="btn btn-success" onclick="vidEnd(this.id)"
+                                                            id="btnLecture{{ $key }}">Complete Lecture</button>
+                                                    </td>
+
+                                                    <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}"
+                                                            class="edit btn btn-primary"
+                                                            data-id="{{ $d->id }}">Edit</a></td>
+
+                                                    <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                            type="button" data-id="{{ $d->id }}">Delete</a></td>
+
+                                                </div>
+                                            </tr>
+                                        @endif
+                                        @if ($key !== 0 && $d->course_content_mark === 1)
+                                            <tr id="tableData{{ $key }}">
+                                                <div>
+                                                    <td>
+                                                        <h5 id="keyVal">{{ $key + 1 }}</h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>{{ $d->course_content_title }}</h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <div><video id="vid{{ $key }}" controls height="300"
+                                                                width="700" controlsList="nodownload" src="">
+                                                                {{-- <source  /> --}}
+                                                            </video></div>
+                                                    </td>
+                                                    {{-- <td>
+                                                    <div id="player{{ $key }}"></div>
+                                                </td> --}}
+                                                    <td>
+                                                        <button class="btn btn-success" onclick="vidEnd(this.id)"
+                                                            id="btnLecture{{ $key }}">Complete
+                                                            Lecture</button>
+                                                    </td>
+
+                                                    <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}"
+                                                            class="edit btn btn-primary"
+                                                            data-id="{{ $d->id }}">Edit</a></td>
+
+                                                    <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                            type="button" data-id="{{ $d->id }}">Delete</a>
+                                                    </td>
+
+                                                </div>
+                                            </tr>
+                                        @endif
+                                        <tr id="tableData{{ $key }}" hidden="hidden">
                                             <div>
                                                 <td>
                                                     <h5 id="keyVal">{{ $key + 1 }}</h5>
@@ -188,29 +224,36 @@
                                                     <h5>{{ $d->course_content_title }}</h5>
                                                 </td>
 
+                                                <td>
+                                                    <div><video id="vid{{ $key }}" controls height="300"
+                                                            width="700" controlsList="nodownload" src="">
+                                                            {{-- <source  /> --}}
+                                                        </video></div>
+                                                </td>
                                                 {{-- <td>
-                                                    <div id="player{{ $key }}"></div>
-                                                </td> --}}
+                                                <div id="player{{ $key }}"></div>
+                                            </td> --}}
+                                                <td>
+                                                    <button class="btn btn-success" onclick="vidEnd(this.id)"
+                                                        id="btnLecture{{ $key }}">Complete
+                                                        Lecture</button>
+                                                </td>
 
-                                                <td><a href="javascript:void(0);" class="delete" type="button"
-                                                        data-id="{{ $d->id }}">Delete</a></td>
-
-                                                <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}" class="edit" type="button"
+                                                <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}"
+                                                        class="edit btn btn-primary"
                                                         data-id="{{ $d->id }}">Edit</a></td>
+
+                                                <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                        type="button" data-id="{{ $d->id }}">Delete</a>
+                                                </td>
 
                                             </div>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                {{-- @endif --}}
+                                @endif
                             </table>
                         </div>
-                        <video id="vidSrc" autoplay poster="/images/video.gif" controls height="300" width="700" controlsList="nodownload">
-                            <source src="https://dl.dropbox.com/s/6yoiltd9flkgd88/Class_01.mp4" />
-                            <img src="video.jpg">
-                          </video>
-                          <button onclick="vidEnd()">Check</button>
-                        <div id="hiID" style="display: none"><h3>Hi</h3></div>
                     </div>
                 </div>
             </div>
@@ -450,26 +493,70 @@ postDisable();
     </script> --}}
 
     <script>
+        /// Dynamic video link to set video-src
+        var vidLinkID = document.getElementById("{{ $key }}").id;
 
-        function vidEnd()
-        {
-            var a = document.getElementById("vidSrc");
+        //console.log(vidLinkID);
+        for (var i = 0; i <= vidLinkID.length; i++) {
+            var ID = i.toString();
 
-            if(a.ended === true)
-            {
-                document.getElementById("hiID").style.display = 'block';
+            var Href = document.getElementById(ID).href;
+            var strID = '';
+
+            for (var j = 26; j < Href.length; j++) {
+                if (Href[j] === '?') {
+                    break;
+                } else {
+                    strID += Href[j];
+                }
             }
+            var strLink = 'https://dl.dropbox.com/s/' + strID;
+            console.log(strLink)
+
+            var Src = 'vid' + ID;
+            document.getElementById(Src).src = strLink;
+
+            // var tdHideShow = "";
+            // tdHideShow = "tableData0";
+            // console.log(tdHideShow);
+            // document.getElementById(tdHideShow).removeAttribute("hidden");
         }
 
-        var a = $("#vidSrc").find('source').attr("src");
-        var b = document.getElementById("vidSrc");
-        var c = document.getElementById("vidSrc");
 
-        if(b.ended === true)
-        {
-            console.log("Yes");
 
+        /// ******* End ******* ///
+
+
+        /// Check lecture Video Complete to watch next lecture
+        function vidEnd(check_id) {
+            var tdHideShow = "";
+            var btnID = '';
+            for (var i = 10; i < check_id.length; i++) {
+                btnID += check_id[i];
+            }
+            var Vid = 'vid' + btnID;
+
+            var a = document.getElementById(Vid);
+
+            if (a.ended === true) {
+                btnID = parseInt(btnID);
+                btnID++;
+                tdHideShow = "tableData" + btnID;
+                document.getElementById(tdHideShow).removeAttribute("hidden");
+                //document.getElementById("hiID").style.display = 'block';
+            }
+            
         }
+
+        // var a = $("#vidSrc").find('source').attr("src");
+        // var b = document.getElementById("vidSrc");
+        // var c = document.getElementById("vidSrc");
+
+        // if(b.ended === true)
+        // {
+        //     console.log("Yes");
+
+        // }
     </script>
 
     <script type="text/javascript">
@@ -590,7 +677,7 @@ postDisable();
             $(".delete").on('click', function(e) {
                 e.preventDefault();
                 var id = $(this).attr("data-id");
-                var confirmation = confirm("Are you sure you want to delete this user?");
+                var confirmation = confirm("Are you sure you want to delete this content?");
                 if (confirmation) {
                     $.ajax({
                         type: 'GET',
