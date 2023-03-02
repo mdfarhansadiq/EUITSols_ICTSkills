@@ -234,6 +234,14 @@
                     error: function(error) {
                                 $('#alertError').fadeIn()
                                 $("#alertError").fadeOut(5000);
+
+                                console.log(error);
+                                // var Err = error.ResponseJSON.errors;
+
+                                // for(var i in Err)
+                                // {
+                                //     console.log(Err[i][0]);
+                                // }
                             },
                 });
                     }
