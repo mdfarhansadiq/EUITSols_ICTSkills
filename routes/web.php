@@ -777,6 +777,8 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::get('/admin/courses-info/view', [CoursesInfoController::class, 'coursesInfoPageView']);
     Route::post('/admin/courses-info/create', [CoursesInfoController::class, 'coursesInfoCreate']);
     Route::get('/admin/courses-info/delete/{id}', [CoursesInfoController::class, 'coursesInfoDelete']);
+    Route::get('/admin/courses-info/edit/view/{id}', [CoursesInfoController::class, 'coursesInfoEditView']);
+    Route::post('/admin/courses-info/update/{id}', [CoursesInfoController::class, 'courseInfoEditUpdate']);
 
 
     Route::get('/admin/course-review/view', [CourseReviewController::class, 'courseReviewPageView']);

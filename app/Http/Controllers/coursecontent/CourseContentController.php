@@ -33,7 +33,7 @@ class CourseContentController extends Controller
             $filename = $file->getClientOriginalName();
             $folder = $data->course_content_title;
             $path = $req->file('courseContentMaterialFile')->storeAs($folder, $filename, 'public');
-            $data->course_content_material_file = '/storage/'.$path;
+            $data->course_content_material_file = '/storage/' . $path;
         }
         $data->course_content_material_link = $req->courseContentMaterialLink;
         $data->course_content_duration = $req->courseContentDuration;
@@ -41,7 +41,6 @@ class CourseContentController extends Controller
         $data->save();
 
         return redirect('/admin/course-content/view');
-
     }
 
     public function courseContentEditView($id)
@@ -67,7 +66,7 @@ class CourseContentController extends Controller
             $filename = $file->getClientOriginalName();
             $folder = $data->course_content_title;
             $path = $req->file('courseContentMaterialFile')->storeAs($folder, $filename, 'public');
-            $data->course_content_material_file = '/storage/'.$path;
+            $data->course_content_material_file = '/storage/' . $path;
         }
         $data->course_content_material_link = $req->courseContentMaterialLink;
         $data->course_content_duration = $req->courseContentDuration;
@@ -78,7 +77,8 @@ class CourseContentController extends Controller
         return redirect('/admin/course-content/view');
     }
 
-    public function courseContentDelete($id){
+    public function courseContentDelete($id)
+    {
         CourseContentModel::where('id', $id)->delete();
 
         $data1 = CourseContentModel::all();
@@ -89,11 +89,15 @@ class CourseContentController extends Controller
     public function courseContentComplete($id)
     {
         $data = CourseContentModel::findOrFail($id);
-
-        $data->course_content_mark = 1;
+        dd($data);
+        $data->course_content_complete = 1;
 
         $data->save();
 
-        return redirect('/admin/course-content/view');
+        return redirect()->back();
+
+        // $data1 = CourseContentModel::all();
+
+        // return response()->json($data1);
     }
 }

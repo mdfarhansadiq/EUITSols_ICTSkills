@@ -132,6 +132,7 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Course Title</th>
+                                        <th>Content Title</th>
                                         <th>Lecture Video</th>
                                         <th>Action</th>
                                     </tr>
@@ -150,13 +151,18 @@
                                                         </td>
 
                                                         <td>
+                                                            <h5>{{ $d->CoursesInfoModel->course_title }}</h5>
+                                                        </td>
+
+                                                        <td>
                                                             <h5>{{ $d->course_content_title }}</h5>
                                                         </td>
 
                                                         <td>
                                                             <div><video id="vid{{ $key }}" controls
                                                                     height="300" width="700"
-                                                                    controlsList="nodownload" src="">
+                                                                    controlsList="nodownload" src=""
+                                                                    onended="vidEnd(this.id)">
                                                                     {{-- <source  /> --}}
                                                                 </video></div>
                                                         </td>
@@ -164,9 +170,12 @@
                                                     <div id="player{{ $key }}"></div>
                                                 </td> --}}
                                                         <td>
-                                                            <button class="btn btn-success" onclick="vidEnd(this.id)"
-                                                                id="btnLecture{{ $key }}">Complete
-                                                                Lecture</button>
+                                                            <button class="btn btn-success"
+                                                            id="btnLecture{{ $key }}" href="{{ url('/admin/courses-content-complete', $d['id']) }}" style="display: none">Complete
+                                                            Lecture</button>
+                                                            {{-- <a href="{{ url('/admin/courses-content-complete', $d['id']) }}"
+                                                                class="edit btn btn-success"
+                                                                data-id="{{ $d->id }}" type="button" disabled>Complete Lecture</a> --}}
                                                         </td>
 
                                                         <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}"
@@ -194,7 +203,8 @@
                                                         <td>
                                                             <div><video id="vid{{ $key }}" controls
                                                                     height="300" width="700"
-                                                                    controlsList="nodownload" src="">
+                                                                    controlsList="nodownload" src=""
+                                                                    onended="vidEnd(this.id)">
                                                                     {{-- <source  /> --}}
                                                                 </video></div>
                                                         </td>
@@ -202,8 +212,8 @@
                                                     <div id="player{{ $key }}"></div>
                                                 </td> --}}
                                                         <td>
-                                                            <button class="btn btn-success" onclick="vidEnd(this.id)"
-                                                                id="btnLecture{{ $key }}">Complete
+                                                            <button class="btn btn-success"
+                                                                id="btnLecture{{ $key }}" disabled>Complete
                                                                 Lecture</button>
                                                         </td>
 
@@ -230,7 +240,8 @@
 
                                                     <td>
                                                         <div><video id="vid{{ $key }}" controls height="300"
-                                                                width="700" controlsList="nodownload" src="">
+                                                                width="700" controlsList="nodownload" src=""
+                                                                onended="vidEnd(this.id)">
                                                                 {{-- <source  /> --}}
                                                             </video></div>
                                                     </td>
@@ -238,11 +249,15 @@
                                                 <div id="player{{ $key }}"></div>
                                             </td> --}}
                                                     <td>
-                                                        {{-- <button class="btn btn-success" onclick="vidEnd(this.id)"
-                                                            id="btnLecture{{ $key }}">Complete
-                                                            Lecture</button> --}}
+                                                        <button class="btn btn-success"
+                                                            id="btnLecture{{ $key }}" disabled>Complete
+                                                            Lecture</button>
 
-                                                            <input id="btnLecture{{ $key }}" onclick="vidEnd(this.id)" type="submit" class="btn btn-success" name="" value="Complete Lecture"  href="{{ url('/admin/courses-content-complete', $d['id']) }}"/>
+                                                        {{-- <input id="btnLecture{{ $key }}"
+                                                            onclick="vidEnd(this.id)" type="submit"
+                                                            class="btn btn-success" name=""
+                                                            value="Complete Lecture"
+                                                            href="{{ url('/admin/courses-content-complete', $d['id']) }}" /> --}}
                                                     </td>
 
                                                     <td><a href="{{ url('/admin/courses-content/edit/view', $d['id']) }}"
@@ -263,6 +278,31 @@
                     </div>
                 </div>
 
+                <div style="background-color: white">
+                    <!-- Tab links -->
+                    <div class="tab">
+                        <button class="tablinks" onclick="openCity(event, 'Continue')">Continue</button>
+                        <button class="tablinks" onclick="openCity(event, 'Completed')">Completed</button>
+                        <button class="tablinks" onclick="openCity(event, 'Remaining')">Remaining</button>
+                    </div>
+
+                    <!-- Tab content -->
+                    <div id="Continue" class="tabcontent">
+                        <h3>Continue</h3>
+                        <p>London is the capital city of England.</p>
+                    </div>
+
+                    <div id="Completed" class="tabcontent">
+                        <h3>Completed</h3>
+                        <p>Paris is the capital of France.</p>
+                    </div>
+
+                    <div id="Remaining" class="tabcontent">
+                        <h3>Remaining</h3>
+                        <p>Tokyo is the capital of Japan.</p>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -420,10 +460,26 @@ postDisable();
 
 </script> --}}
 
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 
     <script>
         // create youtube player
     </script>
+
 
     {{-- <script src="http://www.youtube.com/player_api"></script> --}}
 
@@ -539,16 +595,18 @@ postDisable();
         function vidEnd(check_id) {
             var tdHideShow = "";
             var btnID = '';
-            for (var i = 10; i < check_id.length; i++) {
+            for (var i = 3; i < check_id.length; i++) {
                 btnID += check_id[i];
             }
             var Vid = 'vid' + btnID;
+
+            var buttonLect = 'btnLecture' + btnID;
+            document.getElementById(buttonLect).style.display = 'block';
 
             var a = document.getElementById(Vid);
 
             if (a.ended === true) {
                 btnID = parseInt(btnID);
-                document.getElementById(check_id).name = '1';
                 btnID++;
                 tdHideShow = "tableData" + btnID;
                 document.getElementById(tdHideShow).removeAttribute("hidden");
@@ -556,7 +614,6 @@ postDisable();
             }
 
         }
-
         // var a = $("#vidSrc").find('source').attr("src");
         // var b = document.getElementById("vidSrc");
         // var c = document.getElementById("vidSrc");

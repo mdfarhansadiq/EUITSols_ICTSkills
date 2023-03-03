@@ -19,6 +19,19 @@ class CategoryController extends Controller
 
     public function categoryCreate(Request $req)
     {
+
+        $this->validate($req, [
+            'categoryName' => 'required|unique:coursecategories,category_name',
+            'categoryDescription' => 'required',
+            'categoryImage' => 'required'
+
+        ], [],
+        [
+            'categoryName' => "Category Name",
+            'categoryDescription' => 'Category Description',
+            'categoryImage' => 'Category Image'
+        ]);
+
         $data = new CourseCategoryModel();
 
         $data->category_name = $req->input('categoryName');
@@ -38,10 +51,10 @@ class CategoryController extends Controller
 
         $data->save();
 
-        $data1 = CourseCategoryModel::all();
+        // $data1 = CourseCategoryModel::all();
 
-        return response()->json($data1);
+        // return response()->json($data1);
 
-        //return redirect('/admin/category/view');
+        return redirect('/admin/category/view');
     }
 }

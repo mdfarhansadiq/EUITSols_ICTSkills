@@ -19,6 +19,42 @@ class CourseStudentController extends Controller
 
     public function courseStudentInfoCreate(Request $req)
     {
+
+        $this->validate($req, [
+            'courseStudentName' => 'required',
+            'courseStudentEmail' => 'required|unique:coursestudents,course_student_email',
+            'courseStudentPhone' => 'required|unique:coursestudents,course_student_phone',
+            'courseStudentDOB' => 'required',
+            'courseStudentProfession' => 'required',
+            'courseStudentCompany' => 'required',
+            'courseStudentInterestArea' => 'required',
+            'courseStudentFacebook' => 'required',
+            'courseStudentLinkedIn' => 'required',
+            'courseStudentGitHub' => 'required',
+            'courseStudentWebSite' => 'required',
+            'courseStudentAddress' => 'required',
+            'courseStudentDescription' => 'required',
+            'courseStudentPhoto' => 'required',
+
+        ], [],
+        [
+            'courseStudentName' => 'Course Student Name',
+            'courseStudentEmail' => 'Course Student Email ',
+            'courseStudentPhone' => 'Course Student Phone',
+            'courseStudentDOB' => 'Course Student DOB',
+            'courseStudentProfession' => 'Course Student Profession',
+            'courseStudentCompany' => 'Course Student Company/Institute',
+            'courseStudentInterestArea' => 'Course Student InterestArea',
+            'courseStudentFacebook' => 'Course Student Facebook',
+            'courseStudentLinkedIn' => 'Course Student LinkedIn',
+            'courseStudentGitHub' => 'Course Student GitHub',
+            'courseStudentWebSite' => 'Course Student Website',
+            'courseStudentAddress' => 'Course Student Address',
+            'courseStudentDescription' => 'Course Student Description',
+            'courseStudentPhoto' => 'Course Student Photo',
+
+        ]);
+
         $data = new CourseStudentModel();
 
         $data->course_student_name = $req->courseStudentName;
@@ -49,9 +85,10 @@ class CourseStudentController extends Controller
 
         $data->save();
 
-        $data1 = CourseStudentModel::all();
+        return redirect('/admin/student-info/view');
+        // $data1 = CourseStudentModel::all();
 
-        return response()->json($data1);
+        // return response()->json($data1);
     }
 
     public function courseStudentInfoEditView($id)

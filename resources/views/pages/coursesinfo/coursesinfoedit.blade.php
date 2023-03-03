@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/courses-info/create') }}" method="POST"
+                                <form action="/admin/courses-info/update/{{ $data['id'] }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     <div class="form-group row">
@@ -52,7 +52,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTitle" name="courseTitle"
-                                                placeholder="Enter Course Title">
+                                                placeholder="Enter Course Title" value="{{ $data->course_title }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -62,9 +62,8 @@
                                             <select class="form-control" aria-label="Default select example"
                                                 name="courseCategory" id="courseCategory">
                                                 <option selected value="">Select Course Category</option>
-                                                @foreach ($data2 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->category_name }}
-                                                    </option>
+                                                @foreach ($coursecategory as $d)
+                                                    <option value="{{ $d->id }}" @if ($d->id == $data->course_category_id) selected @endif>{{ $d->category_name }}</option>
                                                 @endforeach
                                             </select>
 
@@ -77,9 +76,8 @@
                                             <select class="form-control" aria-label="Default select example"
                                                 name="courseTeacher" id="courseTeacher">
                                                 <option selected value="">Select Course Teacher</option>
-                                                @foreach ($data1 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_teacher_name }}
-                                                    </option>
+                                                @foreach ($courseteacher as $d)
+                                                    <option value="{{ $d->id }}" @if ($d->id == $data->course_teacher_id) selected @endif>{{ $d->course_teacher_name }}</option>
                                                 @endforeach
                                             </select>
 
@@ -90,7 +88,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseDuration"
-                                                name="courseDuration" placeholder="Enter Course Duration">
+                                                name="courseDuration" placeholder="Enter Course Duration" value="{{ $data->course_duration }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -98,7 +96,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <textarea type="text" class="ckeditor form-control" id="courseDescription" placeholder="Write Your Post"
-                                                name="courseDescription" rows="17" cols="70"></textarea>
+                                                name="courseDescription" rows="17" cols="70">{{ $data->course_description }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -113,7 +111,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="number" class="form-control" id="courseFee" name="courseFee"
-                                                placeholder="Enter Course Fee">
+                                                placeholder="Enter Course Fee" value="{{ $data->course_fee }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -135,7 +133,7 @@
             </div>
 
             <div class="col-md-10 col-lg-12">
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <span class="float-left">
                             <h4>View Course Info</h4>
@@ -170,12 +168,8 @@
 
                                                 <td>{{ $d->CourseCategoryModel->category_name }}</td>
 
-                                                <<td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
-                                                <td><a href="{{ url('/admin/courses-info/edit/view', $d['id']) }}"
-                                                    class="edit btn btn-primary"
-                                                    data-id="{{ $d->id }}">Edit</a></td>
-
-                                                <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                <td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
+                                                <td><a href="javascript:void(0);" class="delete"
                                                         data-id="{{ $d->id }}">Delete</a></td>
                                             </tr>
                                         @endforeach
@@ -185,7 +179,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -197,7 +191,7 @@
 
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -340,7 +334,7 @@
             });
 
         });
-    </script>
+    </script> --}}
     {{-- <script>
     function reqrChk()
     {
