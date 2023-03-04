@@ -23,6 +23,10 @@
                 <div id="alertSuccess" class="alert alert-success" role="alert" style="display:none";>
                     Data Insert Successfully Done
                 </div>
+
+                <div id="alertDelete" class="alert alert-danger" role="alert" style="display:none";>
+                    Data Delete Successfully
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
@@ -153,6 +157,7 @@
                                             <th>Title</th>
                                             <th>Category</th>
                                             <th>Teacher</th>
+                                            <th>Image</th>
                                             <th>Action</th>
                                         @else
                                             <th style="text-align:center;">{{ 'No Data Found' }}
@@ -164,16 +169,18 @@
                                 @if (count($data3))
                                     <tbody id="showPost">
                                         @foreach ($data3 as $key => $d)
-                                            <tr>
+                                            <tr id="row1{{ $d->id }}">
                                                 <td id="keyVal">{{ $key + 1 }}</td>
                                                 <td id="titleVal">{{ $d->course_title }}</td>
 
                                                 <td>{{ $d->CourseCategoryModel->category_name }}</td>
 
-                                                <<td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
+                                                <td>{{ $d->CourseTeacherModel->course_teacher_name }}</td>
+                                                <td><a href="{{ asset($d->course_image) }}" target="_blank">Course
+                                                        Image</a></td>
                                                 <td><a href="{{ url('/admin/courses-info/edit/view', $d['id']) }}"
-                                                    class="edit btn btn-primary"
-                                                    data-id="{{ $d->id }}">Edit</a></td>
+                                                        class="edit btn btn-primary"
+                                                        data-id="{{ $d->id }}">Edit</a></td>
 
                                                 <td><a href="javascript:void(0);" class="delete btn btn-danger"
                                                         data-id="{{ $d->id }}">Delete</a></td>
@@ -201,11 +208,7 @@
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
-                // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
-                // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-                // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-                // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-                // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
+
 
                 for (instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();
@@ -242,11 +245,14 @@
                         contentType: false,
                         processData: false,
                         success: function(response) {
-                            $('#alertSuccess').fadeIn()
-                            $("#alertSuccess").fadeOut(5000);
-                            var student = '';
-                            // ITERATING THROUGH OBJECTS
+
+                            console.log(response[0])
+                            // $('#alertSuccess').fadeIn()
+                            // $("#alertSuccess").fadeOut(5000);
+                            // var student = '';
+                            // // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
+                                // console.log(response[key]['id']);
                                 //CONSTRUCTION OF ROWS HAVING
                                 // DATA FROM JSON OBJECT
                                 student = '<tbody id="showPost">';
@@ -255,13 +261,13 @@
                                     response.length + '</td>';
 
                                 student += '<td>' +
-                                    value.courseTitle + '</td>';
+                                    response[key]['course_title'] + '</td>';
 
                                 student += '<td>' +
-                                    value.courseCategory + '</td>';
+                                    response[key]['course_category_id'] + '</td>';
 
                                 student += '<td>' +
-                                    value.courseTeacher + '</td>';
+                                    response[key]['course_teacher_id'] + '</td>';
 
                                 // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
                                 //     '</td>';
@@ -269,6 +275,7 @@
                                 // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
                                 //     '</td>';
 
+                                student += '<td>' + response[key]['id'] + '</td>';
                                 // student += '<td>' +
                                 //     value.Articles + '</td>';
 
@@ -315,6 +322,7 @@
             $(".delete").on('click', function(e) {
                 e.preventDefault();
                 var id = $(this).attr("data-id");
+                var token = $("meta[name='csrf-token']").attr("content");
                 var confirmation = confirm("Are you sure you want to delete this user?");
                 if (confirmation) {
                     $.ajax({
@@ -323,11 +331,20 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        // data:{user_id: userId},
+                        // data:{user_id: id},
+                        data: {
+                            "id": id,
+                            "_token": token,
+                        },
                         success: function(data) {
                             //Refresh the grid
-                            alert(data.success);
-                            $(".data-id" + id).remove();
+                            console.log(data);
+                            // alert(data.success);
+                            $('#alertDelete').fadeIn()
+                            $("#alertDelete").fadeOut(5000);
+                            // $(".data-id" + id).remove();
+                            $("#row1" + id).remove();
+                            // location.reload();
                         },
                         error: function(e) {
                             alert(e.error);

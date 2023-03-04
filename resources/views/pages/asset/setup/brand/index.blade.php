@@ -161,6 +161,7 @@
                     }
                 }, 'pageLength']
             });
+
             //view-modal
             $('.btnView').click(function() {
                 if ($(this).data('id') != null || $(this).data('id') != '') {
@@ -173,15 +174,15 @@
                             $('#view-img').html(response.img);
                             $('#view-name').html(response.name);
                             $('#view-status').html(response.status);
-                            $('#view-createdAt').html(response.created_at ? new Date(response
-                                .created_at) : '');
-                            $('#view-createdBy').html(response.created_user ? response
-                                .created_user.name : 'system');
-                            $('#view-updatedAt').html(response.updated_at ? new Date(response
-                                .updated_at) : '');
-                            $('#view-updatedBy').html(response.updated_user ? response
-                                .updated_user.name : '');
-                            $('#view-modal').modal('show');
+                            // $('#view-createdAt').html(response.created_at ? new Date(response
+                            //     .created_at) : '');
+                            // $('#view-createdBy').html(response.created_user ? response
+                            //     .created_user.name : 'system');
+                            // $('#view-updatedAt').html(response.updated_at ? new Date(response
+                            //     .updated_at) : '');
+                            // $('#view-updatedBy').html(response.updated_user ? response
+                            //     .updated_user.name : '');
+                            // $('#view-modal').modal('show');
                         }
                     });
                 } else {

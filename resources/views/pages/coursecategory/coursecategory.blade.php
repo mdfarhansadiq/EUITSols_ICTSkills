@@ -62,15 +62,16 @@
                                         <label class="col-sm-3" for="categoryDescription">Description<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="categoryDescription" placeholder="Write Your Post" name="categoryDescription"
-                                                rows="17" cols="70"></textarea>
+                                            <textarea type="text" class="ckeditor form-control" id="categoryDescription" placeholder="Write Your Post"
+                                                name="categoryDescription" rows="17" cols="70"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="about-photo">Category Image: <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9 offset-md-3">
-                                            <input type="file" name="categoryImage" id="categoryImage" class="form-control">
+                                            <input type="file" name="categoryImage" id="categoryImage"
+                                                class="form-control">
                                         </div>
                                     </div>
 
@@ -109,33 +110,36 @@
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
-                                        @if(count($data)!=0)
-                                        <th>SL</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
+                                        @if (count($data) != 0)
+                                            <th>SL</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
                                         @else
-                                        <th style="text-align:center;">{{"No Data Found"}}<th>
-
+                                            <th style="text-align:center;">{{ 'No Data Found' }}
+                                            <th>
                                         @endif
 
                                     </tr>
                                 </thead>
-                                @if(count($data))
-                                <tbody id="showPost">
-                                    @foreach($data as $key => $d)
+                                @if (count($data))
+                                    <tbody id="showPost">
+                                        @foreach ($data as $key => $d)
+                                            <tr>
+                                                <td id="keyVal">{{ $key + 1 }}</td>
 
-                                <tr>
-                                    <td id="keyVal">{{ $key + 1 }}</td>
-                                    <td id="titleVal">{{ $d->category_name }}</td>
+                                                <td id="titleVal">{{ $d->category_name }}</td>
 
-                                    <td>{!! $d->category_description !!}</td>
-                                    <td>
-                                        <img src="{{ asset($d->category_image) }}" alt="" title="">
-                                    </td>
-                                </tr>
-                            @endforeach
-                                </tbody>
+                                                <td>{!! $d->category_description !!}</td>
+
+                                                <td><a href="{{ asset($d->category_image) }}" target="_blank">Course
+                                                        Image</a></td>
+
+                                                <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                        data-id="{{ $d->id }}">Delete</a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 @endif
                             </table>
                         </div>
@@ -152,8 +156,8 @@
 @endpush
 
 @push('page_scripts')
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-{{-- <script type="text/javascript">
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -250,12 +254,37 @@
 
             });
 
-
+            $(".delete").on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).attr("data-id");
+                var confirmation = confirm("Are you sure you want to delete this user?");
+                if (confirmation) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/admin/category/delete/" + id,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        // data:{user_id: userId},
+                        success: function(data) {
+                            //Refresh the grid
+                            alert(data.success);
+                            $(".data-id" + id).remove();
+                        },
+                        error: function(e) {
+                            alert(e.error);
+                        }
+                    });
+                } else {
+                    //alert ('no');
+                    return false;
+                }
+            });
 
 
         });
-</script> --}}
-{{-- <script>
+</script>
+    {{-- <script>
     function reqrChk()
     {
 
@@ -263,7 +292,7 @@
     reqrChk();
 </script> --}}
 
-{{-- <script>
+    {{-- <script>
 
 function postDisable()
 {
@@ -283,5 +312,4 @@ postDisable();
 
 
 </script> --}}
-
 @endpush

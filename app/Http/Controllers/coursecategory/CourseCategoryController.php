@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\category;
+namespace App\Http\Controllers\coursecategory;
 
 use App\Http\Controllers\Controller;
 use App\Models\CourseCategoryModel;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CourseCategoryController extends Controller
 {
     //
     public function categoryPageView()
@@ -56,5 +56,14 @@ class CategoryController extends Controller
         // return response()->json($data1);
 
         return redirect('/admin/category/view');
+    }
+
+    public function courseCategoryDelete($id)
+    {
+        CourseCategoryModel::where('id', $id)->delete();
+
+        $data1 = CourseCategoryModel::all();
+
+        return response()->json($data1);
     }
 }

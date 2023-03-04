@@ -277,32 +277,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div style="background-color: white">
-                    <!-- Tab links -->
-                    <div class="tab">
-                        <button class="tablinks" onclick="openCity(event, 'Continue')">Continue</button>
-                        <button class="tablinks" onclick="openCity(event, 'Completed')">Completed</button>
-                        <button class="tablinks" onclick="openCity(event, 'Remaining')">Remaining</button>
-                    </div>
-
-                    <!-- Tab content -->
-                    <div id="Continue" class="tabcontent">
-                        <h3>Continue</h3>
-                        <p>London is the capital city of England.</p>
-                    </div>
-
-                    <div id="Completed" class="tabcontent">
-                        <h3>Completed</h3>
-                        <p>Paris is the capital of France.</p>
-                    </div>
-
-                    <div id="Remaining" class="tabcontent">
-                        <h3>Remaining</h3>
-                        <p>Tokyo is the capital of Japan.</p>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>

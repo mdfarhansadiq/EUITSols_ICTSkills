@@ -774,7 +774,7 @@
     </a>
 </li>
 
-<li class="nav-item">
+{{-- <li class="nav-item">
 
     <a href="{{url('/admin/student-certificate/view')}}" class="nav-link {{ Request::is('/admin/student-certificate/view') ? 'active' : '' }}">
         <i class="fa fa-certificate" aria-hidden="true"></i>
@@ -788,7 +788,7 @@
         <i style="font-size:" class="fa">&#xf024;</i>
         <p>Course Completion</p>
     </a>
-</li>
+</li> --}}
 
 {{-- <li class="nav-item">
     <a href="{{url('/icsb-president')}}" class="nav-link {{ Request::is('/icsb-president') ? 'active' : '' }}">

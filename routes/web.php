@@ -63,7 +63,7 @@ use App\Http\Controllers\eligibility\EligibilityController;
 use App\Http\Controllers\admissionrule\AdmissionRuleController;
 use App\Http\Controllers\nationalaward\NationalAwardController;
 use App\Http\Controllers\codeconduct\CodeConductController;
-use App\Http\Controllers\category\CategoryController;
+use App\Http\Controllers\coursecategory\CourseCategoryController;
 use App\Http\Controllers\courseteacher\CourseTeacherController;
 use App\Http\Controllers\coursesinfo\CoursesInfoController;
 use App\Http\Controllers\coursereview\CourseReviewController;
@@ -721,7 +721,6 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
         Route::get('/assigned-officer-list', [AboutController::class, 'assigned']);
         Route::post('/assigned-officer-list-create', [AboutController::class, 'assignedPost']);
-
     });
 
     /// NoticeBoard Route
@@ -765,8 +764,10 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::get('/code-of-conduct', [CodeConductController::class, 'codeConduct']);
     Route::post('/code-of-conduct-create', [CodeConductController::class, 'codeConductPost']);
 
-    Route::get('/admin/category/view', [CategoryController::class, 'categoryPageView']);
-    Route::post('/admin/category/create', [CategoryController::class, 'categoryCreate']);
+    Route::get('/admin/category/view', [CourseCategoryController::class, 'categoryPageView']);
+    Route::post('/admin/category/create', [CourseCategoryController::class, 'categoryCreate']);
+    Route::get('/admin/category/delete/{id}', [CourseCategoryController::class, 'courseCategoryDelete']);
+
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
@@ -779,7 +780,7 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::get('/admin/courses-info/delete/{id}', [CoursesInfoController::class, 'coursesInfoDelete']);
     Route::get('/admin/courses-info/edit/view/{id}', [CoursesInfoController::class, 'coursesInfoEditView']);
     Route::post('/admin/courses-info/update/{id}', [CoursesInfoController::class, 'courseInfoEditUpdate']);
-
+    Route::get('/admin/courses-info/show/{id}', [CoursesInfoController::class, 'courseInfoShow']);
 
     Route::get('/admin/course-review/view', [CourseReviewController::class, 'courseReviewPageView']);
     Route::post('/admin/course-review/create', [CourseReviewController::class, 'courseReviewCreate']);
@@ -808,8 +809,6 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/course-completion/view', [CourseStudentCompletionController::class, 'courseStudentCompletionPageView']);
     Route::post('/admin/course-completion/create', [CourseStudentCompletionController::class, 'courseStudentCompletionCreate']);
-
-
 });
 
 
