@@ -766,8 +766,9 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/category/view', [CourseCategoryController::class, 'categoryPageView']);
     Route::post('/admin/category/create', [CourseCategoryController::class, 'categoryCreate']);
+    Route::get('/admin/category/edit/view/{id}', [CourseCategoryController::class, 'courseCategoryEditView']);
+    Route::post('/admin/category/update/{id}', [CourseCategoryController::class, 'courseCategoryEditUpdate']);
     Route::get('/admin/category/delete/{id}', [CourseCategoryController::class, 'courseCategoryDelete']);
-
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
