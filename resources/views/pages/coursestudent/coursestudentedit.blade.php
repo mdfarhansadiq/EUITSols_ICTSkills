@@ -106,32 +106,33 @@
                                     <label class="col-sm-3" for="courseStudentFacebook">Facebook URL<span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-9">
-                                        <textarea type="text" class="ckeditor form-control" id="courseStudentFacebook" name="courseStudentFacebook"
-                                            placeholder="Enter Facebook" rows="17" cols="70">{{ $data->course_student_facebook }}</textarea>
+
+                                            <input type="url" class="form-control" id="courseStudentFacebook"
+                                            name="courseStudentFacebook" placeholder="Enter Facebook URL" value="{{ $data->course_student_facebook }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3" for="courseStudentLinkedIn">LinkedIn URL<span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-9">
-                                        <textarea type="text" class="ckeditor form-control" id="courseStudentLinkedIn" name="courseStudentLinkedIn"
-                                            placeholder="Enter LinkedIn" rows="17" cols="70">{{ $data->course_student_linkdein }}</textarea>
+                                            <input type="url" class="form-control" id="courseStudentLinkedIn"
+                                            name="courseStudentLinkedIn" placeholder="Enter LinkedIn URL" value="{{ $data->course_student_linkdein }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3" for="courseStudentGitHub">GitHub URL<span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-9">
-                                        <textarea type="text" class="ckeditor form-control" id="courseStudentGitHub" name="courseStudentGitHub"
-                                            placeholder="Enter GitHub" rows="17" cols="70">{{ $data->course_student_github }}</textarea>
+                                            <input type="url" class="form-control" id="courseStudentGitHub"
+                                            name="courseStudentGitHub" placeholder="Enter GitHub URL" value="{{ $data->course_student_github }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3" for="courseStudentWebSite">WebSite URL<span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-9">
-                                        <textarea type="text" class="ckeditor form-control" id="courseStudentWebSite" name="courseStudentWebSite"
-                                            placeholder="Enter WebSite" rows="17" cols="70">{{ $data->course_student_website }}</textarea>
+                                            <input type="url" class="form-control" id="courseStudentGitHub"
+                                            name="courseStudentGitHub" placeholder="Enter WebSite URL" value="{{ $data->course_student_website }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">

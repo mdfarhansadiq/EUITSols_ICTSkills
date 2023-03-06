@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('course_teacher_profession');
             $table->string('course_teacher_company');
             $table->string('course_teacher_interest_area');
-            $table->text('course_teacher_facebook');
-            $table->text('course_teacher_linkedin');
-            $table->text('course_teacher_github');
-            $table->text('course_teacher_website');
+            $table->string('course_teacher_facebook');
+            $table->string('course_teacher_linkedin');
+            $table->string('course_teacher_github');
+            $table->string('course_teacher_website');
             $table->string('course_teacher_address');
             $table->text('course_teacher_description');
             $table->text('course_teacher_photo');

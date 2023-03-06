@@ -52,7 +52,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTeacherName"
-                                                name="courseTeacherName" placeholder="Enter Course Teacher Name" value="{{ $data->course_teacher_name }}">
+                                                name="courseTeacherName" placeholder="Enter Course Teacher Name"
+                                                value="{{ $data->course_teacher_name }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -60,7 +61,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="email" class="form-control" id="courseTeacherEmail"
-                                                name="courseTeacherEmail" placeholder="Enter Course Teacher Email" value="{{ $data->course_teacher_email }}">
+                                                name="courseTeacherEmail" placeholder="Enter Course Teacher Email"
+                                                value="{{ $data->course_teacher_email }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -68,7 +70,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="tel" class="form-control" id="courseTeacherPhone"
-                                                name="courseTeacherPhone" placeholder="Enter Course Teacher Phone" value="{{ $data->course_teacher_phone }}">
+                                                name="courseTeacherPhone" placeholder="Enter Course Teacher Phone"
+                                                value="{{ $data->course_teacher_phone }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -76,7 +79,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="date" class="form-control" id="courseTeacherDOB"
-                                                name="courseTeacherDOB" placeholder="Enter Course Teacher Phone" value="{{ $data->course_teacher_dob }}">
+                                                name="courseTeacherDOB" placeholder="Enter Course Teacher Phone"
+                                                value="{{ $data->course_teacher_dob }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -84,7 +88,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTeacherProfession"
-                                                name="courseTeacherProfession" placeholder="Enter Profession" value="{{ $data->course_teacher_profession }}">
+                                                name="courseTeacherProfession" placeholder="Enter Profession"
+                                                value="{{ $data->course_teacher_profession }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -92,7 +97,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTeacherCompany"
-                                                name="courseTeacherCompany" placeholder="Enter Company Name" value="{{ $data->course_teacher_company }}">
+                                                name="courseTeacherCompany" placeholder="Enter Company Name"
+                                                value="{{ $data->course_teacher_company }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -100,39 +106,40 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTeacherInterestArea"
-                                                name="courseTeacherInterestArea" placeholder="Enter Interest Area" value="{{ $data->course_teacher_interest_area }}">
+                                                name="courseTeacherInterestArea" placeholder="Enter Interest Area"
+                                                value="{{ $data->course_teacher_interest_area }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseTeacherFacebook">Facebook URL<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherFacebook" name="courseTeacherFacebook"
-                                                placeholder="Enter Facebook" rows="17" cols="70">{{ $data->course_teacher_facebook }}</textarea>
+                                            <input type="url" class="form-control" id="courseTeacherFacebook"
+                                                name="courseTeacherFacebook" placeholder="Enter Facebook URL">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseTeacherLinkedIn">LinkedIn URL<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherLinkedIn" name="courseTeacherLinkedIn"
-                                                placeholder="Enter LinkedIn" rows="17" cols="70">{{ $data->course_teacher_linkedin }}</textarea>
+                                            <input type="url" class="form-control" id="courseTeacherLinkedIn"
+                                                name="courseTeacherLinkedIn" placeholder="Enter LinkedIn URL">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseTeacherGitHub">GitHub URL<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherGitHub" name="courseTeacherGitHub"
-                                                placeholder="Enter GitHub" rows="17" cols="70">{{ $data->course_teacher_github }}</textarea>
+                                            <input type="url" class="form-control" id="courseTeacherGitHub"
+                                                name="courseTeacherGitHub" placeholder="Enter GitHub URL">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseTeacherWebSite">WebSite URL<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <textarea type="text" class="ckeditor form-control" id="courseTeacherWebSite" name="courseTeacherWebSite"
-                                                placeholder="Enter WebSite" rows="17" cols="70">{{ $data->course_teacher_website }}</textarea>
+                                            <input type="url" class="form-control" id="courseTeacherWebSite"
+                                                name="courseTeacherWebSite" placeholder="Enter GitHub URL">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -140,7 +147,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseTeacherAddress"
-                                                name="courseTeacherAddress" placeholder="Enter Address" value="{{ $data->course_teacher_address }}">
+                                                name="courseTeacherAddress" placeholder="Enter Address"
+                                                value="{{ $data->course_teacher_address }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -376,7 +384,5 @@ postDisable();
 
     </script> --}}
 
-    <script type="text/javascript">
-
-    </script>
+    <script type="text/javascript"></script>
 @endpush
