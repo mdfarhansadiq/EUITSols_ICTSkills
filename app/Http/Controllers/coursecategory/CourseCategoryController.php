@@ -62,6 +62,7 @@ class CourseCategoryController extends Controller
     {
         $data = CourseCategoryModel::findOrFail($id);
         return view('pages.coursecategory.coursecategoryedit', compact('data'));
+        //return response()->json($data);
     }
 
     public function courseCategoryEditUpdate(Request $req, $id)

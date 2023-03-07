@@ -14,6 +14,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-12">
+
                 <div id="alertError1" class="alert alert-danger" role="alert" style="display:none";>
                     Please fill the all required field
                 </div>
@@ -28,11 +29,9 @@
                         <span class="float-left">
                             <h4>Add Course Category</h4>
                         </span>
-                        {{-- <span class="float-right">
-                        @if (Auth::user()->can('user view') || Auth::user()->role->id == 1)<a href="{{ route('users.index') }}" class="btn btn-info">Back</a>@endif
-                    </span> --}}
                     </div>
                     <div class="card-body">
+
                         <div class="row">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -53,9 +52,6 @@
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="categoryName" name="categoryName"
                                                 placeholder="Enter Category Name">
-                                            {{-- @if ($errors->has('name'))
-                                            <span class="text-danger">{{ $errors->first('name') }}</span>
-                                        @endif --}}
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -84,14 +80,14 @@
                                     </div>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
+
+            <!-- Modal -->
+            <!-- Button trigger modal -->
+
 
             <div class="col-md-10 col-lg-12">
                 <div class="card">
@@ -126,7 +122,7 @@
                                 @if (count($data))
                                     <tbody id="showPost">
                                         @foreach ($data as $key => $d)
-                                            <tr id="row1{{ $d->id }}">
+                                            <tr id="row{{ $d->id }}">
                                                 <td id="keyVal">{{ $key + 1 }}</td>
 
                                                 <td id="titleVal">{{ $d->category_name }}</td>
@@ -137,11 +133,16 @@
                                                         Image</a></td>
 
                                                 <td><a href="{{ url('/admin/category/edit/view', $d['id']) }}"
-                                                        class="edit btn btn-primary" data-id="{{ $d->id }}">Edit</a>
+                                                        class="edit btn btn-primary">Edit</a>
                                                 </td>
 
                                                 <td><a href="javascript:void(0);" class="delete btn btn-danger"
-                                                        data-id="{{ $d->id }}">Delete</a></td>
+                                                        data-id="{{ $d->id }}" onclick="deleteEvent({{ $d->id }})">Delete</a></td>
+
+                                                {{-- <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#exampleModalCenter">
+                                                        Launch demo modal
+                                                    </button></td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -163,6 +164,31 @@
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script type="text/javascript">
+        function deleteEvent(id) {
+
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                $.ajax({
+                    type: 'GET',
+                    url: "/admin/category/delete/" + id,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // data:{user_id: userId},
+                    success: function(data) {
+                        //Refresh the grid
+                        // alert(data.success);
+                        $("#row"+id).remove();
+                    },
+                    error: function(e) {
+                        alert(e.error);
+                    }
+                });
+            } else {
+                //alert ('no');
+                return false;
+            }
+        }
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -202,16 +228,23 @@
                         contentType: false,
                         processData: false,
                         success: function(response) {
-                            $('#alertSuccess').fadeIn()
-                            $("#alertSuccess").fadeOut(5000);
+                            toastr.success("Course Category Inserted successfully");
                             var student = '';
                             // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
                                 //CONSTRUCTION OF ROWS HAVING
                                 // DATA FROM JSON OBJECT
-                                console.log(response[key]['category_image']);
-                                student = '<tbody id="showPost">';
-                                student += '<tr>';
+                                var editUrl = "{{ route('category.edit', ':id') }}";
+                                //var deleteUrl = "{{ route('category.delete', ':id') }}";
+
+
+                                //deleteUrl = deleteUrl.replace(':id', response[key]["id"]);
+
+
+                                editUrl = editUrl.replace(':id', response[key]["id"]);
+                                //console.log(response[key]['category_image']);
+
+                                student = '<tr id="row'+response[key]["id"]+'">';
                                 student += '<td>' +
                                     response.length + '</td>';
 
@@ -223,26 +256,25 @@
 
                                 student += '<td><a href="' + response[key][
                                     'category_image'
-                                ] + '" target="_blank">Course Image</a></td>';
+                                ] + '" target="_blank">Category Image</a></td>';
 
                                 student +=
-                                    '<td><a href="javascript:void(0);" class="delete btn btn-danger" data-id="' +
-                                    response[key]['id'] + '">Delete</a></td>';
+                                    '<td><a href="' + editUrl +
+                                    '"class="edit btn btn-primary">Edit</a></td>';
+
+                                student +=
+                                    '<td><a href="javascript:void(0);" class="delete btn btn-danger" onclick="deleteEvent('+response[key]['id']+')">Delete</a></td>';
                                 // student += '<td>' +
                                 //     value.Articles + '</td>';
 
                                 // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
 
                                 student += '</tr>';
-                                student += '</tbody>'
-                            });
-                            table_head =
-                                '<th>SL</th><th>Name</th><th>Description</th><th>Image</th><th>Action</th>'
 
-                            $(".about_table thead tr th:lt(5)").remove();
-                            $('.about_table thead tr').append(table_head)
-                            $('.about_table').append(student);
-                            // showJobs(response);
+                            });
+
+
+                            $('#showPost').append(student);
 
                         },
                         error: function(error) {
@@ -264,33 +296,7 @@
 
             });
 
-            $(".delete").on('click', function(e) {
-                e.preventDefault();
-                var id = $(this).attr("data-id");
-                var confirmation = confirm("Are you sure you want to delete this user?");
-                if (confirmation) {
-                    $.ajax({
-                        type: 'GET',
-                        url: "/admin/category/delete/" + id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        // data:{user_id: userId},
-                        success: function(data) {
-                            //Refresh the grid
-                            // alert(data.success);
-                            $(".data-id" + id).remove();
-                            $("#row1" + id).remove();
-                        },
-                        error: function(e) {
-                            alert(e.error);
-                        }
-                    });
-                } else {
-                    //alert ('no');
-                    return false;
-                }
-            });
+
 
 
         });

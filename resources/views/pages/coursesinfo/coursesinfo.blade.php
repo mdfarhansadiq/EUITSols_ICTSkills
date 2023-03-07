@@ -246,9 +246,8 @@
                         processData: false,
                         success: function(response) {
 
-                            console.log(response[0])
-                            // $('#alertSuccess').fadeIn()
-                            // $("#alertSuccess").fadeOut(5000);
+                            $('#alertSuccess').fadeIn()
+                            $("#alertSuccess").fadeOut(5000);
                             // var student = '';
                             // // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
@@ -275,17 +274,21 @@
                                 // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
                                 //     '</td>';
 
-                                student += '<td>' + response[key]['id'] + '</td>';
-                                // student += '<td>' +
-                                //     value.Articles + '</td>';
+                                student += '<td><a href="' + response[key][
+                                    'course_image'
+                                ] + '" target="_blank">Course Image</a></td>';
 
-                                // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
+                                student += '<td><a href="{{ url(' + "/admin/courses-info/edit/view/" + response[key]["id"] + ')}}" class="edit btn btn-primary">Edit</a></td>';
+
+                                student +=
+                                    '<td><a href="javascript:void(0);" class="delete btn btn-danger" data-id="' +
+                                    response[key]['id'] + '">Delete</a></td>';
 
                                 student += '</tr>';
                                 student += '</tbody>'
                             });
                             table_head =
-                                '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
+                                '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th><th>Image</th><th>Action</th>'
 
                             $(".about_table thead tr th:lt(5)").remove();
                             $('.about_table thead tr').append(table_head)

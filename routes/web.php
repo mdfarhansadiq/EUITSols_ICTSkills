@@ -708,67 +708,67 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     });
 
     /// AboutUS Route
-    Route::group(['prefix' => 'about'], function () {
-        Route::get('/about', [AboutController::class, 'about']);
-        Route::post('/aboutus-create', [AboutController::class, 'aboutPost']);
-        Route::get('/aboutAjaxShow', [AboutController::class, 'aboutAjaxShow']);
-        Route::get('/csr-activities', [AboutController::class, 'csr']);
-        Route::post('/csr-activities-create', [AboutController::class, 'csrPost']);
+    // Route::group(['prefix' => 'about'], function () {
+    //     Route::get('/about', [AboutController::class, 'about']);
+    //     Route::post('/aboutus-create', [AboutController::class, 'aboutPost']);
+    //     Route::get('/aboutAjaxShow', [AboutController::class, 'aboutAjaxShow']);
+    //     Route::get('/csr-activities', [AboutController::class, 'csr']);
+    //     Route::post('/csr-activities-create', [AboutController::class, 'csrPost']);
 
 
-        Route::get('/faq', [AboutController::class, 'faq']);
-        Route::post('/faq-create', [AboutController::class, 'faqPost']);
+    //     Route::get('/faq', [AboutController::class, 'faq']);
+    //     Route::post('/faq-create', [AboutController::class, 'faqPost']);
 
-        Route::get('/assigned-officer-list', [AboutController::class, 'assigned']);
-        Route::post('/assigned-officer-list-create', [AboutController::class, 'assignedPost']);
-    });
+    //     Route::get('/assigned-officer-list', [AboutController::class, 'assigned']);
+    //     Route::post('/assigned-officer-list-create', [AboutController::class, 'assignedPost']);
+    // });
 
-    /// NoticeBoard Route
-    Route::get('/notice-board', [NoticeController::class, 'notice']);
-    Route::post('/notice-board-create', [NoticeController::class, 'noticePost']);
+    // /// NoticeBoard Route
+    // Route::get('/notice-board', [NoticeController::class, 'notice']);
+    // Route::post('/notice-board-create', [NoticeController::class, 'noticePost']);
 
-    /// ICSBPresident Route
-    Route::get('/icsb-president', [ICSBPresidentController::class, 'icsbPresident']);
-    Route::post('/icsb-president-create', [ICSBPresidentController::class, 'icsbPresidentPost']);
+    // /// ICSBPresident Route
+    // Route::get('/icsb-president', [ICSBPresidentController::class, 'icsbPresident']);
+    // Route::post('/icsb-president-create', [ICSBPresidentController::class, 'icsbPresidentPost']);
 
 
 
-    /// ICSBRecentVideos Route
-    Route::get('/recent-video', [RecentVideosController::class, 'recentVideos']);
-    Route::post('/recent-video-create', [RecentVideosController::class, 'recentVideosPost']);
+    // /// ICSBRecentVideos Route
+    // Route::get('/recent-video', [RecentVideosController::class, 'recentVideos']);
+    // Route::post('/recent-video-create', [RecentVideosController::class, 'recentVideosPost']);
 
-    /// ICSBService Route
-    Route::get('/services', [ServiceController::class, 'service']);
-    Route::post('/services-create', [ServiceController::class, 'servicePost']);
+    // /// ICSBService Route
+    // Route::get('/services', [ServiceController::class, 'service']);
+    // Route::post('/services-create', [ServiceController::class, 'servicePost']);
 
-    /// ICSBMissionVision Route
-    Route::get('/mission-vision', [MissionVisionController::class, 'missionVision']);
-    Route::post('/mission-vision-create', [MissionVisionController::class, 'missionVisionPost']);
+    // /// ICSBMissionVision Route
+    // Route::get('/mission-vision', [MissionVisionController::class, 'missionVision']);
+    // Route::post('/mission-vision-create', [MissionVisionController::class, 'missionVisionPost']);
 
-    /// ICSBContactAddress Route
-    Route::get('/contact-address', [ContactAddressController::class, 'contactAddress']);
-    Route::post('/contact-address-create', [ContactAddressController::class, 'contactAddressPost']);
+    // /// ICSBContactAddress Route
+    // Route::get('/contact-address', [ContactAddressController::class, 'contactAddress']);
+    // Route::post('/contact-address-create', [ContactAddressController::class, 'contactAddressPost']);
 
-    /// ICSBEligibility Route
-    Route::get('/eligibility', [EligibilityController::class, 'eligibility']);
-    Route::post('/eligibility-create', [EligibilityController::class, 'eligibilityPost']);
+    // /// ICSBEligibility Route
+    // Route::get('/eligibility', [EligibilityController::class, 'eligibility']);
+    // Route::post('/eligibility-create', [EligibilityController::class, 'eligibilityPost']);
 
-    /// ICSBAdmissionRule Route
-    Route::get('/admission-rule', [AdmissionRuleController::class, 'admissionRule']);
-    Route::post('/admission-rule-create', [AdmissionRuleController::class, 'admissionRulePost']);
+    // /// ICSBAdmissionRule Route
+    // Route::get('/admission-rule', [AdmissionRuleController::class, 'admissionRule']);
+    // Route::post('/admission-rule-create', [AdmissionRuleController::class, 'admissionRulePost']);
 
-    /// ICSBNationalAward Route
-    Route::get('/national-award', [NationalAwardController::class, 'nationalAward']);
-    Route::post('/national-award-create', [NationalAwardController::class, 'nationalAwardPost']);
-    /// ICSBCodeOfConduct Route
-    Route::get('/code-of-conduct', [CodeConductController::class, 'codeConduct']);
-    Route::post('/code-of-conduct-create', [CodeConductController::class, 'codeConductPost']);
+    // /// ICSBNationalAward Route
+    // Route::get('/national-award', [NationalAwardController::class, 'nationalAward']);
+    // Route::post('/national-award-create', [NationalAwardController::class, 'nationalAwardPost']);
+    // /// ICSBCodeOfConduct Route
+    // Route::get('/code-of-conduct', [CodeConductController::class, 'codeConduct']);
+    // Route::post('/code-of-conduct-create', [CodeConductController::class, 'codeConductPost']);
 
     Route::get('/admin/category/view', [CourseCategoryController::class, 'categoryPageView']);
     Route::post('/admin/category/create', [CourseCategoryController::class, 'categoryCreate']);
-    Route::get('/admin/category/edit/view/{id}', [CourseCategoryController::class, 'courseCategoryEditView']);
+    Route::get('/admin/category/edit/view/{id}', [CourseCategoryController::class, 'courseCategoryEditView'])->name('category.edit');
     Route::post('/admin/category/update/{id}', [CourseCategoryController::class, 'courseCategoryEditUpdate']);
-    Route::get('/admin/category/delete/{id}', [CourseCategoryController::class, 'courseCategoryDelete']);
+    Route::get('/admin/category/delete/{id}', [CourseCategoryController::class, 'courseCategoryDelete'])->name('category.delete');
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);

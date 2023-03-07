@@ -17,9 +17,9 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-    <div class="login-logo">
+    {{-- <div class="login-logo">
         <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
-    </div>
+    </div> --}}
     <!-- /.login-logo -->
 
     <!-- /.login-box-body -->

@@ -530,7 +530,7 @@ postDisable();
     </script> --}}
 
 
-    <script>
+    {{-- <script>
         /// Dynamic video link to set video-src
         var vidLinkID = document.getElementById("{{ $key }}").id;
 
@@ -597,150 +597,9 @@ postDisable();
         //     console.log("Yes");
 
         // }
-    </script>
+    </script> --}}
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            // $("#about_form").submit(function(e) {
-            //     e.preventDefault()
-            //     // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
-            //     // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-            //     // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-            //     // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-            //     // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
-
-            //     for (instance in CKEDITOR.instances) {
-            //         CKEDITOR.instances[instance].updateElement();
-            //     }
-
-            //     var formData = new FormData(this);
-            //     length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length,
-            //         formData.get('courseTeacher').length
-            //     ]
-            //     count = 0
-            //     for (i = 0; i < length_array.length; i = i + 1) {
-            //         if (length_array[i] == 0) {
-
-            //             count = 0
-            //             break;
-            //         } else {
-            //             count = 1
-
-            //         }
-
-            //     }
-            //     if (count == 0) {
-            //         $('#alertError1').fadeIn()
-            //         $("#alertError1").fadeOut(10000);
-            //     } else {
-            //         $.ajax({
-            //             url: '/admin/courses-info/create',
-            //             type: "post",
-            //             headers: {
-            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //             },
-            //             data: formData,
-            //             cache: false,
-            //             contentType: false,
-            //             processData: false,
-            //             success: function(response) {
-            //                 $('#alertSuccess').fadeIn()
-            //                 $("#alertSuccess").fadeOut(5000);
-            //                 var student = '';
-            //                 // ITERATING THROUGH OBJECTS
-            //                 $.each(response, function(key, value) {
-            //                     //CONSTRUCTION OF ROWS HAVING
-            //                     // DATA FROM JSON OBJECT
-            //                     student = '<tbody id="showPost">';
-            //                     student += '<tr>';
-            //                     student += '<td>' +
-            //                         response.length + '</td>';
-
-            //                     student += '<td>' +
-            //                         value.courseTitle + '</td>';
-
-            //                     student += '<td>' +
-            //                         value.courseCategory + '</td>';
-
-            //                     student += '<td>' +
-            //                         value.courseTeacher + '</td>';
-
-            //                     // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
-            //                     //     '</td>';
-
-            //                     // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
-            //                     //     '</td>';
-
-            //                     // student += '<td>' +
-            //                     //     value.Articles + '</td>';
-
-            //                     // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
-
-            //                     student += '</tr>';
-            //                     student += '</tbody>'
-            //                 });
-            //                 table_head =
-            //                     '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
-
-            //                 $(".about_table thead tr th:lt(5)").remove();
-            //                 $('.about_table thead tr').append(table_head)
-            //                 $('.about_table').append(student);
-            //                 // showJobs(response);
-
-            //             },
-            //             error: function(error) {
-            //                 $('#alertError').fadeIn()
-            //                 $("#alertError").fadeOut(5000);
-            //             },
-            //         });
-            //     }
-
-            //     return false;
-
-            // });
-
-            // $(".delete").on("click", function() {
-            //     var id = $(this).attr("data-id");
-            //     $.ajax({
-            //         url: "/admin/courses-info/delete/" + id,
-            //         data: {
-            //             "id": id,
-            //             "_token": "{{ csrf_token() }}"
-            //         },
-            //         type: 'post',
-            //         success: function(result) {
-            //             console.log("Yes");
-            //         }
-            //     });
-            // });
-
-            $(".delete").on('click', function(e) {
-                e.preventDefault();
-                var id = $(this).attr("data-id");
-                var confirmation = confirm("Are you sure you want to delete this content?");
-                if (confirmation) {
-                    $.ajax({
-                        type: 'GET',
-                        url: "/admin/courses-content/delete/" + id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        // data:{user_id: userId},
-                        success: function(data) {
-                            //Refresh the grid
-                            alert(data.success);
-                            $(".data-id" + id).remove();
-                        },
-                        error: function(e) {
-                            alert(e.error);
-                        }
-                    });
-                } else {
-                    //alert ('no');
-                    return false;
-                }
-            });
-
-        });
+    
     </script>
 @endpush

@@ -22,26 +22,6 @@ class CoursesInfoController extends Controller
     public function coursesInfoCreate(Request $req)
     {
 
-        // $this->validate($req, [
-        //     'courseTitle' => 'required|unique:coursesinfos,course_title',
-        //     'courseCategory' => 'required',
-        //     'courseTeacher' => 'required',
-        //     'courseDuration' => 'required',
-        //     'courseDescription' => 'required',
-        //     'courseImage' => 'required',
-
-        // ], [],
-        // [
-        //     'courseTitle' => 'Course Title',
-        //     'courseCategory' => 'Course Category Name',
-        //     'courseTeacher' => 'Course Teacher Name',
-        //     'courseDuration' => 'Course Duration',
-        //     'courseDescription' => 'Course Description',
-        //     'courseImage' => 'Course Image',
-
-        // ]);
-
-
         $data = new CoursesInfoModel();
 
         $data->course_title = $req->input('courseTitle');
