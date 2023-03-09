@@ -788,8 +788,8 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/student-info/view', [CourseStudentController::class, 'courseStudentInfoPageView']);
     Route::post('/admin/student-info/create', [CourseStudentController::class, 'courseStudentInfoCreate']);
-    Route::get('/admin/student-info/delete/{id}', [CourseStudentController::class, 'courseStudentInfoDelete']);
-    Route::get('/admin/student-info/edit/view/{id}', [CourseStudentController::class, 'courseStudentInfoEditView']);
+    Route::get('/admin/student-info/delete/{id}', [CourseStudentController::class, 'courseStudentInfoDelete'])->name('coursestudent.delete');
+    Route::get('/admin/student-info/edit/view/{id}', [CourseStudentController::class, 'courseStudentInfoEditView'])->name('coursestudent.edit');
     Route::post('/admin/student-info/update/{id}', [CourseStudentController::class, 'courseStudentInfoEditUpdate']);
 
     Route::get('/admin/course-discount/view', [CourseDiscountController::class, 'courseDiscountPageView']);

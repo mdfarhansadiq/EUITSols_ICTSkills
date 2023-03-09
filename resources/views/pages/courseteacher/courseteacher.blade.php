@@ -473,7 +473,7 @@
                                 student += '</tr>';
 
                             });
-                            $('.about_table').append(student);
+                            $('#showPost').append(student);
                             // showJobs(response);
 
                         },
