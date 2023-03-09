@@ -95,9 +95,7 @@
                         <span class="float-left">
                             <h4>View Course Category</h4>
                         </span>
-                        {{-- <span class="float-right">
-                    @if (Auth::user()->can('add blood-group') || Auth::user()->role->id == 1)<a href="{{ route('bloodgroup.create') }}" class="btn btn-info">Add new Blood Group</a>@endif
-                </span> --}}
+
                     </div>
                     <div class="card-body">
                         @include('partial.flush-message')
@@ -235,11 +233,6 @@
                                 //CONSTRUCTION OF ROWS HAVING
                                 // DATA FROM JSON OBJECT
                                 var editUrl = "{{ route('category.edit', ':id') }}";
-                                //var deleteUrl = "{{ route('category.delete', ':id') }}";
-
-
-                                //deleteUrl = deleteUrl.replace(':id', response[key]["id"]);
-
 
                                 editUrl = editUrl.replace(':id', response[key]["id"]);
                                 //console.log(response[key]['category_image']);

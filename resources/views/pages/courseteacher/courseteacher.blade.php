@@ -194,8 +194,6 @@
                         </span>
                     </div>
                     <div class="card-body">
-                        @include('partial.flush-message')
-
                         <div class="table table-responsive">
                             <table id="table" class="about_table">
                                 <thead>
@@ -217,6 +215,7 @@
                                         <th>Description</th> --}}
                                             <th>Photo</th>
                                             <th>CV</th>
+                                            <th>Action</th>
                                         @else
                                             <th style="text-align:center;">{{ 'No Data Found' }}
                                             <th>
@@ -227,7 +226,7 @@
                                 @if (count($data))
                                     <tbody id="showPost">
                                         @foreach ($data as $key => $d)
-                                            <tr>
+                                            <tr id="row{{ $d->id }}">
                                                 <td id="keyVal">{{ $key + 1 }}</td>
                                                 <td id="titleVal">{{ $d->course_teacher_name }}</td>
 
@@ -251,18 +250,19 @@
 
                                                 <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher
                                                         CV</a></td>
-                                                <td>
+                                                {{-- <td>
                                                     <div class="btn-group">
                                                         <a href="javascript:void(0)" class="btn btn-info btnView"
                                                             data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a>
-                                                </td>
-
-                                                <td><a href="javascript:void(0);" class="delete" type="button"
-                                                        data-id="{{ $d->id }}">Delete</a></td>
+                                                </td> --}}
 
                                                 <td><a href="{{ url('/admin/teacher-info/edit/view', $d['id']) }}"
-                                                        class="edit" type="button"
+                                                        class="edit btn btn-primary" type="button"
                                                         data-id="{{ $d->id }}">Edit</a></td>
+
+                                                <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                        type="button" data-id="{{ $d->id }}"
+                                                        onclick="deleteEvent({{ $d->id }})">Delete</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -354,103 +354,139 @@
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script type="text/javascript">
+        function deleteEvent(id) {
+
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                $.ajax({
+                    type: 'GET',
+                    url: "/admin/teacher-info/delete/" + id,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // data:{user_id: userId},
+                    success: function(data) {
+                        toastr.success("Teacher Info Inserted successfully");
+                        //Refresh the grid
+                        // alert(data.success);
+                        $("#row" + id).remove();
+                    },
+                    error: function(e) {
+                        alert(e.error);
+                    }
+                });
+            } else {
+                //alert ('no');
+                return false;
+            }
+        }
+
         $(document).ready(function() {
-            // $("#about_form").submit(function(e) {
-            //     e.preventDefault()
-            //     var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
-            //     var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-            //     var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-            //     var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-            //     var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
+            $("#about_form").submit(function(e) {
+                e.preventDefault()
+                var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
-            //     for ( instance in CKEDITOR.instances ) {
-            //         CKEDITOR.instances[instance].updateElement();
-            //     }
+                for (instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
 
-            //     var formData = new FormData(this);
-            //     length_array = [formData.get('courseTeacherName').length, formData.get('courseTeacherEmail').length, formData.get('courseTeacherPhone').length, formData.get('courseTeacherDOB').length, formData.get('courseTeacherProfession').length, formData.get('courseTeacherCompany').length, formData.get('courseTeacherInterestArea').length, formData.get('courseTeacherAddress').length, data1.length, data2.length, data3.length, data4.length, data5.length, formData.get('courseTeacherPhoto').length, formData.get('courseTeacherCV').length]
-            //         count = 0
-            //         for (i = 0; i < length_array.length; i = i + 1) {
-            //             if (length_array[i] == 0) {
+                var formData = new FormData(this);
+                length_array = [formData.get('courseTeacherName').length, formData.get('courseTeacherEmail')
+                    .length, formData.get('courseTeacherPhone').length, formData.get('courseTeacherDOB')
+                    .length, formData.get('courseTeacherProfession').length, formData.get(
+                        'courseTeacherCompany').length, formData.get('courseTeacherInterestArea')
+                    .length, formData.get('courseTeacherAddress').length, formData.get('courseTeacherFacebook').length, formData.get('courseTeacherGitHub').length, formData.get('courseTeacherWebSite').length, formData.get('courseTeacherPhoto').length,
+                    formData.get('courseTeacherCV').length, data5.length
+                ]
+                count = 0
+                for (i = 0; i < length_array.length; i = i + 1) {
+                    if (length_array[i] == 0) {
 
-            //                 count = 0
-            //                 break;
-            //             } else {
-            //                 count = 1
+                        count = 0
+                        break;
+                    } else {
+                        count = 1
 
-            //             }
+                    }
 
-            //         }
-            //         if (count == 0) {
-            //             $('#alertError1').fadeIn()
-            //             $("#alertError1").fadeOut(10000);
-            //         }
-            //         else
-            //         {
-            //             $.ajax({
-            //         url: '/admin/teacher-info/create',
-            //         type: "post",
-            //         headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         },
-            //         data: formData,
-            //         cache: false,
-            //         contentType: false,
-            //         processData: false,
-            //         success: function(response) {
-            //             $('#alertSuccess').fadeIn()
-            //             $("#alertSuccess").fadeOut(5000);
-            //             var student = '';
-            //             // ITERATING THROUGH OBJECTS
-            //             $.each(response, function(key, value) {
-            //                 //CONSTRUCTION OF ROWS HAVING
-            //                 // DATA FROM JSON OBJECT
-            //                 student = '<tbody id="showPost">';
-            //                 student += '<tr>';
-            //                 student += '<td>' +
-            //                 response.length + '</td>';
+                }
+                if (count == 0) {
+                    $('#alertError1').fadeIn()
+                    $("#alertError1").fadeOut(10000);
+                } else {
+                    $.ajax({
+                        url: '/admin/teacher-info/create',
+                        type: "post",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            $('#alertSuccess').fadeIn()
+                            $("#alertSuccess").fadeOut(5000);
+                            var student = '';
+                            console.log()
+                            // ITERATING THROUGH OBJECTS
+                            $.each(response, function(key, value) {
+                                //CONSTRUCTION OF ROWS HAVING
+                                // DATA FROM JSON OBJECT
+                                var editUrl = "{{ route('courseteacher.edit', ':id') }}";
 
-            //                 student += '<td>' +
-            //                     value.courseTeacherName + '</td>';
+                                editUrl = editUrl.replace(':id', response[key]["id"]);
+                                //console.log(response[key]['category_image']);
 
-            //                 student += '<td>' +
-            //                     value.courseTeacherEmail + '</td>';
+                                student = '<tr id="row' + response[key]["id"] + '">';
+                                student += '<td>' +
+                                    response.length + '</td>';
 
-            //                 student += '<td>' +
-            //                     value.courseTeacherPhoto + '</td>';
+                                student += '<td>' +
+                                    response[key]["course_teacher_name"] + '</td>';
 
-            //                 student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
-            //                     '</td>';
+                                student += '<td>' +
+                                    response[key]["course_teacher_email"] + '</td>';
 
-            //                 student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
-            //                     '</td>';
+                                student += '<td>' +
+                                    response[key]["course_teacher_phone"] + '</td>';
 
-            //                 // student += '<td>' +
-            //                 //     value.Articles + '</td>';
+                                student +=
+                                    '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
+                                '</td>';
 
-            //                 // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
+                                student +=
+                                    '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
+                                '</td>';
 
-            //                 student += '</tr>';
-            //                 student +='</tbody>'
-            //             });
-            //             table_head = '<th>SL</th><th>Name</th><th>Email</th><th>Phone</th><th>Photo</th>'
+                                student +=
+                                    '<td><a href="' + editUrl +
+                                    '"class="edit btn btn-primary">Edit</a></td>';
 
-            //             $(".about_table thead tr th:lt(5)").remove();
-            //             $('.about_table thead tr').append(table_head)
-            //             $('.about_table').append(student);
-            //             // showJobs(response);
+                                student +=
+                                    '<td><a href="javascript:void(0);" class="delete btn btn-danger" onclick="deleteEvent('+response[key]['id']+')">Delete</a></td>';
+                                // student += '<td>' +
+                                //     value.Articles + '</td>';
 
-            //         },
-            //         error: function(error) {
-            //                     $('#alertError').fadeIn()
-            //                     $("#alertError").fadeOut(5000);
-            //                 },
-            //     });
-            //         }
+                                // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
 
-            //     return false;
+                                student += '</tr>';
 
-            // });
+                            });
+                            $('.about_table').append(student);
+                            // showJobs(response);
+
+                        },
+                        error: function(error) {
+                            $('#alertError').fadeIn()
+                            $("#alertError").fadeOut(5000);
+                        },
+                    });
+                }
+
+                return false;
+
+            });
 
             // $('.btnView').click(function() {
             //     if ($(this).data('id') != null || $(this).data('id') != '') {
@@ -479,32 +515,10 @@
             //     }
             // });
 
-            $(".delete").on('click', function(e) {
-                e.preventDefault();
-                var id = $(this).attr("data-id");
-                var confirmation = confirm("Are you sure you want to delete this?");
-                if (confirmation) {
-                    $.ajax({
-                        type: 'GET',
-                        url: "/admin/teacher-info/delete/" + id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        // data:{user_id: userId},
-                        success: function(data) {
-                            //Refresh the grid
-                            alert(data.success);
-                            $(".data-id" + id).remove();
-                        },
-                        error: function(e) {
-                            alert(e.error);
-                        }
-                    });
-                } else {
-                    //alert ('no');
-                    return false;
-                }
-            });
+            // $(".delete").on('click', function(e) {
+            //     e.preventDefault();
+            //     var id = $(this).attr("data-id");
+            // });
 
 
             // $('.btnView').click( function(){

@@ -772,14 +772,14 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/teacher-info/view', [CourseTeacherController::class, 'courseTeacherInfoPageView']);
     Route::post('/admin/teacher-info/create', [CourseTeacherController::class, 'courseTeacherInfoCreate']);
-    Route::get('/admin/teacher-info/delete/{id}', [CourseTeacherController::class, 'courseTeacherInfoDelete']);
-    Route::get('/admin/teacher-info/edit/view/{id}', [CourseTeacherController::class, 'courseTeacherInfoEditView']);
+    Route::get('/admin/teacher-info/delete/{id}', [CourseTeacherController::class, 'courseTeacherInfoDelete'])->name('courseteacher.delete');
+    Route::get('/admin/teacher-info/edit/view/{id}', [CourseTeacherController::class, 'courseTeacherInfoEditView'])->name('courseteacher.edit');
     Route::post('/admin/teacher-info/update/{id}', [CourseTeacherController::class, 'courseTeacherInfoEditUpdate']);
 
     Route::get('/admin/courses-info/view', [CoursesInfoController::class, 'coursesInfoPageView']);
     Route::post('/admin/courses-info/create', [CoursesInfoController::class, 'coursesInfoCreate']);
-    Route::get('/admin/courses-info/delete/{id}', [CoursesInfoController::class, 'coursesInfoDelete']);
-    Route::get('/admin/courses-info/edit/view/{id}', [CoursesInfoController::class, 'coursesInfoEditView']);
+    Route::get('/admin/courses-info/delete/{id}', [CoursesInfoController::class, 'coursesInfoDelete'])->name('courseinfo.delete');
+    Route::get('/admin/courses-info/edit/view/{id}', [CoursesInfoController::class, 'coursesInfoEditView'])->name('courseinfo.edit');
     Route::post('/admin/courses-info/update/{id}', [CoursesInfoController::class, 'courseInfoEditUpdate']);
     Route::get('/admin/courses-info/show/{id}', [CoursesInfoController::class, 'courseInfoShow']);
 

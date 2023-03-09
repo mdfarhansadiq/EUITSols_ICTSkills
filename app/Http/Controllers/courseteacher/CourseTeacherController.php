@@ -19,42 +19,42 @@ class CourseTeacherController extends Controller
     public function courseTeacherInfoCreate(Request $req)
     {
 
-        $this->validate($req, [
-            'courseTeacherName' => 'required',
-            'courseTeacherEmail' => 'required|unique:courseteachers,course_teacher_email',
-            'courseTeacherPhone' => 'required|unique:courseteachers,course_teacher_phone',
-            'courseTeacherDOB' => 'required',
-            'courseTeacherProfession' => 'required',
-            'courseTeacherCompany' => 'required',
-            'courseTeacherInterestArea' => 'required',
-            'courseTeacherFacebook' => 'required',
-            'courseTeacherLinkedIn' => 'required',
-            'courseTeacherGitHub' => 'required',
-            'courseTeacherWebSite' => 'required',
-            'courseTeacherAddress' => 'required',
-            'courseTeacherDescription' => 'required',
-            'courseTeacherPhoto' => 'required',
-            'courseTeacherCV' => 'required'
+        // $this->validate($req, [
+        //     'courseTeacherName' => 'required',
+        //     'courseTeacherEmail' => 'required|unique:courseteachers,course_teacher_email',
+        //     'courseTeacherPhone' => 'required|unique:courseteachers,course_teacher_phone',
+        //     'courseTeacherDOB' => 'required',
+        //     'courseTeacherProfession' => 'required',
+        //     'courseTeacherCompany' => 'required',
+        //     'courseTeacherInterestArea' => 'required',
+        //     'courseTeacherFacebook' => 'required',
+        //     'courseTeacherLinkedIn' => 'required',
+        //     'courseTeacherGitHub' => 'required',
+        //     'courseTeacherWebSite' => 'required',
+        //     'courseTeacherAddress' => 'required',
+        //     'courseTeacherDescription' => 'required',
+        //     'courseTeacherPhoto' => 'required',
+        //     'courseTeacherCV' => 'required'
 
-        ], [],
-        [
-            'courseTeacherName' => 'Course Teacher Name',
-            'courseTeacherEmail' => 'Course Teacher Email ',
-            'courseTeacherPhone' => 'Course Teacher Phone',
-            'courseTeacherDOB' => 'Course Teacher DOB',
-            'courseTeacherProfession' => 'Course Teacher DOB',
-            'courseTeacherCompany' => 'Course Teacher DOB',
-            'courseTeacherInterestArea' => 'Course Teacher InterestArea',
-            'courseTeacherFacebook' => 'Course Teacher Facebook',
-            'courseTeacherLinkedIn' => 'Course Teacher LinkedIn',
-            'courseTeacherGitHub' => 'Course Teacher GitHub',
-            'courseTeacherWebSite' => 'Course Teacher Website',
-            'courseTeacherAddress' => 'Course Teacher Address',
-            'courseTeacherDescription' => 'Course Teacher Description',
-            'courseTeacherPhoto' => 'Course Teacher Teacher',
-            'courseTeacherCV' => 'Course Teacher CV'
+        // ], [],
+        // [
+        //     'courseTeacherName' => 'Course Teacher Name',
+        //     'courseTeacherEmail' => 'Course Teacher Email ',
+        //     'courseTeacherPhone' => 'Course Teacher Phone',
+        //     'courseTeacherDOB' => 'Course Teacher DOB',
+        //     'courseTeacherProfession' => 'Course Teacher DOB',
+        //     'courseTeacherCompany' => 'Course Teacher DOB',
+        //     'courseTeacherInterestArea' => 'Course Teacher InterestArea',
+        //     'courseTeacherFacebook' => 'Course Teacher Facebook',
+        //     'courseTeacherLinkedIn' => 'Course Teacher LinkedIn',
+        //     'courseTeacherGitHub' => 'Course Teacher GitHub',
+        //     'courseTeacherWebSite' => 'Course Teacher Website',
+        //     'courseTeacherAddress' => 'Course Teacher Address',
+        //     'courseTeacherDescription' => 'Course Teacher Description',
+        //     'courseTeacherPhoto' => 'Course Teacher Teacher',
+        //     'courseTeacherCV' => 'Course Teacher CV'
 
-        ]);
+        // ]);
 
         $data = new CourseTeacherModel();
 
@@ -98,11 +98,11 @@ class CourseTeacherController extends Controller
 
         $data->save();
 
-        return redirect('/admin/teacher-info/view');
+        // return redirect('/admin/teacher-info/view');
 
-        // $data1 = CourseTeacherModel::all();
+        $data1 = CourseTeacherModel::all();
 
-        // return response()->json($data1);
+        return response()->json($data1);
     }
 
     public function courseTeacherInfoEditView($id)

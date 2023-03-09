@@ -169,7 +169,7 @@
                                 @if (count($data3))
                                     <tbody id="showPost">
                                         @foreach ($data3 as $key => $d)
-                                            <tr id="row1{{ $d->id }}">
+                                            <tr id="row{{ $d->id }}">
                                                 <td id="keyVal">{{ $key + 1 }}</td>
                                                 <td id="titleVal">{{ $d->course_title }}</td>
 
@@ -183,7 +183,8 @@
                                                         data-id="{{ $d->id }}">Edit</a></td>
 
                                                 <td><a href="javascript:void(0);" class="delete btn btn-danger"
-                                                        data-id="{{ $d->id }}">Delete</a></td>
+                                                        data-id="{{ $d->id }}"
+                                                        onclick="deleteEvent({{ $d->id }})">Delete</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -205,6 +206,34 @@
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script type="text/javascript">
+        function deleteEvent(id) {
+
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                $.ajax({
+                    type: 'GET',
+                    url: "/admin/courses-info/delete/" + id,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // data:{user_id: userId},
+                    success: function(data) {
+                        toastr.success("Course Inserted successfully");
+                        //Refresh the grid
+                        // alert(data.success);
+                        $("#row" + id).remove();
+                    },
+                    error: function(e) {
+                        alert(e.error);
+                    }
+                });
+            } else {
+                //alert ('no');
+                return false;
+            }
+        }
+
+
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
@@ -253,9 +282,11 @@
                             $.each(response, function(key, value) {
                                 // console.log(response[key]['id']);
                                 //CONSTRUCTION OF ROWS HAVING
+                                var editUrl = "{{ route('courseinfo.edit', ':id') }}";
+
+                                editUrl = editUrl.replace(':id', response[key]["id"]);
                                 // DATA FROM JSON OBJECT
-                                student = '<tbody id="showPost">';
-                                student += '<tr>';
+                                student = '<tr id="row' + response[key]["id"] + '">';
                                 student += '<td>' +
                                     response.length + '</td>';
 
@@ -278,21 +309,18 @@
                                     'course_image'
                                 ] + '" target="_blank">Course Image</a></td>';
 
-                                student += '<td><a href="{{ url(' + "/admin/courses-info/edit/view/" + response[key]["id"] + ')}}" class="edit btn btn-primary">Edit</a></td>';
+                                student +=
+                                    '<td><a href="' + editUrl +
+                                    '"class="edit btn btn-primary">Edit</a></td>';
 
                                 student +=
-                                    '<td><a href="javascript:void(0);" class="delete btn btn-danger" data-id="' +
-                                    response[key]['id'] + '">Delete</a></td>';
+                                    '<td><a href="javascript:void(0);" class="delete btn btn-danger" onclick="deleteEvent(' +
+                                    response[key]['id'] + ')">Delete</a></td>';
 
                                 student += '</tr>';
-                                student += '</tbody>'
                             });
-                            table_head =
-                                '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th><th>Image</th><th>Action</th>'
 
-                            $(".about_table thead tr th:lt(5)").remove();
-                            $('.about_table thead tr').append(table_head)
-                            $('.about_table').append(student);
+                            $('#showPost').append(student);
                             // showJobs(response);
 
                         },
