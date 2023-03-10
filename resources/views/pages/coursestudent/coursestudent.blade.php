@@ -273,7 +273,7 @@
                     },
                     // data:{user_id: userId},
                     success: function(data) {
-                        toastr.success("Teacher Info Inserted successfully");
+                        toastr.success("Student Info Deleted successfully");
                         //Refresh the grid
                         // alert(data.success);
                         $("#row" + id).remove();
@@ -343,6 +343,7 @@
                             $("#alertSuccess").fadeOut(5000);
                             var student = '';
                             // ITERATING THROUGH OBJECTS
+                            document.getElementById('courseStudentName').value = '';
                             $.each(response, function(key, value) {
                                 //CONSTRUCTION OF ROWS HAVING
                                 // DATA FROM JSON OBJECT
@@ -385,6 +386,21 @@
                                 student += '</tr>';
                             });
                             $('#showPost').append(student);
+
+                            document.getElementById('courseStudentName').value = '';
+                            document.getElementById('courseStudentEmail').value = '';
+                            document.getElementById('courseStudentPhone').value = '';
+                            document.getElementById('courseStudentDOB').value = '';
+                            CKEDITOR.instances.courseStudentDescription.setData('');
+                            document.getElementById('courseStudentProfession').value = '';
+                            document.getElementById('courseStudentCompany').value = '';
+                            document.getElementById('courseStudentInterestArea').value = '';
+                            document.getElementById('courseStudentFacebook').value = '';
+                            document.getElementById('courseStudentGitHub').value = '';
+                            document.getElementById('courseStudentWebSite').value = '';
+                            document.getElementById('courseStudentLinkedIn').value = '';
+                            document.getElementById('courseStudentAddress').value = '';
+                            document.getElementById('courseStudentPhoto').value = '';
                             // showJobs(response);
 
                         },
@@ -401,5 +417,6 @@
 
 
         });
+
     </script>
     @endpush

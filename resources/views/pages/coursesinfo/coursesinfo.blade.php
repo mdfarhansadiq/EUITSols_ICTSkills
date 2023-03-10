@@ -277,6 +277,10 @@
 
                             $('#alertSuccess').fadeIn()
                             $("#alertSuccess").fadeOut(5000);
+
+                            var courseCategory = document.querySelector('#courseCategory option:checked').text;
+                            var courseTeacher = document.querySelector('#courseTeacher option:checked').text;
+
                             // var student = '';
                             // // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
@@ -294,10 +298,10 @@
                                     response[key]['course_title'] + '</td>';
 
                                 student += '<td>' +
-                                    response[key]['course_category_id'] + '</td>';
+                                    courseCategory + '</td>';
 
                                 student += '<td>' +
-                                    response[key]['course_teacher_id'] + '</td>';
+                                    courseTeacher + '</td>';
 
                                 // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
                                 //     '</td>';
@@ -321,6 +325,14 @@
                             });
 
                             $('#showPost').append(student);
+
+                            document.getElementById('courseTitle').value = '';
+                            document.getElementById('courseDuration').value = '';
+                            CKEDITOR.instances.courseDescription.setData('');
+                            document.getElementById('courseImage').value = '';
+                            document.getElementById('courseFee').value = '';
+                            $('#courseCategory').val('');
+                            $('#courseTeacher').val('');
                             // showJobs(response);
 
                         },
@@ -350,42 +362,42 @@
             //     });
             // });
 
-            $(".delete").on('click', function(e) {
-                e.preventDefault();
-                var id = $(this).attr("data-id");
-                var token = $("meta[name='csrf-token']").attr("content");
-                var confirmation = confirm("Are you sure you want to delete this user?");
-                if (confirmation) {
-                    $.ajax({
-                        type: 'GET',
-                        url: "/admin/courses-info/delete/" + id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        // data:{user_id: id},
-                        data: {
-                            "id": id,
-                            "_token": token,
-                        },
-                        success: function(data) {
-                            //Refresh the grid
-                            console.log(data);
-                            // alert(data.success);
-                            $('#alertDelete').fadeIn()
-                            $("#alertDelete").fadeOut(5000);
-                            // $(".data-id" + id).remove();
-                            $("#row1" + id).remove();
-                            // location.reload();
-                        },
-                        error: function(e) {
-                            alert(e.error);
-                        }
-                    });
-                } else {
-                    //alert ('no');
-                    return false;
-                }
-            });
+            // $(".delete").on('click', function(e) {
+            //     e.preventDefault();
+            //     var id = $(this).attr("data-id");
+            //     var token = $("meta[name='csrf-token']").attr("content");
+            //     var confirmation = confirm("Are you sure you want to delete this user?");
+            //     if (confirmation) {
+            //         $.ajax({
+            //             type: 'GET',
+            //             url: "/admin/courses-info/delete/" + id,
+            //             headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             },
+            //             // data:{user_id: id},
+            //             data: {
+            //                 "id": id,
+            //                 "_token": token,
+            //             },
+            //             success: function(data) {
+            //                 //Refresh the grid
+            //                 console.log(data);
+            //                 // alert(data.success);
+            //                 $('#alertDelete').fadeIn()
+            //                 $("#alertDelete").fadeOut(5000);
+            //                 // $(".data-id" + id).remove();
+            //                 $("#row1" + id).remove();
+            //                 // location.reload();
+            //             },
+            //             error: function(e) {
+            //                 alert(e.error);
+            //             }
+            //         });
+            //     } else {
+            //         //alert ('no');
+            //         return false;
+            //     }
+            // });
 
         });
     </script>

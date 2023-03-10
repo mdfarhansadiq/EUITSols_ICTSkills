@@ -250,12 +250,6 @@
 
                                                 <td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher
                                                         CV</a></td>
-                                                {{-- <td>
-                                                    <div class="btn-group">
-                                                        <a href="javascript:void(0)" class="btn btn-info btnView"
-                                                            data-id="{{ $d->id }}"><i class="fas fa-eye"></i></a>
-                                                </td> --}}
-
                                                 <td><a href="{{ url('/admin/teacher-info/edit/view', $d['id']) }}"
                                                         class="edit btn btn-primary" type="button"
                                                         data-id="{{ $d->id }}">Edit</a></td>
@@ -366,7 +360,7 @@
                     },
                     // data:{user_id: userId},
                     success: function(data) {
-                        toastr.success("Teacher Info Inserted successfully");
+                        toastr.success("Teacher Info Deleted successfully");
                         //Refresh the grid
                         // alert(data.success);
                         $("#row" + id).remove();
@@ -475,6 +469,21 @@
                             });
                             $('#showPost').append(student);
                             // showJobs(response);
+                            document.getElementById('courseTeacherName').value = '';
+                            document.getElementById('courseTeacherEmail').value = '';
+                            document.getElementById('courseTeacherPhone').value = '';
+                            document.getElementById('courseTeacherDOB').value = '';
+                            CKEDITOR.instances.courseTeacherDescription.setData('');
+                            document.getElementById('courseTeacherProfession').value = '';
+                            document.getElementById('courseTeacherCompany').value = '';
+                            document.getElementById('courseTeacherInterestArea').value = '';
+                            document.getElementById('courseTeacherFacebook').value = '';
+                            document.getElementById('courseTeacherGitHub').value = '';
+                            document.getElementById('courseTeacherWebSite').value = '';
+                            document.getElementById('courseTeacherLinkedIn').value = '';
+                            document.getElementById('courseTeacherAddress').value = '';
+                            document.getElementById('courseTeacherPhoto').value = '';
+                            document.getElementById('courseTeacherCV').value = '';
 
                         },
                         error: function(error) {

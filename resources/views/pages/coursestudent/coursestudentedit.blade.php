@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Courses Content')
+@section('title', 'Courses Student Edit')
 
 @push('third_party_stylesheets')
 @endpush
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>Add Course Content</h4>
+                            <h4>Edit Student Info</h4>
                         </span>
                         {{-- <span class="float-right">
                         @if (Auth::user()->can('user view') || Auth::user()->role->id == 1)<a href="{{ route('users.index') }}" class="btn btn-info">Back</a>@endif

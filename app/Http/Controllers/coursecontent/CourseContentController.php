@@ -40,7 +40,9 @@ class CourseContentController extends Controller
 
         $data->save();
 
-        return redirect('/admin/course-content/view');
+        // return redirect('/admin/course-content/view');
+        $data1 = CourseContentModel::all();
+        return response()->json($data1);
     }
 
     public function courseContentEditView($id)

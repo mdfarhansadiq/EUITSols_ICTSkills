@@ -188,21 +188,20 @@
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
-                var data1 = CKEDITOR.instances.courseReview.getData();
+                // var data1 = CKEDITOR.instances.courseReview.getData();
                 // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
                 // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
                 // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
                 // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
-                for (instance in CKEDITOR.instances) {
-                    CKEDITOR.instances[instance].updateElement();
-                }
+                // for (instance in CKEDITOR.instances) {
+                //     CKEDITOR.instances[instance].updateElement();
+                // }
 
                 var formData = new FormData(this);
-                length_array = [formData.get('courseTitle').length, formData.get('courseStudent').length,
-                    data1.length
-                ]
-                count = 0
+                length_array = [formData.get('courseTitle').length, formData.get('courseContentLink').length, formData.get('courseContentDuration').length
+                ];
+                count = 0;
                 for (i = 0; i < length_array.length; i = i + 1) {
                     if (length_array[i] == 0) {
 
