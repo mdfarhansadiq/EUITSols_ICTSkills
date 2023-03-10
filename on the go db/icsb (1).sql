@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2023 at 11:30 AM
+-- Generation Time: Mar 10, 2023 at 12:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -602,7 +602,8 @@ INSERT INTO `coursesinfos` (`id`, `course_title`, `course_category_id`, `course_
 (14, 'Scala', 5, 1, '30 hours', '<p>fjcrejtg</p>', '/storage/Scala/ICTSkills.png', 3000, '2023-03-07 07:31:17', '2023-03-07 07:31:17'),
 (15, 'Julia', 5, 1, '30 hours', '<p>cfvfbg</p>', '/storage/Julia/ICTSkills.png', 3000, '2023-03-07 07:32:05', '2023-03-07 07:32:05'),
 (17, 'PHP', 5, 1, '100 hours', '<p>jfdcomgbv</p>', '/storage/PHP/ICTSkills.png', 3000, '2023-03-10 04:15:27', '2023-03-10 04:15:27'),
-(21, 'Banner Design', 4, 2, '30 hours', '<p>jfrfgtmi</p>', '/storage/Banner Design/ICTSkills.png', 3000, '2023-03-10 04:23:32', '2023-03-10 04:23:32');
+(23, 'Banner Design', 2, 2, '30 hours', '<p>dcfnfvnv</p>', '/storage/Banner Design/ICTSkills.png', 3000, '2023-03-10 04:45:02', '2023-03-10 04:45:02'),
+(24, 'Business Card Design', 2, 2, '30 hours', '<p>jdmgbmg</p>', '/storage/Business Card Design/ICTSkills.png', 3000, '2023-03-10 04:51:41', '2023-03-10 04:51:41');
 
 -- --------------------------------------------------------
 
@@ -639,7 +640,9 @@ INSERT INTO `coursestudents` (`id`, `course_student_name`, `course_student_email
 (2, 'Calvin David', 'nidemokipa@mailinator.com', '+1 (413) 294-4916', '2021-04-08', 'Laborum nostrud nesc', 'Austin and Noble Associates', 'Ullamco voluptas arc', 'https://www.hopikuzex.ca', 'https://www.lilavedares.net', 'https://www.rihixodubososyq.co', 'https://www.mozageguz.ca', 'Odit aute esse repre', '<p>rhfrbgvb</p>', '/storage/Calvin David/ICTSkills.png', '2023-03-09 01:28:48', '2023-03-09 01:28:48'),
 (3, 'Abraham Clemons', 'xinisojyco@mailinator.com', '+1 (573) 675-7429', '2006-07-23', 'Ullam voluptates qui', 'Wooten Burt Trading', 'Dolor natus qui assu', 'https://www.xobofa.me.uk', 'https://www.nusa.ca', 'https://www.zopylynyza.us', 'https://www.kegegemeqofy.org', 'Aut voluptatem eaqu', '<p>rhfrbgvb</p>', '/storage/Abraham Clemons/ICTSkills.png', '2023-03-09 01:29:07', '2023-03-09 01:29:07'),
 (4, 'Cheyenne Morse', 'lybunemoga@mailinator.com', '+1 (127) 357-2146', '1984-04-10', 'Eos dolor Nam elige', 'Stark and Huffman Associates', 'Dolorum id cillum d', 'https://www.titafixylemi.co.uk', 'https://www.mukutuwulir.co', 'https://www.vewomu.in', 'https://www.rosyhypinagewek.mobi', 'Eum eu culpa illum', '<p>rhfrbgvb</p>', '/storage/Cheyenne Morse/ICTSkills.png', '2023-03-09 01:29:46', '2023-03-09 01:29:46'),
-(5, 'Serena Newton', 'tokagik@mailinator.com', '+1 (266) 665-8442', '1973-11-10', 'Sed quia hic vel lab', 'Hoover and Montgomery LLC', 'Dolores duis iusto i', 'https://www.laz.com.au', 'https://www.foqiqus.cm', 'https://www.lyfujyb.mobi', 'https://www.jufijir.me.uk', 'Sed facere recusanda', '<p>ffjgifjbgb</p>', '/storage/Serena Newton/ICTSkills.png', '2023-03-09 02:57:15', '2023-03-09 02:57:15');
+(5, 'Serena Newton', 'tokagik@mailinator.com', '+1 (266) 665-8442', '1973-11-10', 'Sed quia hic vel lab', 'Hoover and Montgomery LLC', 'Dolores duis iusto i', 'https://www.laz.com.au', 'https://www.foqiqus.cm', 'https://www.lyfujyb.mobi', 'https://www.jufijir.me.uk', 'Sed facere recusanda', '<p>ffjgifjbgb</p>', '/storage/Serena Newton/ICTSkills.png', '2023-03-09 02:57:15', '2023-03-09 02:57:15'),
+(6, 'Adara Buckley', 'jycudehe@mailinator.com', '+1 (541) 554-4934', '1986-10-31', 'Ullam suscipit commo', 'Slater and Mueller Co', 'Anim mollit adipisci', 'https://www.guna.us', 'https://www.forojiwov.tv', 'https://www.rufuhedamov.co', 'https://www.xakaliriq.co', 'Mollit esse exceptu', '<p>fjfgjbh</p>', '/storage/Adara Buckley/ICTSkills.png', '2023-03-10 05:04:25', '2023-03-10 05:04:25'),
+(7, 'Susan Garza', 'liqizibeq@mailinator.com', '+1 (127) 216-5767', '1994-11-11', 'Quia voluptas qui ei', 'Stone and Trevino Traders', 'Mollitia amet ex sa', 'https://www.witalim.info', 'https://www.bif.in', 'https://www.fupoke.me', 'https://www.pyl.co.uk', 'Est nihil dolore tem', '<p>vgfbmghb</p>', '/storage/Susan Garza/ICTSkills.png', '2023-03-10 05:09:54', '2023-03-10 05:09:54');
 
 -- --------------------------------------------------------
 
@@ -678,7 +681,8 @@ INSERT INTO `courseteachers` (`id`, `course_teacher_name`, `course_teacher_email
 (3, 'Xavier Pittman', 'fiximyh@mailinator.com', '+1 (267) 174-1564', '2016-01-23', 'Possimus est ut dol', 'Newman and Nguyen LLC', 'Ut voluptas sed prov', 'https://www.tifumupo.org.au', 'https://www.riw.com', 'https://www.temoza.org.au', 'https://www.wequ.in', 'Molestias quas labor', '<p>ndferfniuefgv</p>', '/storage/Xavier Pittman/ICTSkills.png', '/storage/Xavier Pittman/ICTSkills.drawio (6).pdf', '2023-03-09 00:55:28', '2023-03-09 00:55:28'),
 (5, 'Thomas Page', 'tycima@mailinator.com', '+1 (308) 308-2607', '1982-11-09', 'Aliqua Est ipsum', 'Browning and Osborne Traders', 'Proident esse volup', 'https://www.qot.ca', 'https://www.bibiqibino.cm', 'https://www.cirypowalysokil.tv', 'https://www.pew.co', 'Voluptatem voluptas', '<p>dffrirmvmfv</p>', '/storage/Thomas Page/ICTSkills.png', '/storage/Thomas Page/ICTSkills.drawio (6).pdf', '2023-03-09 00:58:33', '2023-03-09 00:58:33'),
 (6, 'Rigel Frank', 'popep@mailinator.com', '+1 (773) 111-8626', '2014-01-05', 'Placeat consectetur', 'Gentry and Perry Co', 'Ullamco placeat et', 'https://www.togob.org', 'https://www.duzykimykyzat.mobi', 'https://www.lagituxyxa.biz', 'https://www.cazatefenesa.ws', 'Blanditiis esse cupi', '<p>mvfgkjngb</p>', '/storage/Rigel Frank/ICTSkills.png', '/storage/Rigel Frank/ICTSkills.drawio (6).pdf', '2023-03-09 00:59:11', '2023-03-09 00:59:11'),
-(7, 'Yardley Snyder', 'zuwyvuwufu@mailinator.com', '+1 (324) 362-1671', '2005-04-28', 'Omnis est eu et rem', 'House Weaver Trading', 'Nisi modi quisquam q', 'https://www.rekeludepajuha.mobi', 'https://www.dopipyvob.co', 'https://www.beqivufedulo.mobi', 'https://www.bohuxuduvixiqi.me', 'Dolorum sed possimus', '<p>jmgmgbm</p>', '/storage/Yardley Snyder/ICTSkills.png', '/storage/Yardley Snyder/ICTSkills.drawio (6).pdf', '2023-03-09 00:59:53', '2023-03-09 00:59:53');
+(7, 'Yardley Snyder', 'zuwyvuwufu@mailinator.com', '+1 (324) 362-1671', '2005-04-28', 'Omnis est eu et rem', 'House Weaver Trading', 'Nisi modi quisquam q', 'https://www.rekeludepajuha.mobi', 'https://www.dopipyvob.co', 'https://www.beqivufedulo.mobi', 'https://www.bohuxuduvixiqi.me', 'Dolorum sed possimus', '<p>jmgmgbm</p>', '/storage/Yardley Snyder/ICTSkills.png', '/storage/Yardley Snyder/ICTSkills.drawio (6).pdf', '2023-03-09 00:59:53', '2023-03-09 00:59:53'),
+(10, 'Ishmael Sullivan', 'gyhyqi@mailinator.com', '+1 (971) 789-8825', '1971-04-14', 'Occaecat velit proi', 'Reese Page Associates', 'Debitis ea praesenti', 'https://www.vowezupafasukow.ws', 'https://www.nefado.org', 'https://www.repikumil.org.au', 'https://www.nyhodotujomi.me', 'Quo provident nulla', '<p>nfcngb</p>', '/storage/Ishmael Sullivan/ICTSkills.png', '/storage/Ishmael Sullivan/ICTSkills.drawio (6).pdf', '2023-03-10 05:01:28', '2023-03-10 05:01:28');
 
 -- --------------------------------------------------------
 
@@ -3047,19 +3051,19 @@ ALTER TABLE `coursereviews`
 -- AUTO_INCREMENT for table `coursesinfos`
 --
 ALTER TABLE `coursesinfos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `coursestudents`
 --
 ALTER TABLE `coursestudents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `courseteachers`
 --
 ALTER TABLE `courseteachers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `credits`
