@@ -123,7 +123,7 @@
                 </div>
             </div>
 
-            {{-- <div class="col-md-10 col-lg-12">
+            <div class="col-md-10 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
@@ -137,43 +137,46 @@
                             <table id="table" class="about_table">
                                 <thead>
                                     <tr>
-                                        <th>SL</th>
-                                        <th>Course Title</th>
+                                        <th>Content Title</th>
                                         <th>Lecture Video</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                                @foreach ($data2 as $key => $d)
+                                {{-- @foreach ($data2 as $key => $d)
                                     <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
-                                @endforeach
+                                @endforeach --}}
                                 <tbody id="showPost">
-                                    @foreach ($data2 as $key => $d)
-                                        <tr>
-                                            <td>
+                                        <tr id="row{{ $d->id }}">
+                                            {{-- <td>
                                                 <h5 id="keyVal">{{ $key + 1 }}</h5>
-                                            </td>
+                                            </td> --}}
 
                                             <td>
                                                 <h5>{{ $d->course_content_title }}</h5>
                                             </td>
 
                                             <td>
-                                                <div id="player{{ $key }}"></div>
+                                                <div><video id="vid" controls height="300"
+                                                        width="700" controlsList="nodownload"
+                                                        src="">
+                                                    </video></div>
                                             </td>
 
-                                            <td><a href="javascript:void(0);" class="delete"
-                                                data-id="{{ $d->id }}">Delete</a></td>
-
+                                            {{-- <td>
+                                                    <button class="btn btn-success" onclick="vidEnd(this.id)"
+                                                        id="btnLecture{{ $key }}">Complete
+                                                        Lecture</button>
+                                                </td> --}}
                                         </tr>
-                                    @endforeach
+
                                 </tbody>
 
                             </table>
+
                         </div>
 
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 @endsection
@@ -185,6 +188,9 @@
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>
+        var vidLink = document.getElementById('courseContentLink').value;
+
+        document.getElementById('vid').src = vidLink;
 
     </script>
 
