@@ -101,12 +101,8 @@
                                     </div>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -128,7 +124,6 @@
                                             <th>SL</th>
                                             <th>Course Title</th>
                                             <th>Student Name</th>
-                                            {{-- <th>Action</th> --}}
                                             <th>Course Review</th>
                                         @else
                                             <th style="text-align:center;">{{ 'No Data Found' }}
@@ -183,8 +178,6 @@
                     // data:{user_id: userId},
                     success: function(data) {
                         toastr.success("Course Inserted successfully");
-                        //Refresh the grid
-                        // alert(data.success);
                         $("#row" + id).remove();
 
                     },
@@ -193,7 +186,6 @@
                     }
                 });
             } else {
-                //alert ('no');
                 return false;
             }
         }
@@ -343,12 +335,8 @@
                         },
                     });
                 }
-
                 return false;
-
             });
-
-
 
         });
     </script>
