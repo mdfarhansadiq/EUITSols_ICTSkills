@@ -194,6 +194,9 @@
                         <span class="float-left">
                             <h4>View Course Student</h4>
                         </span>
+                        <span class="float-right">
+                            <h4 id="studentCount">Total Student: {{count($data)}}</h4>
+                        </span>
                     </div>
                     <div class="card-body">
                         @include('partial.flush-message')

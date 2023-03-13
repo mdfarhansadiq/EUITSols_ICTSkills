@@ -34,4 +34,13 @@ class CourseReviewController extends Controller
         return response()->json($data1);
     }
 
+    public function courseReviewDelete($id)
+    {
+        CourseReviewModel::where('id', $id)->delete();
+
+        $data1 = CourseReviewModel::all();
+
+        return response()->json($data1);
+    }
+
 }

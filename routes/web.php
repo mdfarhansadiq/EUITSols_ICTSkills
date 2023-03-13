@@ -785,6 +785,7 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/course-review/view', [CourseReviewController::class, 'courseReviewPageView']);
     Route::post('/admin/course-review/create', [CourseReviewController::class, 'courseReviewCreate']);
+    Route::get('/admin/course-review/delete/{id}', [CourseReviewController::class, 'courseReviewDelete'])->name('coursereview.delete');
 
     Route::get('/admin/student-info/view', [CourseStudentController::class, 'courseStudentInfoPageView']);
     Route::post('/admin/student-info/create', [CourseStudentController::class, 'courseStudentInfoCreate']);
@@ -794,6 +795,9 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
 
     Route::get('/admin/course-discount/view', [CourseDiscountController::class, 'courseDiscountPageView']);
     Route::post('/admin/course-discount/create', [CourseDiscountController::class, 'courseDiscountCreate']);
+    Route::get('/admin/course-discount/edit/view/{id}', [CourseDiscountController::class, 'courseDiscountEditView'])->name('coursediscount.edit');
+    Route::post('/admin/course-discount/update/{id}', [CourseDiscountController::class, 'courseDiscountEditUpdate']);
+    Route::get('/admin/course-discount/delete/{id}', [CourseDiscountController::class, 'courseDiscountDelete'])->name('coursediscount.delete');
 
     Route::get('/admin/course-content/view', [CourseContentController::class, 'courseContentPageView']);
     Route::post('/admin/course-content/create', [CourseContentController::class, 'courseContentCreate']);
@@ -811,6 +815,7 @@ Route::group(['middleware' => ['auth', 'checkstatus']], function () {
     Route::get('/admin/course-completion/view', [CourseStudentCompletionController::class, 'courseStudentCompletionPageView']);
     Route::post('/admin/course-completion/create', [CourseStudentCompletionController::class, 'courseStudentCompletionCreate']);
 });
+
 
 
 

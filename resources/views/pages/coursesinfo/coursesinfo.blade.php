@@ -281,7 +281,7 @@
                             var courseCategory = document.querySelector('#courseCategory option:checked').text;
                             var courseTeacher = document.querySelector('#courseTeacher option:checked').text;
 
-                            // var student = '';
+                            var student = '';
                             // // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
                                 // console.log(response[key]['id']);

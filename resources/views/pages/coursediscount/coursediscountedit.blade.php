@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="{{ url('/admin/course-discount/create') }}" method="POST"
+                                <form action="/admin/course-discount/update/{{ $data['id'] }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     {{-- <div class="form-group row">
@@ -62,35 +62,23 @@
                                             <select class="form-control" aria-label="Default select example"
                                                 name="courseTitle" id="courseTitle">
                                                 <option selected value="">Select Course Title</option>
-                                                @foreach ($data1 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_title }}
-                                                    </option>
+                                                @foreach ($courseinfo as $d)
+                                                    <option value="{{ $d->id }}"
+                                                        @if ($d->id == $data->course_title_id) selected @endif>
+                                                        {{ $d->course_title }}</option>
                                                 @endforeach
                                             </select>
 
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
-                                        <label class="col-sm-3" for="courseStudent">Student Name<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" aria-label="Default select example"
-                                                name="courseStudent" id="courseStudent">
-                                                <option selected value="">Student Name</option>
-                                                @foreach ($data2 as $d)
-                                                    <option value="{{ $d->id }}">{{ $d->course_student_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
 
-                                        </div>
-                                    </div> --}}
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="courseDiscountStart">Discount Start<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="date" class="form-control" id="courseDiscountStart"
-                                                name="courseDiscountStart" placeholder="Enter Start Date">
+                                                name="courseDiscountStart" placeholder="Enter Start Date"
+                                                value="{{ $data->course_discount_start }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -98,40 +86,79 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="date" class="form-control" id="courseDiscountEnd"
-                                                name="courseDiscountEnd" placeholder="Enter End Date">
+                                                name="courseDiscountEnd" placeholder="Enter End Date"
+                                                value="{{ $data->course_discount_end }}">
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-sm-3" for="courseDiscountType">Discount Type<span
-                                                class="text-danger">*</span></label>
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="radio1" name="optradio"
-                                                value="option1" onchange="discountType(this)">
-                                            <label class="form-check-label ml-4" for="radio1">Flat Amount</label>
+                                    @if ($data->course_discount_amount)
+                                        <div class="form-group row" id="discountAmount">
+                                            <label class="col-sm-3" for="courseDiscountAmount">Discount Amount<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="courseDiscountAmount"
+                                                    name="courseDiscountAmount" placeholder="Enter Discount Amount"
+                                                    value="{{ $data->course_discount_amount }}">
+                                                <br>
+                                            </div>
+
+                                            <label class="col-sm-3" for="courseDiscountType">Discount Type<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" id="radio2"
+                                                    name="optradio" value="option2" onchange="discountType(this)">
+                                                <label class="form-check-label ml-4" for="radio2">Percentage</label>
+                                            </div>
+
+                                            <div>
+                                                <div class="form-group row" style="display: none" id="discountPercentage">
+                                                    <label class="col-sm-3" for="courseDiscountPercentage">Discount
+                                                        Amount<span class="text-danger">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="number" class="form-control"
+                                                            id="courseDiscountPercentage" name="courseDiscountPercentage"
+                                                            placeholder="Enter Discount Percentage">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="radio2" name="optradio"
-                                                value="option2" onchange="discountType(this)">
-                                            <label class="form-check-label ml-4" for="radio2">Percentage</label>
+                                    @endif
+
+                                    @if ($data->course_discount_percentage)
+                                        <div class="form-group row" id="discountPercentage">
+                                            <label class="col-sm-3" for="courseDiscountPercentage">Discount
+                                                Percentage<span class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="courseDiscountPercentage"
+                                                    name="courseDiscountPercentage"
+                                                    placeholder="Enter Discount Percentage"
+                                                    value="{{ $data->course_discount_percentage }}">
+
+                                                <br>
+                                            </div>
+
+                                            <label class="col-sm-3" for="courseDiscountType">Discount Type<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" id="radio1"
+                                                    name="optradio" value="option1" onchange="discountType(this)">
+                                                <label class="form-check-label ml-4" for="radio1">Flat Amount</label>
+                                            </div>
+
+                                            <div>
+                                                <div class="form-group row" style="display: none" id="discountAmount">
+                                                    <label class="col-sm-3" for="courseDiscountAmount">Discount
+                                                        Amount<span class="text-danger">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="number" class="form-control"
+                                                            id="courseDiscountAmount" name="courseDiscountAmount"
+                                                            placeholder="Enter Discount Amount">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row" style="display: none" id="discountAmount">
-                                        <label class="col-sm-3" for="courseDiscountAmount">Discount Amount<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="courseDiscountAmount"
-                                                name="courseDiscountAmount" placeholder="Enter Discount Amount">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row" style="display: none" id="discountPercentage">
-                                        <label class="col-sm-3" for="courseDiscountAmount">Discount Percentage<span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="courseDiscountPercentage"
-                                                name="courseDiscountPercentage" placeholder="Enter Discount Percentage">
-                                        </div>
-                                    </div>
+                                    @endif
+
                                     <div class="form-group row">
                                         <label class="col-sm-3" for="guard_name"></label>
                                         <div class="col-sm-9">
@@ -147,7 +174,7 @@
                 </div>
             </div>
 
-            <div class="col-md-10 col-lg-12">
+            {{-- <div class="col-md-10 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
@@ -191,10 +218,6 @@
 
                                                 <td>{{ $d->course_discount_percentage }}</td>
 
-                                                <td><a href="{{ url('/admin/course-discount/edit/view', $d['id']) }}"
-                                                    class="edit btn btn-primary"
-                                                    data-id="{{ $d->id }}">Edit</a></td>
-
                                                 <td><a href="javascript:void(0);" class="delete btn btn-danger"
                                                         type="button" data-id="{{ $d->id }}"
                                                         onclick="deleteEvent({{ $d->id }})">Delete</a></td>
@@ -207,7 +230,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
@@ -218,7 +241,24 @@
 
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script type="text/javascript">
+    <script>
+        function discountType(radio) {
+            var discountamount, discountpercentage;
+            console.log(radio.value);
+            if (radio.value == "option1") {
+                document.getElementById('discountAmount').style.display = 'block';
+                document.getElementById('courseDiscountPercentage').style.display = 'none';
+                // discountpercentage = document.getElementById('courseDiscountPercentage').value;
+                document.getElementById('courseDiscountPercentage').value = '';
+            } else if (radio.value == 'option2') {
+                document.getElementById('courseDiscountAmount').style.display = 'none';
+                document.getElementById('discountPercentage').style.display = 'block';
+                // discountamount = document.getElementById('courseDiscountAmount').value;
+                document.getElementById('courseDiscountAmount').value = '';
+            }
+        }
+    </script>
+    {{-- <script type="text/javascript">
         function discountType(radio) {
             if (radio.value == "option1") {
                 document.getElementById('discountAmount').style.display = 'block';
@@ -299,15 +339,11 @@
 
                             var courseTitle = document.querySelector(
                                 '#courseTitle option:checked').text;
+                            console.log("ABC");
                             // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
                                 //CONSTRUCTION OF ROWS HAVING
                                 // DATA FROM JSON OBJECT
-
-                                var editUrl = "{{ route('coursediscount.edit', ':id') }}";
-
-                                editUrl = editUrl.replace(':id', response[key]["id"]);
-
                                 student = '<tr id="row' + response[key]["id"] + '">';
                                 student += '<td>' +
                                     response.length + '</td>';
@@ -326,10 +362,9 @@
 
                                 student += '<td>' +
                                     response[key]["course_discount_percentage"] + '</td>';
-
-                                student +=
-                                    '<td><a href="' + editUrl +
-                                    '"class="edit btn btn-primary">Edit</a></td>';
+                                // student +=
+                                //     '<td><a href="' + editUrl +
+                                //     '"class="edit btn btn-primary">Edit</a></td>';
 
                                 student +=
                                     '<td><a href="javascript:void(0);" class="delete btn btn-danger" onclick="deleteEvent(' +
@@ -357,5 +392,5 @@
 
             });
         });
-    </script>
+    </script> --}}
 @endpush

@@ -129,8 +129,8 @@
                                             <th>SL</th>
                                             <th>Course Title</th>
                                             <th>Student Name</th>
+                                            {{-- <th>Action</th> --}}
                                             <th>Course Review</th>
-
                                         @else
                                             <th style="text-align:center;">{{ 'No Data Found' }}
                                             <th>
@@ -138,21 +138,22 @@
 
                                     </tr>
                                 </thead>
-                                @if (count($data3))
-                                    <tbody id="showPost">
-                                        @foreach ($data3 as $key => $d)
-                                            <tr>
-                                                <td id="keyVal">{{ $key + 1 }}</td>
-                                                <td id="titleVal">{{ $d->CoursesInfoModel->course_title }}</td>
 
-                                                <td>{{ $d->CourseStudentModel->course_student_name }}</td>
+                                <tbody id="showPost">
+                                    @foreach ($data3 as $key => $d)
+                                        <tr id="row{{ $d->id }}">
+                                            <td id="keyVal">{{ $key + 1 }}</td>
+                                            <td id="titleVal">{{ $d->CoursesInfoModel->course_title }}</td>
 
-                                                <td>{!! $d->course_review !!}</td>
+                                            <td>{{ $d->CourseStudentModel->course_student_name }}</td>
 
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                @endif
+                                            <td>{!! $d->course_review !!}</td>
+                                            {{-- <td><a href="javascript:void(0);" class="delete btn btn-danger"
+                                                    data-id="{{ $d->id }}"
+                                                    onclick="deleteEvent({{ $d->id }})">Delete</a></td> --}}
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
 
@@ -170,14 +171,38 @@
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script type="text/javascript">
+        function deleteEvent(id) {
+
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                $.ajax({
+                    type: 'GET',
+                    url: "/admin/course-review/delete/" + id,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // data:{user_id: userId},
+                    success: function(data) {
+                        toastr.success("Course Inserted successfully");
+                        //Refresh the grid
+                        // alert(data.success);
+                        $("#row" + id).remove();
+
+                    },
+                    error: function(e) {
+                        alert(e.error);
+                    }
+                });
+            } else {
+                //alert ('no');
+                return false;
+            }
+        }
         $(document).ready(function() {
             $("#about_form").submit(function(e) {
                 e.preventDefault()
+
                 var data1 = CKEDITOR.instances.courseReview.getData();
-                // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-                // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-                // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-                // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
                 for (instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();
@@ -214,36 +239,102 @@
                         contentType: false,
                         processData: false,
                         success: function(response) {
+
                             $('#alertSuccess').fadeIn()
                             $("#alertSuccess").fadeOut(5000);
+
+                            var courseTitle = document.querySelector(
+                                '#courseTitle option:checked').text;
+                            var courseStudent = document.querySelector(
+                                '#courseStudent option:checked').text;
+
                             var student = '';
-                            // ITERATING THROUGH OBJECTS
+                            // // ITERATING THROUGH OBJECTS
                             $.each(response, function(key, value) {
+                                // console.log(response[key]['id']);
                                 //CONSTRUCTION OF ROWS HAVING
                                 // DATA FROM JSON OBJECT
-                                student = '<tbody id="showPost">';
-                                student += '<tr>';
-                                student += '<td>' +
-                                    response.length + '</td>';
 
-                                student += '<td>' +
-                                    value.courseTitle + '</td>';
+                                if (response.length == 1) {
 
-                                student += '<td>' +
-                                    value.courseStudent + '</td>';
+                                    // student = '<tbody id="showPost">';
+                                    student += '<tr id="row' + response[key]["id"] +
+                                        '">';
+                                    student += '<td>' +
+                                        response.length + '</td>';
 
-                                student += '<td>' +
-                                    value.courseReview + '</td>';
+                                    student += '<td>' +
+                                        courseTitle + '</td>';
 
-                                student += '</tr>';
-                                student += '</tbody>'
+                                    student += '<td>' +
+                                        courseStudent + '</td>';
+
+                                    student += '<td>' +
+                                        response[key]['course_review'] + '</td>';
+
+
+                                    // student +=
+                                    //     '<td><a href="' + editUrl +
+                                    //     '"class="edit btn btn-primary">Edit</a></td>';
+
+                                    // student +=
+                                    //     '<td><a href="javascript:void(0);" class="delete btn btn-danger" onclick="deleteEvent(' +
+                                    //     response[key]['id'] + ')">Delete</a></td>';
+
+                                    student += '</tr>';
+                                    // student += '</tbody>';
+                                } else {
+                                    student = '<tr id="row' + response[key]["id"] +
+                                        '">';
+                                    student += '<td>' +
+                                        response.length + '</td>';
+
+                                    student += '<td>' +
+                                        courseTitle + '</td>';
+
+                                    student += '<td>' +
+                                        courseStudent + '</td>';
+
+                                    student += '<td>' +
+                                        response[key]['course_review'] + '</td>';
+
+
+                                    // student +=
+                                    //     '<td><a href="' + editUrl +
+                                    //     '"class="edit btn btn-primary">Edit</a></td>';
+
+                                    // student +=
+                                    //     '<td><a href="javascript:void(0);" class="delete btn btn-danger" onclick="deleteEvent(' +
+                                    //     response[key]['id'] + ')">Delete</a></td>';
+
+                                    student += '</tr>';
+                                }
                             });
-                            table_head =
-                                '<th>SL</th><th>Course Title</th><th>Student</th><th>Review</th>'
 
-                            $(".about_table thead tr th:lt(5)").remove();
-                            $('.about_table thead tr').append(table_head)
-                            $('.about_table').append(student);
+                            if (response.length == 1) {
+                                table_head =
+                                    '<th>SL</th><th>Course Title</th><th>Student Name</th><th>Action</th>';
+                                $(".about_table thead tr th:lt(5)").remove();
+                                $('.about_table thead tr').append(table_head);
+                                $('#showPost').append(student);
+
+                                student = '';
+
+                                CKEDITOR.instances.courseReview.setData('');
+                                $('#courseTitle').val('');
+                                $('#courseStudent').val('');
+                            } else {
+
+                                $('#showPost').append(student);
+
+                                CKEDITOR.instances.courseReview.setData('');
+                                $('#courseTitle').val('');
+                                $('#courseStudent').val('');
+                                student = '';
+                            }
+
+
+
                             // showJobs(response);
 
                         },
@@ -259,57 +350,7 @@
             });
 
 
-            // $('.btnView').click( function(){
-            //     if($(this).data('id') != null || $(this).data('id') != ''){
-            //         let url = ("{{ url('/admin/teacher-info/view/', ['id']) }}");
-            //         let _url = url.replace('id', $(this).data('id'));
-            //         $.ajax({
-            //             url: _url,
-            //             method: "GET",
-            //             success: function (response) {
-            //                 $('#view-name').html(response.courseTeacherName);
-            //                 $('#view-email').html(response.courseTeacherEmail);
-            //                 $('#view-photo').html(response.courseTeacherPhoto);
-            //                 // $('#view-createdAt').html(response.created_at ? new Date(response.created_at) : '');
-            //                 // $('#view-createdBy').html(response.created_user ? response.created_user.name : 'system');
-            //                 // $('#view-updatedAt').html(response.updated_at ? new Date(response.updated_at) : '');
-            //                 // $('#view-updatedBy').html(response.updated_user ? response.updated_user.name: '');
-            //                 $('#view-modal').modal('show');
-            //             }
-            //         });
-            //     }else{
-            //         alart('Something went wrong');
-            //     }
-            // });
 
         });
     </script>
-    {{-- <script>
-    function reqrChk()
-    {
-
-    }
-    reqrChk();
-</script> --}}
-
-    {{-- <script>
-
-function postDisable()
-{
-    var chk = 0;
-    chk = document.getElementById("keyVal").textContent;
-    if(chk)
-    {
-        document.getElementById("title").disabled = true;
-        document.getElementById("description").disabled = true;
-        document.getElementById("image").disabled = true;
-        document.getElementById("about_btn").disabled = true;
-        document.getElementById("visionmission").disabled = true;
-        //$("#formID").children().prop('disabled',true);
-    }
-}
-postDisable();
-
-
-</script> --}}
 @endpush

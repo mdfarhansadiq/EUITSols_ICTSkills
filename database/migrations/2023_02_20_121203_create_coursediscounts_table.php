@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('course_title_id');
             $table->date('course_discount_start');
             $table->date('course_discount_end');
-            $table->integer('course_discount_amount');
+            $table->integer('course_discount_amount')->nullable();
+            $table->integer('course_discount_percentage')->nullable();
             $table->foreign('course_title_id')->references('id')->on('coursesinfos')->onDelete('cascade');
             $table->timestamps();
         });
