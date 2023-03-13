@@ -141,9 +141,7 @@
                                         <th>Lecture Video</th>
                                     </tr>
                                 </thead>
-                                {{-- @foreach ($data2 as $key => $d)
-                                    <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
-                                @endforeach --}}
+                                
                                 <tbody id="showPost">
                                         <tr id="row{{ $d->id }}">
                                             {{-- <td>
