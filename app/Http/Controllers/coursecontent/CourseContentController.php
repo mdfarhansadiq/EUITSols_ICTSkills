@@ -40,7 +40,7 @@ class CourseContentController extends Controller
 
         $data->save();
 
-        // return redirect('/admin/course-content/view');
+        //return redirect('/admin/course-content/view');
         $data1 = CourseContentModel::all();
         return response()->json($data1);
     }
@@ -88,18 +88,18 @@ class CourseContentController extends Controller
         return response()->json($data1);
     }
 
-    public function courseContentComplete($id)
-    {
-        $data = CourseContentModel::findOrFail($id);
-        dd($data);
-        $data->course_content_complete = 1;
+    // public function courseContentComplete($id)
+    // {
+    //     $data = CourseContentModel::findOrFail($id);
+    //     dd($data);
+    //     $data->course_content_complete = 1;
 
-        $data->save();
+    //     $data->save();
 
-        return redirect()->back();
+    //     return redirect()->back();
 
-        // $data1 = CourseContentModel::all();
+    //     // $data1 = CourseContentModel::all();
 
-        // return response()->json($data1);
-    }
+    //     // return response()->json($data1);
+    // }
 }

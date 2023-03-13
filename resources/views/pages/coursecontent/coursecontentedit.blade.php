@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="col-md-10 m-auto">
-                                <form action="/admin/courses-content/update/{{ $data['id'] }}" method="POST"
+                                <form action="/admin/course-content/update/{{ $data['id'] }}" method="POST"
                                     class="form-horizontal" enctype="multipart/form-data" id="about_form">
                                     @csrf
                                     {{-- <div class="form-group row">
@@ -184,157 +184,12 @@
 
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $("#about_form").submit(function(e) {
-                e.preventDefault()
-                // var data1 = CKEDITOR.instances.courseReview.getData();
-                // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-                // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-                // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-                // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
-
-                // for (instance in CKEDITOR.instances) {
-                //     CKEDITOR.instances[instance].updateElement();
-                // }
-
-                var formData = new FormData(this);
-                length_array = [formData.get('courseTitle').length, formData.get('courseContentLink').length, formData.get('courseContentDuration').length
-                ];
-                count = 0;
-                for (i = 0; i < length_array.length; i = i + 1) {
-                    if (length_array[i] == 0) {
-
-                        count = 0
-                        break;
-                    } else {
-                        count = 1
-
-                    }
-
-                }
-                if (count == 0) {
-                    $('#alertError1').fadeIn()
-                    $("#alertError1").fadeOut(10000);
-                } else {
-                    $.ajax({
-                        url: '/admin/course-review/create',
-                        type: "post",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
-                            $('#alertSuccess').fadeIn()
-                            $("#alertSuccess").fadeOut(5000);
-                            var student = '';
-                            // ITERATING THROUGH OBJECTS
-                            $.each(response, function(key, value) {
-                                //CONSTRUCTION OF ROWS HAVING
-                                // DATA FROM JSON OBJECT
-                                student = '<tbody id="showPost">';
-                                student += '<tr>';
-                                student += '<td>' +
-                                    response.length + '</td>';
-
-                                student += '<td>' +
-                                    value.courseTitle + '</td>';
-
-                                student += '<td>' +
-                                    value.courseStudent + '</td>';
-
-
-
-                                student += '<td>' +
-                                    value.courseReview + '</td>';
-
-                                student += '</tr>';
-                                student += '</tbody>'
-                            });
-                            table_head =
-                                '<th>SL</th><th>Course Title</th><th>Student</th><th>Review</th>'
-
-                            $(".about_table thead tr th:lt(5)").remove();
-                            $('.about_table thead tr').append(table_head)
-                            $('.about_table').append(student);
-                            // showJobs(response);
-
-                        },
-                        error: function(error) {
-                            $('#alertError').fadeIn()
-                            $("#alertError").fadeOut(5000);
-                        },
-                    });
-                }
-
-                return false;
-
-            });
-
-
-            // $('.btnView').click( function(){
-            //     if($(this).data('id') != null || $(this).data('id') != ''){
-            //         let url = ("{{ url('/admin/teacher-info/view/', ['id']) }}");
-            //         let _url = url.replace('id', $(this).data('id'));
-            //         $.ajax({
-            //             url: _url,
-            //             method: "GET",
-            //             success: function (response) {
-            //                 $('#view-name').html(response.courseTeacherName);
-            //                 $('#view-email').html(response.courseTeacherEmail);
-            //                 $('#view-photo').html(response.courseTeacherPhoto);
-            //                 // $('#view-createdAt').html(response.created_at ? new Date(response.created_at) : '');
-            //                 // $('#view-createdBy').html(response.created_user ? response.created_user.name : 'system');
-            //                 // $('#view-updatedAt').html(response.updated_at ? new Date(response.updated_at) : '');
-            //                 // $('#view-updatedBy').html(response.updated_user ? response.updated_user.name: '');
-            //                 $('#view-modal').modal('show');
-            //             }
-            //         });
-            //     }else{
-            //         alart('Something went wrong');
-            //     }
-            // });
-
-        });
-    </script> --}}
-    {{-- <script>
-    function reqrChk()
-    {
-
-    }
-    reqrChk();
-</script> --}}
-
-    {{-- <script>
-
-function postDisable()
-{
-    var chk = 0;
-    chk = document.getElementById("keyVal").textContent;
-    if(chk)
-    {
-        document.getElementById("title").disabled = true;
-        document.getElementById("description").disabled = true;
-        document.getElementById("image").disabled = true;
-        document.getElementById("about_btn").disabled = true;
-        document.getElementById("visionmission").disabled = true;
-        //$("#formID").children().prop('disabled',true);
-    }
-}
-postDisable();
-
-
-</script> --}}
-
-    {{-- <script src="http://www.youtube.com/player_api"></script> --}}
-
     <script>
-        // create youtube player
+
     </script>
 
+
+    {{-- ******* Youtube Player API Code - Start ******* --}}
     {{-- <script src="http://www.youtube.com/player_api"></script>
 
     <script>
@@ -403,6 +258,9 @@ postDisable();
         }
 
     </script> --}}
+
+    {{-- ******* End ******* --}}
+
 
 <script type="text/javascript">
     $(document).ready(function() {
