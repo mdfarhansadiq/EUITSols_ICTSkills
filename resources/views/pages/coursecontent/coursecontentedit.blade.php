@@ -63,7 +63,9 @@
                                                 name="courseTitle" id="courseTitle">
                                                 <option selected value="">Select Course Title</option>
                                                 @foreach ($course as $d)
-                                                    <option value="{{ $d->id }}" @if ($d->id == $data->course_title_id) selected @endif>{{ $d->course_title }}</option>
+                                                    <option value="{{ $d->id }}"
+                                                        @if ($d->id == $data->course_title_id) selected @endif>
+                                                        {{ $d->course_title }}</option>
                                                 @endforeach
                                             </select>
 
@@ -74,7 +76,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseContentTitle"
-                                                name="courseContentTitle" placeholder="Enter Course Content Title" value="{{ $data->course_content_title }}">
+                                                name="courseContentTitle" placeholder="Enter Course Content Title"
+                                                value="{{ $data->course_content_title }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -82,7 +85,12 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentLink"
-                                                name="courseContentLink" placeholder="Enter Content URL" value="{{ $data->course_content_link }}">
+                                                name="courseContentLink" placeholder="Enter Content URL"
+                                                value="{{ $data->course_content_link }}">
+                                                <button class="btn btn-primary mt-3" onclick="vidPreview()" type="button">Video Preview</button>
+                                        </div>
+                                        <div>
+
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -98,7 +106,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentMaterialLink"
-                                                name="courseContentMaterialLink" placeholder="Enter Content Material Link" value="{{ $data->course_content_material_link }}">
+                                                name="courseContentMaterialLink" placeholder="Enter Content Material Link"
+                                                value="{{ $data->course_content_material_link }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -106,7 +115,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="courseContentDuration"
-                                                name="courseContentDuration" placeholder="Enter Content Duration" value="{{ $data->course_content_duration }}">
+                                                name="courseContentDuration" placeholder="Enter Content Duration"
+                                                value="{{ $data->course_content_duration }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -141,30 +151,29 @@
                                         <th>Lecture Video</th>
                                     </tr>
                                 </thead>
-                                
+
                                 <tbody id="showPost">
-                                        <tr id="row{{ $d->id }}">
-                                            {{-- <td>
+                                    <tr id="row{{ $d->id }}">
+                                        {{-- <td>
                                                 <h5 id="keyVal">{{ $key + 1 }}</h5>
                                             </td> --}}
 
-                                            <td>
-                                                <h5>{{ $d->course_content_title }}</h5>
-                                            </td>
+                                        <td>
+                                            <h5>{{ $d->course_content_title }}</h5>
+                                        </td>
 
-                                            <td>
-                                                <div><video id="vid" controls height="300"
-                                                        width="700" controlsList="nodownload"
-                                                        src="">
-                                                    </video></div>
-                                            </td>
+                                        <td>
+                                            <div style="display: none" id="vidDiv"><video id="vid" controls height="300" width="700"
+                                                    controlsList="nodownload" src="">
+                                                </video></div>
+                                        </td>
 
-                                            {{-- <td>
+                                        {{-- <td>
                                                     <button class="btn btn-success" onclick="vidEnd(this.id)"
                                                         id="btnLecture{{ $key }}">Complete
                                                         Lecture</button>
                                                 </td> --}}
-                                        </tr>
+                                    </tr>
 
                                 </tbody>
 
@@ -186,10 +195,34 @@
 @push('page_scripts')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>
-        var vidLink = document.getElementById('courseContentLink').value;
+        function vidPreview() {
+            var vidLink = document.getElementById('courseContentLink').value;
+            if(vidLink.length >= 59)
+            {
 
-        document.getElementById('vid').src = vidLink;
+                var strID = '';
+                for (var i = 26; i < vidLink.length; i++) {
+                    if (vidLink[i] === '?') {
+                        break;
+                    } else {
+                        strID += vidLink[i];
+                    }
+                }
+                var strLink = 'https://dl.dropbox.com/s/' + strID;
 
+
+
+                document.getElementById('vidDiv').style.display = 'block';
+                document.getElementById('vid').src = strLink;
+                document.getElementById('courseContentLink').value = strLink;
+            }
+            else
+            {
+                document.getElementById('vidDiv').style.display = 'block';
+                document.getElementById('vid').src = vidLink;
+            }
+
+        }
     </script>
 
 
@@ -266,121 +299,121 @@
     {{-- ******* End ******* --}}
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        // $("#about_form").submit(function(e) {
-        //     e.preventDefault()
-        //     // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
-        //     // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
-        //     // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
-        //     // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
-        //     // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // $("#about_form").submit(function(e) {
+            //     e.preventDefault()
+            //     // var data1 = CKEDITOR.instances.courseTeacherFacebook.getData();
+            //     // var data2 = CKEDITOR.instances.courseTeacherLinkedIn.getData();
+            //     // var data3 = CKEDITOR.instances.courseTeacherGitHub.getData();
+            //     // var data4 = CKEDITOR.instances.courseTeacherWebSite.getData();
+            //     // var data5 = CKEDITOR.instances.courseTeacherDescription.getData();
 
-        //     for (instance in CKEDITOR.instances) {
-        //         CKEDITOR.instances[instance].updateElement();
-        //     }
+            //     for (instance in CKEDITOR.instances) {
+            //         CKEDITOR.instances[instance].updateElement();
+            //     }
 
-        //     var formData = new FormData(this);
-        //     length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length,
-        //         formData.get('courseTeacher').length
-        //     ]
-        //     count = 0
-        //     for (i = 0; i < length_array.length; i = i + 1) {
-        //         if (length_array[i] == 0) {
+            //     var formData = new FormData(this);
+            //     length_array = [formData.get('courseTitle').length, formData.get('courseCategory').length,
+            //         formData.get('courseTeacher').length
+            //     ]
+            //     count = 0
+            //     for (i = 0; i < length_array.length; i = i + 1) {
+            //         if (length_array[i] == 0) {
 
-        //             count = 0
-        //             break;
-        //         } else {
-        //             count = 1
+            //             count = 0
+            //             break;
+            //         } else {
+            //             count = 1
 
-        //         }
+            //         }
 
-        //     }
-        //     if (count == 0) {
-        //         $('#alertError1').fadeIn()
-        //         $("#alertError1").fadeOut(10000);
-        //     } else {
-        //         $.ajax({
-        //             url: '/admin/courses-info/create',
-        //             type: "post",
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             },
-        //             data: formData,
-        //             cache: false,
-        //             contentType: false,
-        //             processData: false,
-        //             success: function(response) {
-        //                 $('#alertSuccess').fadeIn()
-        //                 $("#alertSuccess").fadeOut(5000);
-        //                 var student = '';
-        //                 // ITERATING THROUGH OBJECTS
-        //                 $.each(response, function(key, value) {
-        //                     //CONSTRUCTION OF ROWS HAVING
-        //                     // DATA FROM JSON OBJECT
-        //                     student = '<tbody id="showPost">';
-        //                     student += '<tr>';
-        //                     student += '<td>' +
-        //                         response.length + '</td>';
+            //     }
+            //     if (count == 0) {
+            //         $('#alertError1').fadeIn()
+            //         $("#alertError1").fadeOut(10000);
+            //     } else {
+            //         $.ajax({
+            //             url: '/admin/courses-info/create',
+            //             type: "post",
+            //             headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             },
+            //             data: formData,
+            //             cache: false,
+            //             contentType: false,
+            //             processData: false,
+            //             success: function(response) {
+            //                 $('#alertSuccess').fadeIn()
+            //                 $("#alertSuccess").fadeOut(5000);
+            //                 var student = '';
+            //                 // ITERATING THROUGH OBJECTS
+            //                 $.each(response, function(key, value) {
+            //                     //CONSTRUCTION OF ROWS HAVING
+            //                     // DATA FROM JSON OBJECT
+            //                     student = '<tbody id="showPost">';
+            //                     student += '<tr>';
+            //                     student += '<td>' +
+            //                         response.length + '</td>';
 
-        //                     student += '<td>' +
-        //                         value.courseTitle + '</td>';
+            //                     student += '<td>' +
+            //                         value.courseTitle + '</td>';
 
-        //                     student += '<td>' +
-        //                         value.courseCategory + '</td>';
+            //                     student += '<td>' +
+            //                         value.courseCategory + '</td>';
 
-        //                     student += '<td>' +
-        //                         value.courseTeacher + '</td>';
+            //                     student += '<td>' +
+            //                         value.courseTeacher + '</td>';
 
-        //                     // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
-        //                     //     '</td>';
+            //                     // student += '<td><a href="{{ asset($d->course_teacher_photo) }}" target="_blank">Teacher Photo</a>'
+            //                     //     '</td>';
 
-        //                     // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
-        //                     //     '</td>';
+            //                     // student += '<td><a href="{{ asset($d->course_teacher_cv) }}" target="_blank">Teacher CV</a>'
+            //                     //     '</td>';
 
-        //                     // student += '<td>' +
-        //                     //     value.Articles + '</td>';
+            //                     // student += '<td>' +
+            //                     //     value.Articles + '</td>';
 
-        //                     // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
+            //                     // student+='<td class="text-middle py-0 align-middle"><div class="btn-group"><a href="javascript:void(0)" class="btn btn-info btnView" data-id="'+value.id+'"><i class="fas fa-eye"></i></a><a href="" class="btn btn-dark btnEdit"><i class="fas fa-edit"></i></a><a href="" class="btn btn-danger btnDelete"><i class="fas fa-trash"></i></a></div></td>'
 
-        //                     student += '</tr>';
-        //                     student += '</tbody>'
-        //                 });
-        //                 table_head =
-        //                     '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
+            //                     student += '</tr>';
+            //                     student += '</tbody>'
+            //                 });
+            //                 table_head =
+            //                     '<th>SL</th><th>Title</th><th>Category</th><th>Teacher</th>'
 
-        //                 $(".about_table thead tr th:lt(5)").remove();
-        //                 $('.about_table thead tr').append(table_head)
-        //                 $('.about_table').append(student);
-        //                 // showJobs(response);
+            //                 $(".about_table thead tr th:lt(5)").remove();
+            //                 $('.about_table thead tr').append(table_head)
+            //                 $('.about_table').append(student);
+            //                 // showJobs(response);
 
-        //             },
-        //             error: function(error) {
-        //                 $('#alertError').fadeIn()
-        //                 $("#alertError").fadeOut(5000);
-        //             },
-        //         });
-        //     }
+            //             },
+            //             error: function(error) {
+            //                 $('#alertError').fadeIn()
+            //                 $("#alertError").fadeOut(5000);
+            //             },
+            //         });
+            //     }
 
-        //     return false;
+            //     return false;
 
-        // });
+            // });
 
-        // $(".delete").on("click", function() {
-        //     var id = $(this).attr("data-id");
-        //     $.ajax({
-        //         url: "/admin/courses-info/delete/" + id,
-        //         data: {
-        //             "id": id,
-        //             "_token": "{{ csrf_token() }}"
-        //         },
-        //         type: 'post',
-        //         success: function(result) {
-        //             console.log("Yes");
-        //         }
-        //     });
-        // });
+            // $(".delete").on("click", function() {
+            //     var id = $(this).attr("data-id");
+            //     $.ajax({
+            //         url: "/admin/courses-info/delete/" + id,
+            //         data: {
+            //             "id": id,
+            //             "_token": "{{ csrf_token() }}"
+            //         },
+            //         type: 'post',
+            //         success: function(result) {
+            //             console.log("Yes");
+            //         }
+            //     });
+            // });
 
-    });
-</script>
+        });
+    </script>
 @endpush

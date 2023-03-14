@@ -74,8 +74,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentLink"
-                                                name="courseContentLink" placeholder="Enter Content URL"
-                                                onfocusin='vidLinkModify()'>
+                                                name="courseContentLink" placeholder="Enter Content URL">
                                         </div>
                                     </div>
 
@@ -352,6 +351,7 @@
 
 
     <script>
+        setTimeout(vidLinkModify, 7000);
         function vidLinkModify() {
             var vidLink = document.getElementById('courseContentLink').value;
 
@@ -368,6 +368,8 @@
                 document.getElementById('courseContentLink').value = strLink;
             }
         }
+
+
     </script>
 
     {{-- <script src="http://www.youtube.com/player_api"></script> --}}
