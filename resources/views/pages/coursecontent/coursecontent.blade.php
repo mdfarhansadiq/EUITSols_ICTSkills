@@ -74,7 +74,8 @@
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="url" class="form-control" id="courseContentLink"
-                                                name="courseContentLink" placeholder="Enter Content URL" onfocusin='vidLinkModify()'>
+                                                name="courseContentLink" placeholder="Enter Content URL"
+                                                onfocusin='vidLinkModify()'>
                                         </div>
                                     </div>
 
@@ -139,7 +140,9 @@
 
                                 @if (count($data2))
                                     @foreach ($data2 as $key => $d)
-                                        <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
+                                        <div>
+                                            <a href="{{ $d->course_content_link }}" id="{{ $key }}"></a>
+                                        </div>
                                     @endforeach
                                 @else
                                     <div style="visibility: hidden">{{ $key = -1 }}</div>
@@ -158,8 +161,7 @@
 
                                             <td>
                                                 <div><video id="vid{{ $key }}" controls height="300"
-                                                        width="700" controlsList="nodownload"
-                                                        src="">
+                                                        width="700" controlsList="nodownload" src="">
                                                     </video></div>
                                             </td>
 
@@ -353,7 +355,7 @@
         function vidLinkModify() {
             var vidLink = document.getElementById('courseContentLink').value;
 
-            if (vidLink) {
+            if (vidLink.length === 59) {
                 var strID = '';
                 for (var i = 26; i < vidLink.length; i++) {
                     if (vidLink[i] === '?') {
